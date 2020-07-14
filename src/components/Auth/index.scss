@@ -1,0 +1,54 @@
+$inputBgc: rgba(0, 0, 0, .01);
+.container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(180deg, rgba(34, 138, 179, 0.57) 0, rgba(88, 157, 82, 0.4)), linear-gradient(135deg, #670d109e, #0c2c07);
+    overflow: hidden;
+    .login-form {
+        width: 18%;
+        margin: 200px auto;
+        .ant-input-affix-wrapper {
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, .1);
+            font-size: 18px;
+            border-radius: 20px;
+            background-color: $inputBgc;
+            .ant-input {
+                color: #fff;
+                padding: 10px;
+                background-color: $inputBgc;
+            }
+            .ant-input-prefix {
+                color: #fff;
+            }
+        }
+        .ant-form-item-control-input-content {
+            .login-form-button-wrapper {
+                margin: 10px auto;
+                width: 100%;
+                .ant-btn {
+                    border: none;
+                    background: #f96332;
+                    height: auto;
+                    padding: 15px 0;
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                }
+            }
+            .register-button-wrapper {
+                width: 100%;
+                margin-top: 15px;
+                font-size: 12px;
+                text-align: right;
+                letter-spacing: 3px;
+                a {
+                    color: #ccc;
+                    &:hover {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
