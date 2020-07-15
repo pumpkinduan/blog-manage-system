@@ -1,4 +1,6 @@
 import axios from "axios";
+import store from '../../redux/store'
+import { showGlobalLoading } from '../../redux/actionCreators/index'
 // import { Spin } from 'antd';
 // import Loading from '../../components/Loading/index'
 //进行全局的默认配置
@@ -9,10 +11,11 @@ let reqCount = 0; //记录请求次数，处理并发请求
 axios.interceptors.request.use(
     function(config) {
         reqCount++;
+        store.dispatch(showGlobalLoading(true));
         return config;
     },
     function(error) {
-
+        store.dispatch(showGlobalLoading(false));
         return Promise.reject(error);
     }
 );
@@ -21,11 +24,14 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     function(response) {
         reqCount--;
-        if (reqCount <= 0) {}
+        if (reqCount <= 0) {
+            store.dispatch(showGlobalLoading(false));
+        }
         return response;
     },
     function(error) {
         // 对响应错误做点什么
+        store.dispatch(showGlobalLoading(false));
         reqCount--;
         if (reqCount <= 0) {}
         let resErr = error;

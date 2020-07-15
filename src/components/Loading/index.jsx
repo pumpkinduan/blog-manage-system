@@ -4,15 +4,21 @@ import { Spin } from "antd";
 import { connect } from "react-redux";
 class Loading extends PureComponent {
   render() {
+    // 控制loading的显示与隐藏
     let { loadingStatus } = this.props;
     return (
-      <div
+      <Spin
         className="loading-container"
-        style={{ visibility: loadingStatus ? "visible" : "hidden" }}
-      >
-        <Spin size="large" />
-      </div>
+        delay={200}
+        spinning={loadingStatus}
+        size="large"
+      />
     );
   }
 }
-export default connect()(Loading);
+const mapStateToProps = (state) => {
+  return {
+    loadingStatus: state.globalLoading.loadingStatus,
+  };
+};
+export default connect(mapStateToProps)(Loading);

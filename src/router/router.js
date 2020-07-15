@@ -15,13 +15,13 @@ export const routers = [{
             () =>
             import ('../containers/DashBoard/index'))
     },
-    {
-        path: '/login',
-        exact: true,
-        component: silentLoadable(
-            () =>
-            import ('../containers/Login/index'))
-    },
+    // {
+    //     path: '/login',
+    //     exact: true,
+    //     component: silentLoadable(
+    //         () =>
+    //         import ('../containers/Login/index'))
+    // },
     {
         path: '/register',
         exact: true,

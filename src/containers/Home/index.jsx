@@ -1,9 +1,15 @@
 import React, { PureComponent } from 'react'
 import './index.scss'
-class Home extends React.PureComponent {
+import Header from '../../components/Header/index'
+import SiderBar from '../../components/SiderBar/index'
+import { Layout } from "antd";
+class Home extends PureComponent {
     render() {
         return (
-            <div>home1</div>
+            <Layout>
+                <SiderBar />
+                <Header />
+            </Layout>
         )
     }
 }

@@ -1,2 +1,1 @@
 export const SHOWLOADING = 'SHOWLOADING';
-export const HIDDENLOADING = 'HIDDENLOADING';

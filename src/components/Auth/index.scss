@@ -9,7 +9,6 @@ $inputBgc: rgba(0, 0, 0, .01);
         margin: 200px auto;
         .ant-input-affix-wrapper {
             margin-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, .1);
             font-size: 18px;
             border-radius: 20px;
             background-color: $inputBgc;
@@ -49,6 +48,19 @@ $inputBgc: rgba(0, 0, 0, .01);
                     }
                 }
             }
+        }
+        // 密码框右边的眼睛和清空样式
+        .anticon-eye,
+        .anticon-eye-invisible,
+        .anticon-close-circle {
+            color: #ccc;
+            &:hover {
+                color: #fff;
+            }
+        }
+        // 修改input框下方的exact字段的提示文字样式
+        .ant-form-item-extra {
+            color: #f96332;
         }
     }
 }

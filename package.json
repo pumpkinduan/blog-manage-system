@@ -38,5 +38,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "node-sass": "^4.14.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5"
   }
 }

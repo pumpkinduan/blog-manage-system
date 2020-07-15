@@ -1,0 +1,14 @@
+.bms-sider {
+    height: 100vh;
+    padding: 0 15px;
+    width: 300px !important;
+    max-width: 300px !important;
+    .sider-top {
+        display: flex;
+        padding-top: 15px;
+        justify-content: space-between;
+    }
+    .ant-menu-inline {
+        border: none;
+    }
+}

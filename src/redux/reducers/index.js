@@ -1,6 +1,6 @@
-import { handleLoading } from './handleLoading'
+import { showGlobalLoading } from './showGlobalLoading'
 import { combineReducers } from 'redux'
 
 export const appReducer = combineReducers({
-    handleLoading
+    globalLoading: showGlobalLoading
 })
