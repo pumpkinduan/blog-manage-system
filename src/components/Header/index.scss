@@ -1,0 +1,98 @@
+@import '../../styles/color.scss';
+.bms-header {
+    display: flex;
+    background: #fff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    .top-left {
+        padding: 23px 0;
+        height: 90px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex: auto;
+        cursor: pointer;
+        .admin {
+            margin-right: 10px;
+            color: $purple4;
+            &:hover {
+                color: $purple5;
+            }
+        }
+        // 自定义input组件样式
+        .override-ant-input-affix-wrapper {
+            position: relative;
+            border: none;
+            margin-left: 130px;
+            padding: 5px 10px;
+            color: $purple4;
+            overflow: hidden;
+            input {
+                margin-left: 10px;
+                transition: all .3s;
+            }
+            // 当聚焦input时，添加下划线样式，利用伪元素实现
+            &::after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+                bottom: 0px;
+                left: 0px;
+                transform: translateX(-100%);
+                position: absolute;
+                height: 1px;
+                background: $purple2;
+                transition: transform .5s;
+            }
+        }
+        // input框聚焦时：
+        .ant-input-affix-wrapper-focused,
+        .ant-input-affix-wrapper:focus {
+            box-shadow: none;
+            &::after {
+                transform: translateX(0%);
+            }
+        }
+    }
+    // 右上侧的导航图标
+    .top-right {
+        max-width: 450px;
+        display: flex;
+        flex: auto;
+        justify-content: space-between;
+        align-items: center;
+        li {
+            cursor: pointer;
+            color: #666;
+            padding: 10px;
+            transition: color .3s;
+            font-size: 18px;
+            .ant-badge {
+                font-size: inherit;
+            }
+            &:hover {
+                color: $purple5;
+            }
+        }
+    }
+}
+
+// 自定义点击消息图标显示的下拉框的样式
+.override-ant-dropdown {
+    min-width: 20%;
+    top: 80px;
+    padding: 0;
+    .ant-dropdown-menu-items {
+        padding: 0;
+    }
+    .ant-list-item {
+        padding: 15px 20px;
+        cursor: pointer;
+        transition: background-color .3s;
+        &:hover {
+            background-color: $purple1;
+        }
+    }
+}

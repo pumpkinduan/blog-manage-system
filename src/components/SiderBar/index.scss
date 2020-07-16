@@ -1,14 +1,51 @@
-.bms-sider {
-    height: 100vh;
-    padding: 0 15px;
-    width: 300px !important;
-    max-width: 300px !important;
-    .sider-top {
-        display: flex;
-        padding-top: 15px;
-        justify-content: space-between;
-    }
-    .ant-menu-inline {
-        border: none;
+@import '../../styles/color.scss';
+.wrapper {
+    background: $purple1;
+    .override-ant-layout-sider {
+        position: relative;
+        min-height: 100vh;
+        .ant-menu-inline {
+            border: none;
+        }
+        // 祛除在折叠状态下，hover图标时在右侧显示的子菜单项，同时解决了图标右侧出现的1px白色间隙bug
+        .ant-menu-inline-collapsed {
+            width: 0;
+        }
+        // 自定义菜单栏某些状态下的字体样式
+        .ant-menu-item:hover,
+        .ant-menu-item-active,
+        .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+        .ant-menu-submenu-active,
+        .ant-menu-submenu-title:hover,
+        .ant-menu-item-selected,
+        .ant-menu-submenu-selected {
+            color: $purple4;
+        }
+        // 去除菜单子项被点击时的背景颜色
+        .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+            background-color: #fff;
+        }
+        // 去除菜单子项右侧边框
+        .ant-menu-inline .ant-menu-selected::after,
+        .ant-menu-inline .ant-menu-item-selected::after {
+            opacity: 0;
+        }
+        // 自定义折叠容器的位置
+        .ant-layout-sider-trigger {
+            position: absolute;
+            width: 35px !important;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 0 50% 50% 0;
+            left: 100%;
+            top: 40%;
+            transform: translate(-60%, 50%);
+            span {
+                margin-left: 7px;
+            }
+            &:hover {
+                color: $purple5;
+            }
+        }
     }
 }
