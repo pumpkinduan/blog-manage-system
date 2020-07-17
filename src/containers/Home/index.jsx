@@ -1,36 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import Header from "../../components/Header/index";
 import SiderBar from "../../components/SiderBar/index";
 import Content from "../../components/Content/index";
 import { Layout } from "antd";
-// import {
-//   MessageOutlined,
-//   ExpandOutlined,
-//   BellOutlined,
-// } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { showGlobalLoading } from "../../redux/actionCreators/index";
 import { removeLocalStorage } from "../../utils/index";
-
+// import { useHistory } from "react-router-dom";
 const Home = (props) => {
+  let [tags, setTags] = useState([]);
   useEffect(() => {
     console.log('去获取数据')
   })
   const logout = () => {
     removeLocalStorage("isAuthencated");
+    removeLocalStorage("auth_token");
     props.dispatch(showGlobalLoading(true));
     setTimeout(() => {
       props.dispatch(showGlobalLoading(false));
-      props.history.replace("/login");
+      window.location.replace("/login");
     }, 1000);
   };
+  const addTags = (tag) => {
+    setTags([...tags, tag])
+  }
   return (
     <Layout style={{ flexDirection: "column" }}>
-      <Header logout={logout} {...props} />
+      <Header logout={logout} />
       <Layout style={{ backgroundColor: "#f9f0ffb3" }}>
-        <SiderBar />
-        <Content />
+        <SiderBar addTags={addTags} />
+        <Content tags={tags}/>
       </Layout>
     </Layout>
   );

@@ -9,6 +9,12 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+ul,
+li,
+ol {
+    margin: 0;
+}
+
 ul li {
     list-style: none;
 }

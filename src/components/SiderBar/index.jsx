@@ -1,11 +1,33 @@
 import { Layout, Menu } from "antd";
 import React from "react";
-import {
-  UserOutlined,
-} from "@ant-design/icons";
+import { UserOutlined, RadarChartOutlined } from "@ant-design/icons";
 import "./index.scss";
+import { NavLink } from "react-router-dom";
 const { SubMenu } = Menu;
 const { Sider } = Layout;
+
+const siderLinks = [
+  {
+    title: "DashBoard",
+    icon: <RadarChartOutlined />,
+    path: "/dashboard",
+  },
+  {
+    icon: <UserOutlined />,
+    title: "文章管理",
+    subSiderLinks: [
+      {
+        title: "文章列表",
+        path: "/articleList",
+      },
+      {
+        title: "文章创建",
+        path: "/articleCreate",
+      },
+    ],
+  },
+];
+
 class SiderBar extends React.Component {
   state = {
     collapsed: false,
@@ -18,25 +40,45 @@ class SiderBar extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        
         <Sider
           theme="light"
-          // style={{ width: "250px", flex: "0 0 250px", maxWidth: "300px" }}
           collapsible="true"
+          collapsedWidth={2}
           className="override-ant-layout-sider"
         >
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={["1"]}
-          >
-            <SubMenu key="sub2" icon={<UserOutlined />} title="Navigation Two">
-              <Menu.Item key="5">Option 5</Menu.Item>
-              <Menu.Item key="6">Option 6</Menu.Item>
-            </SubMenu>
-            {/* <SubMenu key="sub2" icon={<UserOutlined />} title="Navigation Two">
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-          </SubMenu> */}
+          <Menu mode="inline">
+            {siderLinks.map((item, index) => {
+              return item.subSiderLinks ? (
+                <SubMenu
+                  key={"sub" + index}
+                  icon={item.icon}
+                  title={item.title}
+                >
+                  {item.subSiderLinks.map((subItem, subIndex) => {
+                    return (
+                      <Menu.Item
+                        key={subIndex * 3 + 1}
+                        onClick={() => {
+                          this.props.addTags(subItem.title);
+                        }}
+                      >
+                        <NavLink to={subItem.path}> {subItem.title}</NavLink>
+                      </Menu.Item>
+                    );
+                  })}
+                </SubMenu>
+              ) : (
+                <Menu.Item
+                  icon={item.icon}
+                  key={index}
+                  onClick={() => {
+                    this.props.addTags(item.title);
+                  }}
+                >
+                  <NavLink to={item.path}> {item.title}</NavLink>
+                </Menu.Item>
+              );
+            })}
           </Menu>
         </Sider>
       </div>

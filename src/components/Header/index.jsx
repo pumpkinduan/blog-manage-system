@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SearchOutlined,
   DownOutlined,
@@ -8,25 +8,128 @@ import {
 } from "@ant-design/icons";
 import "./index.scss";
 import { Link } from "react-router-dom";
-import { Input, Popover, Badge, Menu, Dropdown, List, Avatar } from "antd";
-import { setFullScreenStatus } from "../../utils/index";
-const Header = (props) => {
-  const { logout } = props;
+import {
+  Input,
+  Popover,
+  Badge,
+  Menu,
+  Dropdown,
+  List,
+  Avatar,
+  Button,
+} from "antd";
+import { setFullScreenStatus, createRandomColor } from "../../utils/index";
+const MyHeader = (props) => {
+  // 留言消息数据
+  let [data, setData] = useState([
+    {
+      title: "小屁@了你：",
+      content: "你好啊，我是测试小哥，文章写得不错哦",
+      src: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+      time: "3 days ago",
+      read: false,
+    },
+    {
+      title: "粉粉回复了你",
+      content: "期待更新！！！",
+      src: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+      time: "5 days ago",
+      read: false,
+    },
+    {
+      title: "大先生",
+      content: "你好啊，博客好漂亮啊",
+      src: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+      time: "6 days ago",
+      read: false,
+    },
+    {
+      title: "好好先生",
+      content: "大佬嘛，哈哈",
+      src: "",
+      time: "6 days ago",
+      read: false,
+    },
+  ]);
+  let [visitorCounts, setVisitorCounts] = useState(5);
+  let [commentCounts, setCommentCounts] = useState(50);
+  let [visible, setVisible] = useState(false);
 
-  const data = [
-    {
-      title: "Ant Design Title 1",
-    },
-    {
-      title: "Ant Design Title 2",
-    },
-    {
-      title: "Ant Design Title 3",
-    },
-    {
-      title: "Ant Design Title 4",
-    },
-  ];
+  // 控制下拉框的显示与否
+  const handleVisibleChange = (flag) => {
+    setVisible(flag);
+  };
+  const { logout } = props;
+  const clearVisitorCounts = () => setVisitorCounts(0);
+  const clearCommentMsg = () => {
+    // 清空留言数
+    setCommentCounts(0);
+
+    // 留言数据清空时的显示状态
+    setData([
+      {
+        title: "你真棒",
+        content: "已经读完所有消息啦",
+        time: "",
+        src: "",
+      },
+    ]);
+  };
+
+  const hanldeReadComment = (e) => {
+    let classList = e.currentTarget.classList;
+    if (!classList.contains("ant-list-item-read")) {
+      setCommentCounts(commentCounts - 1); // 读完一条消息，消息数量减1
+      classList.add("ant-list-item-read");
+    }
+  };
+  // 用于展示实时留言消息
+  const list = (
+    <List
+      selectable="false"
+      itemLayout="vertical"
+      dataSource={data}
+      renderItem={(item, index) => (
+        <List.Item
+          actions={[item.time]}
+          onClick={hanldeReadComment}
+          style={{ borderBottom: "1px solid #ddd" }}
+        >
+          <List.Item.Meta
+            title={item.title}
+            description={item.content}
+            avatar={
+              item.src && item.title ? (
+                <Avatar src={item.src} />
+              ) : (
+                <Avatar
+                  style={{
+                    fontWight: "bolder",
+                    color: "#fff",
+                    background: createRandomColor(),
+                  }}
+                >
+                  {item.title.substring(0, 1)}
+                </Avatar>
+              )
+            }
+          />
+        </List.Item>
+      )}
+    >
+      <div
+        className="bottom-btns"
+        style={{ display: commentCounts ? "flex" : "none" }}
+      >
+        <Button block={true} type="text" size="large" onClick={clearCommentMsg}>
+          清空消息
+        </Button>
+        <Button block={true} type="text" size="large">
+          <Link to="/comments">查看更多</Link>
+        </Button>
+      </div>
+    </List>
+  );
   return (
     <header className="bms-header">
       <h1 className="top-left">
@@ -48,54 +151,43 @@ const Header = (props) => {
       <ul className="top-right">
         <li>
           <Dropdown
+            visible={visible}
+            onVisibleChange={handleVisibleChange}
+            overlayStyle={{ minWidth: "20%" }}
             overlayClassName="override-ant-dropdown"
             placement="bottomRight"
-            overlayStyle={{ minWidth: "20%", top: "80px" }}
-            overlay={
-              <List
-                itemLayout="vertical"
-                dataSource={data}
-                renderItem={(item) => (
-                  <List.Item>
-                    <List.Item.Meta
-                      avatar={
-                        <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                      }
-                      title={<a href="https://ant.design">{item.title}</a>}
-                      description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                    />
-                  </List.Item>
-                )}
-              />
-            }
             trigger={["click"]}
+            overlay={list}
           >
-            <Badge count={5} offset={[5]}>
-              <Popover content="有人给你留消息啦" placement="bottom">
+            <Badge count={commentCounts} offset={[5]}>
+              <Popover
+                content={
+                  commentCounts ? `新增${commentCounts}条消息` : "暂无消息"
+                }
+                placement="bottom"
+              >
                 <MessageOutlined />
               </Popover>
             </Badge>
           </Dropdown>
         </li>
-        <li>
-          <Popover content="来新的访啦" placement="bottom">
-            <BellOutlined />
-          </Popover>
+        <li onClick={clearVisitorCounts}>
+          <Badge count={visitorCounts} offset={[5]}>
+            <Popover
+              content={
+                visitorCounts ? `新增${visitorCounts}位访客` : "暂无新增访客"
+              }
+              placement="bottom"
+            >
+              <BellOutlined />
+            </Popover>
+          </Badge>
         </li>
         <li>
           <Popover content="全屏展示" placement="bottom">
             <ExpandOutlined onClick={setFullScreenStatus} />
           </Popover>
         </li>
-        {/* {navs.map((r, i) => (
-          <li key={i}>
-            <Badge count={r.flag ? 5 : 0} offset={[5]}>
-              <Popover content={r.title} placement="bottom">
-                {r.icon}
-              </Popover>
-            </Badge>
-          </li>
-        ))} */}
         <li>
           <Dropdown
             overlay={
@@ -132,4 +224,4 @@ const Header = (props) => {
     </header>
   );
 };
-export default Header;
+export default MyHeader;

@@ -4,7 +4,13 @@
     background: #fff;
     justify-content: space-between;
     align-items: center;
+    height: 100px;
+    box-sizing: border-box;
     padding: 0 30px;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    right: 0;
     .top-left {
         padding: 23px 0;
         height: 90px;
@@ -81,9 +87,9 @@
 
 // 自定义点击消息图标显示的下拉框的样式
 .override-ant-dropdown {
-    min-width: 20%;
-    top: 80px;
+    top: 60px !important;
     padding: 0;
+    .ant-dropdown-menu,
     .ant-dropdown-menu-items {
         padding: 0;
     }
@@ -94,5 +100,13 @@
         &:hover {
             background-color: $purple1;
         }
+    }
+    .ant-list-item-read {
+        opacity: .4;
+    }
+    .bottom-btns {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
     }
 }

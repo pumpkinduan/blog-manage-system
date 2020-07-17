@@ -1,6 +1,7 @@
 @import '../../styles/color.scss';
 .wrapper {
     background: $purple1;
+    margin-top: 100px;
     .override-ant-layout-sider {
         position: relative;
         min-height: 100vh;
@@ -18,7 +19,8 @@
         .ant-menu-submenu-active,
         .ant-menu-submenu-title:hover,
         .ant-menu-item-selected,
-        .ant-menu-submenu-selected {
+        .ant-menu-submenu-selected,
+        .ant-menu-item a:hover {
             color: $purple4;
         }
         // 去除菜单子项被点击时的背景颜色
@@ -33,19 +35,25 @@
         // 自定义折叠容器的位置
         .ant-layout-sider-trigger {
             position: absolute;
-            width: 35px !important;
-            height: 35px;
-            line-height: 35px;
+            width: 40px !important;
+            height: 40px;
+            line-height: 40px;
             border-radius: 0 50% 50% 0;
             left: 100%;
             top: 40%;
             transform: translate(-60%, 50%);
             span {
-                margin-left: 7px;
+                margin-left: 15px;
             }
             &:hover {
                 color: $purple5;
             }
+        }
+        // 当菜单栏被折叠时，隐藏所有图标
+        .ant-menu-item,
+        .ant-menu-submenu-title,
+        .ant-menu-inline-collapsed>.ant-menu-submenu>.ant-menu-submenu-title {
+            padding: 0;
         }
     }
 }
