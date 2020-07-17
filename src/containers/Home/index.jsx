@@ -22,6 +22,8 @@ const Home = (props) => {
       window.location.replace("/login");
     }, 1000);
   };
+
+  // 用于在内容区域生成 导航tag
   const addTags = (tag) => {
     setTags([...tags, tag])
   }
