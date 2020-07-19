@@ -2,10 +2,9 @@
     position: absolute;
     left: 0;
     top: 0;
-    padding: 8px 20px;
     width: 100%;
     background: #fff;
-    box-shadow: 0 0 3px 1px #eee inset;
+    transition: padding .3s;
 }
 
 .wrapper-content {

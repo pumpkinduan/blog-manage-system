@@ -17,6 +17,8 @@ import {
   List,
   Avatar,
   Button,
+  Row,
+  Col,
 } from "antd";
 import { setFullScreenStatus, createRandomColor } from "../../utils/index";
 const MyHeader = (props) => {
@@ -47,7 +49,7 @@ const MyHeader = (props) => {
       title: "好好先生",
       content: "大佬嘛，哈哈",
       src: "",
-      time: "6 days ago",
+      time: "3年前",
       read: false,
     },
   ]);
@@ -93,7 +95,7 @@ const MyHeader = (props) => {
         <List.Item
           actions={[item.time]}
           onClick={hanldeReadComment}
-          style={{ borderBottom: "1px solid #ddd" }}
+          style={{ borderBottom: "1px solid #eee" }}
         >
           <List.Item.Meta
             title={item.title}
@@ -131,97 +133,102 @@ const MyHeader = (props) => {
     </List>
   );
   return (
-    <header className="bms-header">
-      <h1 className="top-left">
-        <span className="admin">Pumpkin</span>
-        <img
-          width="50"
-          height="50"
-          style={{ borderRadius: "50%" }}
-          src="http://demo.qfpffmp.cn/cssthemes5/twts_141_PurpleAdmin/images/faces/face1.jpg"
-          alt=""
-        />
+    // 
+    <Row align="middle" className="override-ant-row"> 
+      <Col flex={1} className="ant-col-left">
+        <h1 >
+          <span className="admin">Pumpkin</span>
+          <img
+            width="50"
+            height="50"
+            style={{ borderRadius: "50%" }}
+            src="http://demo.qfpffmp.cn/cssthemes5/twts_141_PurpleAdmin/images/faces/face1.jpg"
+            alt=""
+          />
+        </h1>
+      </Col>
+      <Col className="ant-col-middle" flex={8}>
         <Input
           autoFocus={true}
           placeholder="请输入搜索内容"
           prefix={<SearchOutlined />}
           className="override-ant-input-affix-wrapper"
         />
-      </h1>
-      <ul className="top-right">
-        <li>
-          <Dropdown
-            visible={visible}
-            onVisibleChange={handleVisibleChange}
-            overlayStyle={{ minWidth: "20%" }}
-            overlayClassName="override-ant-dropdown"
-            placement="bottomRight"
-            trigger={["click"]}
-            overlay={list}
-          >
-            <Badge count={commentCounts} offset={[5]}>
+      </Col>
+      <Col className="ant-col-right"  flex={1}>
+          <nav>
+            <Dropdown
+              visible={visible}
+              onVisibleChange={handleVisibleChange}
+              // overlayStyle={{ minWidth: "20%" }}
+              overlayClassName="override-ant-dropdown"
+              placement="bottomRight"
+              trigger={["click"]}
+              overlay={list}
+            >
+              <Badge dot count={commentCounts}>
+                <Popover
+                  content={
+                    commentCounts ? `新增${commentCounts}条消息` : "暂无消息"
+                  }
+                  placement="bottomRight"
+                >
+                  <MessageOutlined />
+                </Popover>
+              </Badge>
+            </Dropdown>
+          </nav>
+          <nav onClick={clearVisitorCounts}>
+            <Badge count={visitorCounts} dot>
               <Popover
                 content={
-                  commentCounts ? `新增${commentCounts}条消息` : "暂无消息"
+                  visitorCounts ? `新增${visitorCounts}位访客` : "暂无新增访客"
                 }
                 placement="bottom"
               >
-                <MessageOutlined />
+                <BellOutlined />
               </Popover>
             </Badge>
-          </Dropdown>
-        </li>
-        <li onClick={clearVisitorCounts}>
-          <Badge count={visitorCounts} offset={[5]}>
-            <Popover
-              content={
-                visitorCounts ? `新增${visitorCounts}位访客` : "暂无新增访客"
-              }
-              placement="bottom"
-            >
-              <BellOutlined />
+          </nav>
+          <nav>
+            <Popover content="全屏展示" placement="bottom">
+              <ExpandOutlined onClick={setFullScreenStatus} />
             </Popover>
-          </Badge>
-        </li>
-        <li>
-          <Popover content="全屏展示" placement="bottom">
-            <ExpandOutlined onClick={setFullScreenStatus} />
-          </Popover>
-        </li>
-        <li>
-          <Dropdown
-            overlay={
-              <Menu>
-                <Menu.Item key="0">
-                  <Link to="/user">个人中心</Link>
-                </Menu.Item>
-                <Menu.Item key="1">
-                  <a href="https://www.pumpkinduan.cn" target="_blank">
-                    南瓜之家
-                  </a>
-                </Menu.Item>
-                <Menu.Divider></Menu.Divider>
-                <Menu.Item>
-                  <span onClick={logout}>退出登录</span>
-                </Menu.Item>
-              </Menu>
-            }
-            trigger={["click"]}
-          >
-            <div>
-              <img
-                width="40"
-                heigh="40"
-                style={{ borderRadius: "50%", marginRight: "10px" }}
-                src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
-                alt=""
-              />
-              <span>Pumpkin</span> <DownOutlined />
-            </div>
-          </Dropdown>
-        </li>
-      </ul>
-    </header>
+          </nav>
+          <nav>
+            <Dropdown
+              overlay={
+                <Menu>
+                  <Menu.Item key="0">
+                    <Link to="/user">个人中心</Link>
+                  </Menu.Item>
+                  <Menu.Item key="1">
+                    <a href="https://www.pumpkinduan.cn" target="_blank">
+                      南瓜之家
+                    </a>
+                  </Menu.Item>
+                  <Menu.Divider></Menu.Divider>
+                  <Menu.Item>
+                    <span onClick={logout}>退出登录</span>
+                  </Menu.Item>
+                </Menu>
+              }
+              trigger={["click"]}
+            >
+              <div>
+                <img
+                  width="30"
+                  heigh="30"
+                  style={{ borderRadius: "50%", marginRight: "6px" }}
+                  src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
+                  alt=""
+                />
+                <span>Pumpkin</span> <DownOutlined />
+              </div>
+            </Dropdown>
+          </nav>
+      </Col>
+    </Row>
   );
 };
 export default MyHeader;

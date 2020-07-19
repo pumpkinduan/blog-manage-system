@@ -1,5 +1,6 @@
 import { Layout, Menu } from "antd";
 import React from "react";
+import PropTypes from "prop-types";
 import { UserOutlined, RadarChartOutlined } from "@ant-design/icons";
 import "./index.scss";
 import { NavLink } from "react-router-dom";
@@ -38,6 +39,7 @@ class SiderBar extends React.Component {
     });
   };
   render() {
+    const { addTag } = this.props;
     return (
       <div className="wrapper">
         <Sider
@@ -59,7 +61,7 @@ class SiderBar extends React.Component {
                       <Menu.Item
                         key={subIndex * 3 + 1}
                         onClick={() => {
-                          this.props.addTags(subItem.title);
+                          addTag(subItem);
                         }}
                       >
                         <NavLink to={subItem.path}> {subItem.title}</NavLink>
@@ -72,7 +74,7 @@ class SiderBar extends React.Component {
                   icon={item.icon}
                   key={index}
                   onClick={() => {
-                    this.props.addTags(item.title);
+                    addTag(item);
                   }}
                 >
                   <NavLink to={item.path}> {item.title}</NavLink>
@@ -85,4 +87,7 @@ class SiderBar extends React.Component {
     );
   }
 }
+SiderBar.propTypes = {
+  addTag: PropTypes.func.isRequired,
+};
 export default SiderBar;

@@ -1,31 +1,37 @@
 import { Layout, Tag } from "antd";
 import React from "react";
+import PropTypes from 'prop-types'
+
 import { routers } from "../../router/router";
-import { Redirect, Switch, Route } from "react-router-dom";
+import { Redirect, Switch, Route, Link } from "react-router-dom";
 import "./index.scss";
 const { Content } = Layout;
 class MainContent extends React.PureComponent {
   render() {
+    const {tags = [], removeTag} = this.props; 
     return (
       <Content
         style={{
           position: "relative",
-          padding: "35px 20px",
+          transition: "padding .3s",
+          padding: tags.length ? "36px 20px" : "0 20px",
           marginTop: "100px",
         }}
       >
-        <nav className="tag-nav">
-          {this.props.tags.map((tag) => (
+        <nav className="tag-nav" style={{padding: tags.length ? "8px 10px" : ""}}>
+          {tags.map((tag, index) => (
             <Tag
+              key={tag.path}
+              color="purple"
               style={{
                 marginLeft: "5px",
-                padding: "4px 6px",
-                background: "#e9e9e9",
+                padding: "3px 5px",
                 cursor: "pointer",
               }}
+              onClose={() => { removeTag(index); }}
               closable
             >
-              {tag}
+              <Link to={tag.path}>{tag.title}</Link>
             </Tag>
           ))}
         </nav>
@@ -46,4 +52,9 @@ class MainContent extends React.PureComponent {
     );
   }
 }
+MainContent.propTypes = {
+  tags: PropTypes.arrayOf(PropTypes.object).isRequired,
+  removeTag: PropTypes.func.isRequired,
+}
+
 export default MainContent;
