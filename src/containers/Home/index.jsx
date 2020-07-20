@@ -45,7 +45,7 @@ const Home = (props) => {
   return (
     <Layout style={{ flexDirection: "column" }}>
       <Header logout={logout} />
-      <Layout style={{ backgroundColor: "#f9f0ffb3" }}>
+      <Layout style={{ backgroundColor: "rgba(243, 251, 255, 0.7)" }}>
         <SiderBar addTag={addTag} />
         <Content tags={tags} removeTag={removeTag} />
       </Layout>

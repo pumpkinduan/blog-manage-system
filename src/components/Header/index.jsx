@@ -9,7 +9,7 @@ import {
 import "./index.scss";
 import { Link } from "react-router-dom";
 import {
-  Input,
+  // Input,
   Popover,
   Badge,
   Menu,
@@ -21,6 +21,7 @@ import {
   Col,
 } from "antd";
 import { setFullScreenStatus, createRandomColor } from "../../utils/index";
+import CustomInput from '../../common/Input/index'
 const MyHeader = (props) => {
   // 留言消息数据
   let [data, setData] = useState([
@@ -148,12 +149,13 @@ const MyHeader = (props) => {
         </h1>
       </Col>
       <Col className="ant-col-middle" flex={8}>
-        <Input
+        <CustomInput placeholder="请输入搜索内容" prefix={<SearchOutlined/>} />
+        {/* <Input
           autoFocus={true}
           placeholder="请输入搜索内容"
           prefix={<SearchOutlined />}
           className="override-ant-input-affix-wrapper"
-        />
+        /> */}
       </Col>
       <Col className="ant-col-right"  flex={1}>
           <nav>

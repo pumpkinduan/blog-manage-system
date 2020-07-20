@@ -1,12 +1,11 @@
 @import '../../styles/color.scss';
-
 .override-ant-row {
     background: #fff;
     height: 100px;
     box-sizing: border-box;
     padding: 0 20px;
     position: fixed;
-    z-index: 2;
+    z-index: 22222;
     left: 0;
     right: 0;
     border-bottom: 1px solid $purple1;
@@ -16,7 +15,7 @@
         flex: auto;
     }
     .ant-col-left {
-        height: 90px;        
+        height: 90px;
         cursor: pointer;
         .admin {
             margin-right: 10px;
@@ -25,50 +24,42 @@
                 color: $purple5;
             }
         }
-
     }
-
     .ant-col-middle {
-
-        // 自定义input组件样式
-        .override-ant-input-affix-wrapper {
-            position: relative;
-            border: none;
-            padding: 5px 10px;
-            color: $purple4;
-            overflow: hidden;
-
-            input {
-                margin-left: 10px;
-                transition: all .3s;
-            }
-
-            // 当聚焦input时，添加下划线样式，利用伪元素实现
-            &::after {
-                content: "";
-                display: inline-block;
-                width: 100%;
-                bottom: 0px;
-                left: 0px;
-                transform: translateX(-100%);
-                position: absolute;
-                height: 1px;
-                background: $purple2;
-                transition: transform .5s;
-            }
-        }
-
-        // input框聚焦时：
-        .ant-input-affix-wrapper-focused,
-        .ant-input-affix-wrapper:focus {
-            box-shadow: none;
-
-            &::after {
-                transform: translateX(0%);
-            }
-        }
+        // // 自定义input组件样式
+        // .override-ant-input-affix-wrapper {
+        //     position: relative;
+        //     border: none;
+        //     padding: 5px 10px;
+        //     color: $purple4;
+        //     overflow: hidden;
+        //     input {
+        //         margin-left: 10px;
+        //         transition: all .3s;
+        //     }
+        //     // 当聚焦input时，添加下划线样式，利用伪元素实现
+        //     &::after {
+        //         content: "";
+        //         display: inline-block;
+        //         width: 100%;
+        //         bottom: 0px;
+        //         left: 0px;
+        //         transform: translateX(-100%);
+        //         position: absolute;
+        //         height: 1px;
+        //         background: $purple2;
+        //         transition: transform .5s;
+        //     }
+        // }
+        // // input框聚焦时：
+        // .ant-input-affix-wrapper-focused,
+        // .ant-input-affix-wrapper:focus {
+        //     box-shadow: none;
+        //     &::after {
+        //         transform: translateX(0%);
+        //     }
+        // }
     }
-
     // 右上侧的导航图标
     .ant-col-right {
         max-width: 450px;
@@ -82,12 +73,10 @@
             .ant-badge {
                 font-size: inherit;
             }
-
             &:hover {
                 color: $purple5;
             }
         }
-
     }
 }
 
@@ -120,11 +109,9 @@
             margin-bottom: 2px;
         }
     }
-
     .ant-list-item-read {
         opacity: .4;
     }
-
     .bottom-btns {
         display: flex;
         align-items: center;
@@ -132,6 +119,5 @@
         .ant-btn-text {
             font-size: 12px;
         }
-
     }
 }

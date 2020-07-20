@@ -1,0 +1,44 @@
+@import '../../styles/color.scss';
+// 自定义input组件样式
+.custom-input {
+    width: 100%;
+    position: relative;
+    padding: 10px 0;
+    .override-ant-input-affix-wrapper {
+        position: relative;
+        border: none;
+        padding: 5px 10px;
+        color: $purple4;
+        overflow: hidden;
+        background-color: transparent;
+        font-size: 17px;
+        text-shadow: 0 0 5px #999;
+        .ant-input {
+            background-color: transparent;
+            margin-left: 10px;
+        }
+        // 当聚焦input时，添加下划线样式，利用伪元素实现
+        &::after {
+            content: "";
+            display: inline-block;
+            width: 100%;
+            bottom: 0px;
+            left: 0px;
+            transform: translateX(-100%);
+            position: absolute;
+            height: 1px;
+            background: $purple3;
+            transition: transform .5s;
+        }
+    }
+    // input框聚焦时：
+    .ant-input-focused,
+    .ant-input:focus,
+    .ant-input-affix-wrapper-focused,
+    .ant-input-affix-wrapper:focus {
+        box-shadow: none;
+        &::after {
+            transform: translateX(0%);
+        }
+    }
+}

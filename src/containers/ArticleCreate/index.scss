@@ -1,0 +1,21 @@
+.editor-container {
+    position: relative;
+    .editor-title {
+        overflow: hidden;
+        position: relative;
+    }
+    .editor-cover {
+        margin-top: 8px;
+        margin-bottom: 12px;
+        margin-left: 9px;
+    }
+    .w-e-toolbar {
+        background: #fff !important;
+        padding: 4px;
+        font-size: 15px;
+    }
+    // 富文本编辑器 编辑区域的高度
+    .w-e-text-container {
+        height: 600px !important;
+    }
+}
