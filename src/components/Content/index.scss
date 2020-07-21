@@ -1,3 +1,11 @@
+@import '../../styles/color.scss';
+.main-content {
+    position: relative;
+    transition: padding .3s;
+    margin-top: 100px;
+    box-shadow: 0 0 0 1px $purple1;
+}
+
 .tag-nav {
     position: absolute;
     left: 0;

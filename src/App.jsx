@@ -18,16 +18,6 @@ class App extends PureComponent {
     return (
       <Router>
         <Loading />
-        <Route
-          strict={true}
-          path="/"
-          render={(props) => {
-            if (!isAuthencated) {
-              return <Redirect to="/login" />;
-            }
-            return <Home {...props} />;
-          }}
-        />{" "}
         <Switch>
           <Route
             path="/register"
@@ -35,6 +25,17 @@ class App extends PureComponent {
             render={(props) => <Register {...props} />}
           />
           <Route path="/login" exact render={(props) => <Login {...props} />} />
+          <Route
+            strict={true}
+            path="/"
+            render={(props) => {
+              console.log(props.location);
+              if (!isAuthencated) {
+                return <Redirect to="/login" />;
+              }
+              return <Home {...props} />;
+            }}
+          />{" "}
           {/* {routers.map((r) => (
             <Route
               path={r.path}

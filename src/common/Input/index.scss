@@ -7,12 +7,12 @@
     .override-ant-input-affix-wrapper {
         position: relative;
         border: none;
-        padding: 5px 10px;
+        padding: 5px 0;
         color: $purple4;
         overflow: hidden;
         background-color: transparent;
         font-size: 17px;
-        text-shadow: 0 0 5px #999;
+        text-shadow: 0 0 4px #ddd;
         .ant-input {
             background-color: transparent;
             margin-left: 10px;

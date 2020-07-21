@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import "./index.scss";
-import { Spin } from "antd";
+import { Spin,  } from "antd";
 import { connect } from "react-redux";
 class Loading extends PureComponent {
   render() {

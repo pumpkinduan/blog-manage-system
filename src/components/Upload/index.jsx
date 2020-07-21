@@ -40,7 +40,10 @@ class PicturesWall extends Component {
     });
   };
 
-  handleChange = ({ fileList }) => this.setState({ fileList });
+  handleChange = ({ fileList }) => {
+    this.setState({ fileList });
+    this.props.getUploadData(fileList);
+  };
 
   render() {
     const { placehloder } = this.props;

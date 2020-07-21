@@ -149,7 +149,7 @@ const MyHeader = (props) => {
         </h1>
       </Col>
       <Col className="ant-col-middle" flex={8}>
-        <CustomInput placeholder="请输入搜索内容" prefix={<SearchOutlined/>} />
+        <CustomInput  width="25%" placeholder="请输入搜索内容" prefix={<SearchOutlined/>} />
         {/* <Input
           autoFocus={true}
           placeholder="请输入搜索内容"

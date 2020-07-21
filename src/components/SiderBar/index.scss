@@ -32,6 +32,10 @@
         .ant-menu-inline .ant-menu-item-selected::after {
             opacity: 0;
         }
+        .ant-menu-inline .ant-menu-item,
+        .ant-menu-inline .ant-menu-submenu-title {
+            width: 100%;
+        }
         // 自定义折叠容器的位置
         .ant-layout-sider-trigger {
             position: absolute;
@@ -41,6 +45,7 @@
             border-radius: 0 50% 50% 0;
             left: 100%;
             top: 40%;
+            border-right: 1px solid $purple2;
             transform: translate(-60%, 50%);
             span {
                 margin-left: 15px;

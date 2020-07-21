@@ -14,7 +14,7 @@ class NormalRegiterForm extends React.Component {
       }
     });
     setTimeout(() => {
-      this.props.history.push("/login");
+      window.location.replace("/login");
     }, 1000);
   };
   render() {
