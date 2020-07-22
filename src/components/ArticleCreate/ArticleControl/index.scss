@@ -1,0 +1,31 @@
+@import '../../../styles/color.scss';
+.article-controls {
+    width: 100%;
+    padding: 20px 0;
+    text-align: right;
+    background: #eee;
+    .btn {
+        margin-right: 10px;
+        margin-left: 8px;
+        color: #fff;
+        padding: 10px;
+        border-radius: 3px;
+        font-size: 16px;
+        cursor: pointer;
+        &:hover {
+            opacity: .66;
+        }
+    }
+    .switch-btn {
+        background: rgb(236, 118, 136);
+    }
+    .preview-btn {
+        background: $purple3;
+    }
+    .post-btn {
+        background: #13ce66;
+    }
+    .draft-btn {
+        background: #ffba00;
+    }
+}

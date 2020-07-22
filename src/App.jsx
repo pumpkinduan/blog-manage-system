@@ -29,7 +29,6 @@ class App extends PureComponent {
             strict={true}
             path="/"
             render={(props) => {
-              console.log(props.location);
               if (!isAuthencated) {
                 return <Redirect to="/login" />;
               }
