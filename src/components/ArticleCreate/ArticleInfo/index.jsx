@@ -1,18 +1,40 @@
 import React from "react";
 import CustomInput from "../../../common/Input/index";
 import "./index.scss";
-import { Form } from "antd";
-class ArticlInfo extends React.PureComponent {
+import { Form, Popconfirm, message } from "antd";
+import {
+  setLocalStorage,
+  getLocalStorage,
+  removeLocalStorage,
+} from "../../../utils/index";
+class ArticleInfo extends React.PureComponent {
   formRef = React.createRef();
   componentDidMount() {
+    let article_sub_info = getLocalStorage("article_sub_info");
+    article_sub_info &&
+      this.formRef &&
+      this.formRef.current.setFieldsValue(article_sub_info);
     this.props.setForm(this.formRef.current);
   }
+  confirm = (e) => {
+    message.success("已清空文章信息");
+    this.onReset();
+  };
+  cancel = (e) => {
+    message.error("您已取消");
+  };
   onReset = () => {
-    this.formRef.resetFields();
+    // clear the values of title, tag, author and description on storage and UI
+    this.formRef.current.resetFields();
+    removeLocalStorage("article_sub_info");
+  };
+  onValuesChange = (changedValues, allValues) => {
+    setLocalStorage("article_sub_info", allValues);
   };
   render() {
     return (
       <Form
+        onValuesChange={this.onValuesChange}
         ref={this.formRef}
         className="articl-info-container"
       >
@@ -65,10 +87,18 @@ class ArticlInfo extends React.PureComponent {
           <CustomInput placeholder="请简要描述文章" prefix="Description:" />
         </Form.Item>
         <Form.Item className="reset-btn">
-          <span onClick={this.onReset}>Reset</span>
+          <Popconfirm
+            title="是否清空文章信息？"
+            onConfirm={this.confirm}
+            onCancel={this.cancel}
+            okText="Yes"
+            cancelText="No"
+          >
+            <span>Reset</span>
+          </Popconfirm>
         </Form.Item>
       </Form>
     );
   }
 }
-export default ArticlInfo;
+export default ArticleInfo;
