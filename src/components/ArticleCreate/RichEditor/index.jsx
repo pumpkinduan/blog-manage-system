@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import E from "wangeditor";
 import "./index.scss";
-import { setLocalStorage } from "../../../utils/index";
+import { setLocalStorage, getLocalStorage } from "../../../utils/index";
 class RichEditor extends Component {
   constructor(props) {
     super(props);
@@ -15,23 +15,24 @@ class RichEditor extends Component {
     // 挂载富文本编辑器并进行配置
     let editor = (this.editor = new E(this.$wangeditor.current));
     editor.customConfig.onchange = this._autoSaveContent;
-    editor.customConfig.zIndex = 11;
+    editor.customConfig.zIndex = 3;
     // 显示“上传图片”的tab
     // editor.customConfig.uploadImgServer = "/upload";
     editor.customConfig.uploadImgShowBase64 = true;
     editor.create();
-    // 设置富文本编辑器初始化时的内容
-    this.props.setContentOnEditor(this.editor, true);
     // 获取当前在使用的编辑器
     this.props.setCurrentEditor(this.editor);
+
+    // 由编辑文章进入，显示已经发布了，并获取到的数据
+    // 由创建文章进入，显示空数据或是编辑过但没有发布的数据(如：路由切换，数据保存至storage)
+    let content = this.props.articleContent || getLocalStorage('rich_text') || "开始你的写作之旅吧~";
+    editor.txt.html(content);
   }
   render() {
-    const { placehloder } = this.props;
     return (
         <div
           id="richEditorApp"
           ref={this.$wangeditor}
-          placehloder={placehloder}
         />
     );
   }

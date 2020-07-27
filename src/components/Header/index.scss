@@ -5,7 +5,7 @@
     box-sizing: border-box;
     padding: 0 20px;
     position: fixed;
-    z-index: 100;
+    z-index: 5;
     left: 0;
     right: 0;
     border-bottom: 1px solid $purple1;
@@ -24,41 +24,6 @@
                 color: $purple5;
             }
         }
-    }
-    .ant-col-middle {
-        // // 自定义input组件样式
-        // .override-ant-input-affix-wrapper {
-        //     position: relative;
-        //     border: none;
-        //     padding: 5px 10px;
-        //     color: $purple4;
-        //     overflow: hidden;
-        //     input {
-        //         margin-left: 10px;
-        //         transition: all .3s;
-        //     }
-        //     // 当聚焦input时，添加下划线样式，利用伪元素实现
-        //     &::after {
-        //         content: "";
-        //         display: inline-block;
-        //         width: 100%;
-        //         bottom: 0px;
-        //         left: 0px;
-        //         transform: translateX(-100%);
-        //         position: absolute;
-        //         height: 1px;
-        //         background: $purple2;
-        //         transition: transform .5s;
-        //     }
-        // }
-        // // input框聚焦时：
-        // .ant-input-affix-wrapper-focused,
-        // .ant-input-affix-wrapper:focus {
-        //     box-shadow: none;
-        //     &::after {
-        //         transform: translateX(0%);
-        //     }
-        // }
     }
     // 右上侧的导航图标
     .ant-col-right {

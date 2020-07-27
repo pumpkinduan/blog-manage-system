@@ -3,10 +3,11 @@ import { Input } from "antd";
 import "./index.scss";
 class CutomInput extends React.PureComponent {
   render() {
-    const { prefix = "", placeholder, width = "100%", onChange } = this.props;
+    const { prefix = "", placeholder, width = "100%", onChange, value } = this.props;
     return (
       <div className="custom-input" style={{ width: width }}>
         <Input
+          value={value}
           onChange={onChange}
           autoFocus={true}
           placeholder={placeholder}
