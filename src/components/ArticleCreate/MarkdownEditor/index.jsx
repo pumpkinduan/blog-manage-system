@@ -15,12 +15,16 @@ class MarkdownEditor extends Component {
       autofocus: true,
       autosave: {
         enabled: true,
+
         delay: 3000,
+
         //在storage中 会自动生成key为smde_marked_text的键代表markdown格式的内容
         uniqueId: "marked_text",
       },
       promptURLs: true,
+
       placeholder: "开始你的写作之旅吧~",
+
       tabSize: 4,
     };
     // 挂载markdown编辑器并进行配置
@@ -38,6 +42,7 @@ class MarkdownEditor extends Component {
     content && editor.value(content);
   }
   render() {
+
     return (
       <div className="markdownEditorApp-container">
         <textarea

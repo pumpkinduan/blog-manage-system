@@ -26,6 +26,7 @@ class RichEditor extends Component {
     // 由编辑文章进入，显示已经发布了，并获取到的数据
     // 由创建文章进入，显示空数据或是编辑过但没有发布的数据(如：路由切换，数据保存至storage)
     let content = this.props.articleContent || getLocalStorage('rich_text') || "开始你的写作之旅吧~";
+
     editor.txt.html(content);
   }
   render() {

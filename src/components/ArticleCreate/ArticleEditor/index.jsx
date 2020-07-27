@@ -14,6 +14,7 @@ class ArticleEditor extends Component {
           <RichEditor
             key={1}
             setCurrentEditor={setCurrentEditor}
+
           />
         ) : (
           <MarkdownEditor

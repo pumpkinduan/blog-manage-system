@@ -77,7 +77,7 @@ class ArticleCreate extends Component {
             coverUrl,
             markedContent
           });
-          console.log(data);
+
           // post data
           // setLocalStorage("text", content);
           this.clearAllContent();
@@ -119,7 +119,6 @@ class ArticleCreate extends Component {
       removeLocalStorage("smde_marked_text"); // markdown编辑器的缓存内容
       currentEditor.value("");
     }
-    console.log(currentEditor);
     form.resetFields();
     removeLocalStorage("article_sub_info");
   };
