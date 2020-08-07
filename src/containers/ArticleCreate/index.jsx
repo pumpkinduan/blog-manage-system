@@ -66,12 +66,13 @@ class ArticleCreate extends Component {
           content = currentEditor.txt.html();
         } else {
           markedContent = currentEditor.value();
-          content = `<div class="editor-preview editor-preview-side">${currentEditor.markdown(
+          // 前端部分获取markdown写的内部必须放以 <div class="editor-preview editor-preview-side"></div>为根节点
+          content = currentEditor.markdown(
             markedContent
-          )}</div>`;
+          );
         }
         if (content !== "") {
-          let data = Object.assign(form.getFieldsValue(), {
+          let data = Object.assign(vals, {
             content,
             status,
             coverUrl,
@@ -83,6 +84,14 @@ class ArticleCreate extends Component {
           this.clearAllContent();
           notification.success({
             message: status,
+            duration: 1,
+            style: {
+              cursor: "pointer",
+            },
+          });
+        } else {
+          notification.warn({
+            message: "文章内容不能为空噢~",
             duration: 1,
             style: {
               cursor: "pointer",

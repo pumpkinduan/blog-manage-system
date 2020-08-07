@@ -44,6 +44,7 @@ class ArticleInfo extends React.PureComponent {
           rules={[
             {
               required: true,
+              message: '标题不能为空'
             },
           ]}
         >
@@ -59,6 +60,7 @@ class ArticleInfo extends React.PureComponent {
           rules={[
             {
               required: true,
+              message: '作者不能为空'
             },
           ]}
         >
@@ -70,6 +72,7 @@ class ArticleInfo extends React.PureComponent {
           rules={[
             {
               required: true,
+              message: '分类tag不能为空'
             },
           ]}
         >
@@ -81,12 +84,14 @@ class ArticleInfo extends React.PureComponent {
           rules={[
             {
               required: true,
+              message: '文字描述不能为空'
             },
           ]}
         >
           <CustomInput placeholder="请简要描述文章" prefix="Description:" />
         </Form.Item>
-        <Form.Item className="reset-btn">
+        <Form.Item className="reset-btn"
+        >
           <Popconfirm
             title="是否清空文章信息？"
             onConfirm={this.confirm}

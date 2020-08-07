@@ -134,7 +134,6 @@ const MyHeader = (props) => {
     </List>
   );
   return (
-    // 
     <Row align="middle" className="override-ant-row"> 
       <Col flex={1} className="ant-col-left">
         <h1 >
