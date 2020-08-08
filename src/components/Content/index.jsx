@@ -38,7 +38,7 @@ class MainContent extends React.PureComponent {
             </Tag>
           ))}
         </nav>
-        <Redirect from="/" to="/articleCreate" />
+        <Redirect from="/" to="/articleList" />
         <section className="wrapper-content">
           <Switch>
             {routers.map((r) => (

@@ -1,0 +1,163 @@
+// 不换行, 超出显示...
+@mixin no-wrap() {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+// 限制行数，多行文本溢出显示...
+@mixin clamp($row: 1) {
+    overflow: hidden;
+    // 将对象作为弹性盒子模型显示
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    // 子元素的排列方式
+    -webkit-box-orient: vertical;
+    // 显示的行数
+    -webkit-line-clamp: $row;
+}
+
+// 主题背景颜色变化(主要)
+@mixin bg_color_theme($bg_color: $theme_bright) {
+    background: $bg_color;
+
+    [data-theme="theme1"] & {
+        background: $theme_skyblue;
+    }
+
+    [data-theme="theme2"] & {
+        background: $theme_dark;
+    }
+}
+
+// 主题背景颜色变化(次要)
+@mixin bg_color_sub_theme($bg_color: $theme_sub_bright) {
+    background: $bg_color;
+
+    [data-theme="theme1"] & {
+        background: $theme_sub_skyblue;
+    }
+
+    [data-theme="theme2"] & {
+        background: $theme_sub_dark;
+    }
+}
+
+// 头部背景图片
+@mixin bg_image($url) {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    [data-dpr^="1"] & {
+        background-image: url($url + "_163.png");
+    }
+
+    [data-dpr^="2"] & {
+        background-image: url($url + "_163@2x.png");
+    }
+
+    [data-dpr^="3"] & {
+        background-image: url($url + "_163@3x.png");
+    }
+}
+
+// 主题背景颜色变化，tabbar选项卡的边框颜色随之变化
+@mixin border_color($color: $theme_bright) {
+    border-color: $color;
+
+    [data-theme="theme1"] & {
+        border-color: $theme_skyblue;
+    }
+
+    [data-theme="theme2"] & {
+        border-color: $theme_dark;
+    }
+}
+
+// 主题背景颜色变化，tabbar选项卡的字体颜色随之变化
+@mixin font_color($color: $font_sub_bright) {
+    color: $color;
+
+    [data-theme="theme1"] & {
+        color: $font_sub_skyblue;
+    }
+
+    [data-theme="theme2"] & {
+        color: $font_sub_yellow;
+    }
+}
+
+@mixin set_flex($direction: row, $align: center, $justify: center) {
+    display: flex;
+    align-items: $align;
+    flex-direction: $direction;
+    justify-content: $justify;
+}
+
+// 从中间向两边展开，下划线
+@mixin show_underline($color, $height: 1px) {
+    &::after {
+        content: "";
+        display: inline-block;
+        width: 100%;
+        bottom: -3px;
+        left: 0px;
+        transform: scale(0);
+        position: absolute;
+        height: $height;
+        background: $color;
+        transition: transform .5s;
+    }
+
+    &:hover {
+        &::after {
+            transform: scale(1);
+        }
+
+    }
+}
+
+// 从中间向四周展开，遮罩层
+@mixin show_mask($bgc: rgba(0, 0, 0, .5)) {
+    & {
+        position: relative;
+    }
+
+    &:hover {
+        &::after {
+            transform: scale(1);
+
+        }
+    }
+
+    &::after {
+        content: " ";
+        position: absolute;
+        display: inline-block;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: $bgc;
+        transform: scale(0);
+        transition: transform .3s;
+    }
+}
+
+// 设置模糊背景
+@mixin blur_bgc($blur: 180px) {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: #999;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur($blur) sepia(10%);
+    transform: scale(2);
+}
