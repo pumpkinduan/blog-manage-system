@@ -1,0 +1,16 @@
+@import "../../assets/styles/color.scss";
+.load-btn {
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    z-index: 11;
+    background: $purple3;
+    border-color: $purple1;
+    color: #fff;
+    &:hover,  &:active, &:focus {
+        box-shadow: 0 0 2px 2px $purple3;
+        background: $purple4;
+        color: #fff;
+        border-color: $purple1;
+    }
+}

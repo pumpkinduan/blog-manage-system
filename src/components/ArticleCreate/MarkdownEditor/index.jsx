@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SimpleMDE from "simplemde";
-import "../../../styles/simplemde.scss";
+import "../../../assets/styles/simplemde.scss";
 import "./index.scss";
 class MarkdownEditor extends Component {
   constructor(props) {
