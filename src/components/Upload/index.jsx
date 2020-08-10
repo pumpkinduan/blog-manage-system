@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import QueueAnim from "rc-queue-anim";
 function getBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -56,23 +57,26 @@ class PicturesWall extends Component {
     );
     return (
       <div className="clearfix">
-        <Upload
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          listType="picture-card"
-          fileList={fileList}
-          onPreview={this.handlePreview}
-          onChange={this.handleChange}
-        >
-          {fileList.length >= 8 ? null : uploadButton}
-        </Upload>
-        <Modal
-          visible={previewVisible}
-          title={previewTitle}
-          footer={null}
-          onCancel={this.handleCancel}
-        >
-          <img alt="cover" style={{ width: "100%" }} src={previewImage} />
-        </Modal>
+        <QueueAnim type="bottom" delay={1600} duration={400}>
+          <Upload
+            key="upload"
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={this.handlePreview}
+            onChange={this.handleChange}
+          >
+            {fileList.length >= 8 ? null : uploadButton}
+          </Upload>
+          <Modal
+            visible={previewVisible}
+            title={previewTitle}
+            footer={null}
+            onCancel={this.handleCancel}
+          >
+            <img alt="cover" style={{ width: "100%" }} src={previewImage} />
+          </Modal>
+        </QueueAnim>
       </div>
     );
   }

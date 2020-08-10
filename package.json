@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "loadsh": "^0.0.4",
     "node-sass": "^4.14.1",
+    "rc-queue-anim": "^1.8.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loadable": "^5.5.0",

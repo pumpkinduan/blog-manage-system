@@ -7,7 +7,7 @@ import { Layout } from "antd";
 import { connect } from "react-redux";
 import { showGlobalLoading } from "../../redux/actionCreators/index";
 import { removeLocalStorage } from "../../utils/index";
-// import { useHistory } from "react-router-dom";
+
 const Home = (props) => {
   let [tags, setTags] = useState([{ title: "DashBoard", path: "/dashboard" }]);
   useEffect(() => {
@@ -27,10 +27,10 @@ const Home = (props) => {
   const addTag = (tag) => {
     // 避免添加重复的tag
     let flag = true;
-    for (let i = 0; i < tags.length; i ++ ) {
+    for (let i = 0; i < tags.length; i++) {
       if (tag.path === tags[i].path) {
         flag = false;
-        return
+        return;
       }
     }
     if (flag) {
