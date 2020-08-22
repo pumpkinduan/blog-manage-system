@@ -11,7 +11,7 @@ class NormalRegiterForm extends React.Component {
       duration: 1,
       style: {
         cursor: "pointer",
-      }
+      },
     });
     setTimeout(() => {
       window.location.replace("/login");
@@ -21,7 +21,8 @@ class NormalRegiterForm extends React.Component {
     // showConfirmInput：是否显示确认密码框，注册时候需要
     return (
       <Auth
-        loginText="立即注册"
+        loginText="现在登录"
+        registerText="立即注册"
         onFinish={this.onFinish}
         showConfirmInput={true}
       />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Popconfirm, message } from "antd";
+import { Popconfirm, message } from "antd";
 import { Link } from "react-router-dom";
 import "./ListCard.scss";
 class ListCard extends React.PureComponent {
@@ -48,9 +48,9 @@ class ListCard extends React.PureComponent {
               okText="确定"
               cancelText="取消"
             >
-              <a href="javascript:;" className="del-btn btn">
+              <span  className="del-btn btn">
                 删除
-              </a>
+              </span>
             </Popconfirm>
           </div>
         </div>

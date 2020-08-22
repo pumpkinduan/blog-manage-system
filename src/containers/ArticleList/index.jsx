@@ -132,7 +132,12 @@ class ArticleList extends Component {
             return (
               <Col span={8} key={index}>
                 <QueueAnim type="bottom" interval={100} delay={index * 100}>
-                  <ListCard item={item} confirmToDel={this.confirmToDel} key={index} index={index} />
+                  <ListCard
+                    item={item}
+                    confirmToDel={this.confirmToDel}
+                    key={index}
+                    index={index}
+                  />
                 </QueueAnim>
               </Col>
             );

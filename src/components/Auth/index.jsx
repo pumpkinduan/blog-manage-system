@@ -17,8 +17,8 @@ const usernameReg = /^(?![0-9])[\u4e00-\u9fa5_a-zA-Z0-9_]/;
 const validateMessages = {
   string: {
     min: "字符个数不得少于${min}个",
-    max: "字符个数不得大于${max}个"
-  }
+    max: "字符个数不得大于${max}个",
+  },
 };
 
 class Auth extends React.Component {
@@ -50,7 +50,10 @@ class Auth extends React.Component {
             validateStatus={error ? "error" : undefined}
             rules={[
               { required: true, message: "请输入您的用户名" },
-              { pattern: usernameReg, message: "至少包含中文，数字或英文中的一种，数字不能开头" },
+              {
+                pattern: usernameReg,
+                message: "至少包含中文，数字或英文中的一种，数字不能开头",
+              },
               { min: 4 },
               { max: 12 },
             ]}
@@ -69,7 +72,10 @@ class Auth extends React.Component {
             validateStatus={error ? "error" : undefined}
             rules={[
               { required: true, message: "请输入您的密码" },
-              { pattern: pwdReg, message: "密码包含 数字,英文,字符中的两种以上" },
+              {
+                pattern: pwdReg,
+                message: "密码包含 数字,英文,字符中的两种以上",
+              },
               { min: 6 },
               { max: 20 },
             ]}
@@ -127,9 +133,15 @@ class Auth extends React.Component {
             </div>
             <div className="register-button-wrapper">
               {/* 这里不用Link组件，在第一次点击跳转时会有闪烁的bug */}
-              <a href="/register" className="register-button">
-                {registerText}
-              </a>
+              {!showConfirmInput ? (
+                <a href="/register" className="register-button">
+                  没有账号？{registerText}
+                </a>
+              ) : (
+                <a href="/login" className="login-button">
+                  已有账号？ {loginText}
+                </a>
+              )}
             </div>
           </Form.Item>
         </Form>
