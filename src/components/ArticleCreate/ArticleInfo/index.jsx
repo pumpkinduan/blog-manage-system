@@ -7,6 +7,7 @@ import {
   getLocalStorage,
   removeLocalStorage,
 } from "../../../utils/index";
+import QueueAnim from "rc-queue-anim";
 class ArticleInfo extends React.PureComponent {
   formRef = React.createRef();
   componentDidMount() {
@@ -38,70 +39,79 @@ class ArticleInfo extends React.PureComponent {
         ref={this.formRef}
         className="articl-info-container"
       >
-        <Form.Item
-          name="title"
-          className="article-title"
-          rules={[
-            {
-              required: true,
-              message: '标题不能为空'
-            },
-          ]}
-        >
-          <CustomInput
-            placeholder="请拟个文章标题"
-            width="40%"
-            prefix="Title:"
-          />
-        </Form.Item>
-        <Form.Item
-          name="author"
-          className="article-author"
-          rules={[
-            {
-              required: true,
-              message: '作者不能为空'
-            },
-          ]}
-        >
-          <CustomInput placeholder="请输入作者" width="20%" prefix="Author:" />
-        </Form.Item>
-        <Form.Item
-          name="tag"
-          className="articla-tag"
-          rules={[
-            {
-              required: true,
-              message: '分类tag不能为空'
-            },
-          ]}
-        >
-          <CustomInput placeholder="请输入文章分类" width="20%" prefix="Tag:" />
-        </Form.Item>
-        <Form.Item
-          name="description"
-          className="article-description"
-          rules={[
-            {
-              required: true,
-              message: '文字描述不能为空'
-            },
-          ]}
-        >
-          <CustomInput placeholder="请简要描述文章" prefix="Description:" />
-        </Form.Item>
-        <Form.Item className="reset-btn"
-        >
-          <Popconfirm
-            title="是否清空文章信息？"
-            onConfirm={this.confirm}
-            onCancel={this.cancel}
-            okText="Yes"
-            cancelText="No"
+        <QueueAnim interval={400}>
+          <Form.Item
+            key="0"
+            name="title"
+            className="article-title"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
           >
-            <span>Reset</span>
-          </Popconfirm>
-        </Form.Item>
+            <CustomInput
+              placeholder="请拟个文章标题"
+              width="40%"
+              prefix="Title:"
+            />
+          </Form.Item>
+          <Form.Item
+            key="1"
+            name="author"
+            className="article-author"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <CustomInput
+              placeholder="请输入作者"
+              width="20%"
+              prefix="Author:"
+            />
+          </Form.Item>
+          <Form.Item
+            key="2"
+            name="tag"
+            className="articla-tag"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <CustomInput
+              placeholder="请输入文章分类"
+              width="20%"
+              prefix="Tag:"
+            />
+          </Form.Item>
+          <Form.Item
+            key="3"
+            name="description"
+            className="article-description"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <CustomInput placeholder="请简要描述文章" prefix="Description:" />
+          </Form.Item>
+          <Form.Item className="reset-btn" key="4">
+            <Popconfirm
+              title="是否清空文章信息？"
+              onConfirm={this.confirm}
+              onCancel={this.cancel}
+              okText="Yes"
+              cancelText="No"
+            >
+              <span>Reset</span>
+            </Popconfirm>
+          </Form.Item>
+        </QueueAnim>
       </Form>
     );
   }
