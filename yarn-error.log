@@ -1,73 +1,186 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe D:\Program Files\nodejs\node_global\node_modules\yarn\bin\yarn.js
+  C:\Program Files\nodejs\node.exe C:\Users\Pumpkin\scoop\apps\yarn\current\Yarn\bin\yarn.js --cwd E:\南瓜\blog-manage-system
 
 PATH: 
-  C:\Python38\Scripts\;C:\Python38\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;D:\Program Files\Microsoft VS Code;E:\Pumpkin\星纵FQ;D:\Program Files\nodejs\node_global;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;D:\Program Files\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Roaming\npm;C:\Program Files\nodejs;C:\Users\Administrator\AppData\Local\GitHubDesktop\bin;D:\Program Files\nodejs\node_global;
+  C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;E:\南瓜\blog-manage-system\node_modules\.bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Git\cmd;C:\Program Files\nodejs\;F:\Qt\Qt5.11.0\5.11.0\mingw53_32\bin;F:\Qt\Qt5.11.0\Tools\mingw530_32\bin;F:\mysql-5.7.27-winx64\bin;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;E:\星纵FQ\星纵FQ;;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;%SYSTEMROOT%\System32\OpenSSH\;C:\Users\Pumpkin\scoop\apps\yarn\current\Yarn\bin;C:\Users\Pumpkin\scoop\apps\yarn\current\global\node_modules\.bin;C:\Users\Pumpkin\AppData\Local\Programs\Python\Python37-32\Scripts\;C:\Users\Pumpkin\AppData\Local\Programs\Python\Python37-32\;C:\Users\Pumpkin\scoop\shims;C:\Users\Pumpkin\AppData\Local\Microsoft\WindowsApps;C:\Users\Pumpkin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Pumpkin\AppData\Roaming\npm;C:\Users\Pumpkin\AppData\Local\Programs\Microsoft VS Code\Code;D:\Bin\TIM;F:\ProgramFiles\ssr;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;
 
 Yarn version: 
   1.22.4
 
 Node version: 
-  12.18.2
+  10.15.3
 
 Platform: 
   win32 x64
 
 Trace: 
-  Error: ENOENT: no such file or directory, copyfile 'C:\Users\Administrator\AppData\Local\Yarn\Cache\v6\npm-electron-to-chromium-1.3.502-6a55e993ef60a01fbdc2152ef5e47ee00c885c98-integrity\node_modules\electron-to-chromium\CHANGELOG.md' -> 'C:\Users\Administrator\Desktop\blog-manage-system\node_modules\@babel\preset-env\node_modules\electron-to-chromium\CHANGELOG.md'
+  Error: ENOENT: no such file or directory, copyfile 'C:\Users\Pumpkin\scoop\apps\yarn\current\cache\v6\npm-electron-to-chromium-1.3.567-7a404288952ac990e447a7a86470d460ea953b8f-integrity\node_modules\electron-to-chromium\chromium-versions.js' -> 'E:\南瓜\blog-manage-system\node_modules\@babel\preset-env\node_modules\electron-to-chromium\chromium-versions.js'
 
 npm manifest: 
   {
-      "name": "blog-manage-system",
-      "version": "0.1.0",
-      "private": true,
-      "dependencies": {
-          "@ant-design/charts": "^0.9.7",
-          "@testing-library/jest-dom": "^4.2.4",
-          "@testing-library/react": "^9.3.2",
-          "@testing-library/user-event": "^7.1.2",
-          "antd": "^4.4.2",
-          "axios": "^0.19.2",
-          "node-sass": "^4.14.1",
-          "react": "^16.13.1",
-          "react-dom": "^16.13.1",
-          "react-loadable": "^5.5.0",
-          "react-router": "^5.2.0",
-          "react-router-dom": "^5.2.0",
-          "react-scripts": "3.4.1",
-          "sass": "^1.26.10",
-          "styled-components": "^5.1.1",
-          "wangeditor": "^3.1.1"
+    "name": "blog-manage-system",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "@ant-design/charts": "^0.9.9",
+      "@babel/core": "7.9.0",
+      "@svgr/webpack": "4.3.3",
+      "@testing-library/jest-dom": "^4.2.4",
+      "@testing-library/react": "^9.3.2",
+      "@testing-library/user-event": "^7.1.2",
+      "@typescript-eslint/eslint-plugin": "^2.10.0",
+      "@typescript-eslint/parser": "^2.10.0",
+      "antd": "^4.4.2",
+      "axios": "^0.19.2",
+      "babel-eslint": "10.1.0",
+      "babel-jest": "^24.9.0",
+      "babel-loader": "8.1.0",
+      "babel-plugin-named-asset-import": "^0.3.6",
+      "babel-preset-react-app": "^9.1.2",
+      "camelcase": "^5.3.1",
+      "case-sensitive-paths-webpack-plugin": "2.3.0",
+      "css-loader": "3.4.2",
+      "dotenv": "8.2.0",
+      "dotenv-expand": "5.1.0",
+      "eslint": "^6.6.0",
+      "eslint-config-react-app": "^5.2.1",
+      "eslint-loader": "3.0.3",
+      "eslint-plugin-flowtype": "4.6.0",
+      "eslint-plugin-import": "2.20.1",
+      "eslint-plugin-jsx-a11y": "6.2.3",
+      "eslint-plugin-react": "7.19.0",
+      "eslint-plugin-react-hooks": "^1.6.1",
+      "file-loader": "4.3.0",
+      "fs-extra": "^8.1.0",
+      "html-webpack-plugin": "4.0.0-beta.11",
+      "identity-obj-proxy": "3.0.0",
+      "jest": "24.9.0",
+      "jest-environment-jsdom-fourteen": "1.0.1",
+      "jest-resolve": "24.9.0",
+      "jest-watch-typeahead": "0.4.2",
+      "loadsh": "^0.0.4",
+      "mini-css-extract-plugin": "0.9.0",
+      "node-sass": "^4.14.1",
+      "optimize-css-assets-webpack-plugin": "5.0.3",
+      "pnp-webpack-plugin": "1.6.4",
+      "postcss-flexbugs-fixes": "4.1.0",
+      "postcss-loader": "3.0.0",
+      "postcss-normalize": "8.0.1",
+      "postcss-preset-env": "6.7.0",
+      "postcss-safe-parser": "4.0.1",
+      "rc-queue-anim": "^1.8.5",
+      "rc-tween-one": "^2.7.3",
+      "react": "^16.13.1",
+      "react-app-polyfill": "^1.0.6",
+      "react-dev-utils": "^10.2.1",
+      "react-dom": "^16.13.1",
+      "react-loadable": "^5.5.0",
+      "react-router": "^5.2.0",
+      "react-router-dom": "^5.2.0",
+      "resolve": "1.15.0",
+      "resolve-url-loader": "3.1.1",
+      "sass": "^1.26.10",
+      "sass-loader": "8.0.2",
+      "semver": "6.3.0",
+      "simplemde": "^1.11.2",
+      "style-loader": "0.23.1",
+      "styled-components": "^5.1.1",
+      "terser-webpack-plugin": "2.3.5",
+      "ts-loader": "^8.0.3",
+      "ts-pnp": "1.1.6",
+      "typescript": "^4.0.2",
+      "url-loader": "2.3.0",
+      "wangeditor": "^3.1.1",
+      "webpack": "4.42.0",
+      "webpack-dev-server": "3.10.3",
+      "webpack-manifest-plugin": "2.2.0",
+      "workbox-webpack-plugin": "4.3.1"
+    },
+    "scripts": {
+      "start": "node scripts/start.js",
+      "build": "node scripts/build.js",
+      "test": "node scripts/test.js"
+    },
+    "eslintConfig": {
+      "extends": "react-app"
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    },
+    "devDependencies": {
+      "@babel/cli": "^7.10.5",
+      "@babel/preset-env": "^7.10.4",
+      "babel-plugin-lodash": "^3.3.4",
+      "node-sass": "^4.14.1",
+      "react-redux": "^7.2.0",
+      "redux": "^4.0.5"
+    },
+    "jest": {
+      "roots": [
+        "<rootDir>/src"
+      ],
+      "collectCoverageFrom": [
+        "src/**/*.{js,jsx,ts,tsx}",
+        "!src/**/*.d.ts"
+      ],
+      "setupFiles": [
+        "react-app-polyfill/jsdom"
+      ],
+      "setupFilesAfterEnv": [
+        "<rootDir>/src/setupTests.js"
+      ],
+      "testMatch": [
+        "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+        "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+      ],
+      "testEnvironment": "jest-environment-jsdom-fourteen",
+      "transform": {
+        "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+        "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+        "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
       },
-      "scripts": {
-          "start": "react-scripts start",
-          "build": "react-scripts build",
-          "test": "react-scripts test",
-          "eject": "react-scripts eject"
+      "transformIgnorePatterns": [
+        "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+        "^.+\\.module\\.(css|sass|scss)$"
+      ],
+      "modulePaths": [
+        "C:\\Users\\Pumpkin\\scoop\\apps\\yarn\\current\\global\\node_modules"
+      ],
+      "moduleNameMapper": {
+        "^react-native$": "react-native-web",
+        "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
       },
-      "eslintConfig": {
-          "extends": "react-app"
-      },
-      "browserslist": {
-          "production": [
-              ">0.2%",
-              "not dead",
-              "not op_mini all"
-          ],
-          "development": [
-              "last 1 chrome version",
-              "last 1 firefox version",
-              "last 1 safari version"
-          ]
-      },
-      "devDependencies": {
-          "@babel/cli": "^7.10.5",
-          "@babel/preset-env": "^7.10.4",
-          "babel-plugin-lodash": "^3.3.4",
-          "node-sass": "^4.14.1",
-          "react-redux": "^7.2.0",
-          "redux": "^4.0.5"
-      }
+      "moduleFileExtensions": [
+        "web.js",
+        "js",
+        "web.ts",
+        "ts",
+        "web.tsx",
+        "tsx",
+        "json",
+        "web.jsx",
+        "jsx",
+        "node"
+      ],
+      "watchPlugins": [
+        "jest-watch-typeahead/filename",
+        "jest-watch-typeahead/testname"
+      ]
+    },
+    "babel": {
+      "presets": [
+        "react-app"
+      ]
+    }
   }
 
 yarn manifest: 

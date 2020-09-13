@@ -111,11 +111,11 @@ export default {
                     function(...result) {
                         // 所有请求现在都执行完成
                         resolve(result);
-                    },
-                    err => {
-                        reject(err);
                     }
-                )
+                ),
+                (err) => {
+                    reject(err);
+                }
             );
         });
     }

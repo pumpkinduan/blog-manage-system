@@ -76,17 +76,29 @@ const lists = [
     visitors: 123,
   },
 ];
+
+interface basicInfoInterface {
+  name: string;
+  age: string;
+  
+}
+interface intialState {
+  spin: boolean;
+  page: number;
+  lists: any[];
+}
 class ArticleList extends Component {
-  state = { spin: false, page: 1, lists: lists };
+  state:intialState = { spin: false, page: 1, lists: lists };
   confirmToDel = (id, index) => {
     // api
     message.success("您已成功删除了！");
   };
   loadMoreData = () => {
-    this.setState((state) => {
+    this.setState((state:intialState) => {
+      let page = state.page;
       return {
         spin: true,
-        page: state.page++,
+        page: page++,
       };
     });
     setTimeout(() => {

@@ -3,13 +3,13 @@ import {
   getLocalStorage,
   setLocalStorage,
   removeLocalStorage,
-} from "../../utils/index";
+} from "utils/index";
 import "./index.scss";
 import { Modal, notification } from "antd";
-import ArticleInfo from "../../components/ArticleCreate/ArticleInfo/index";
-import ArticleEditor from "../../components/ArticleCreate/ArticleEditor/index";
-import PicturesWall from "../../components/Upload/index";
-import ArticleControl from "../../components/ArticleCreate/ArticleControl/index";
+import ArticleInfo from "components/ArticleCreate/ArticleInfo/index";
+import ArticleEditor from "components/ArticleCreate/ArticleEditor/index";
+import PicturesWall from "components/Upload/index";
+import ArticleControl from "components/ArticleCreate/ArticleControl/index";
 class ArticleCreate extends Component {
   constructor(props) {
     super(props);
