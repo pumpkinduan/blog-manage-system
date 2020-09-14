@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Col, Row, Button, Popconfirm, message } from "antd";
-import ListCard from "../../components/ArticleList/ListCard";
+import ListCard from "components/ArticleList/ListCard";
 import LoadButton from "../../common/LoadButton/index";
 import QueueAnim from "rc-queue-anim";
 import "./index.scss";
-const lists = [
+import { listItemInterface } from "interfaces/Article"
+
+const lists: listItemInterface[] = [
   {
     id: 12,
     coverUrl:
@@ -76,25 +78,19 @@ const lists = [
     visitors: 123,
   },
 ];
-
-interface basicInfoInterface {
-  name: string;
-  age: string;
-  
-}
 interface intialState {
   spin: boolean;
   page: number;
-  lists: any[];
+  lists: listItemInterface[];
 }
 class ArticleList extends Component {
-  state:intialState = { spin: false, page: 1, lists: lists };
-  confirmToDel = (id, index) => {
+  state: intialState = { spin: false, page: 1, lists: lists };
+  confirmToDelelte = (selectedItemId: string | number, selectedItemIndex: number) => {
     // api
     message.success("您已成功删除了！");
   };
   loadMoreData = () => {
-    this.setState((state:intialState) => {
+    this.setState((state: intialState) => {
       let page = state.page;
       return {
         spin: true,
@@ -140,15 +136,15 @@ class ArticleList extends Component {
     return (
       <div className="article-list-container">
         <Row align="middle" gutter={[12, 15]}>
-          {lists.map((item, index) => {
+          {lists.map((item: listItemInterface, index: number) => {
             return (
               <Col span={8} key={index}>
                 <QueueAnim type="bottom" interval={100} delay={index * 100}>
                   <ListCard
-                    item={item}
-                    confirmToDel={this.confirmToDel}
-                    key={index}
-                    index={index}
+                    listItem={item}
+                    confirmToDelelte={this.confirmToDelelte}
+                    key={item.id}
+                    selectedItemIndex={index}
                   />
                 </QueueAnim>
               </Col>
