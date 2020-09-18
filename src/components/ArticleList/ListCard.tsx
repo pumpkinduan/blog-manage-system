@@ -2,7 +2,7 @@ import React from "react";
 import { Popconfirm, message } from "antd";
 import { Link } from "react-router-dom";
 import "./ListCard.scss";
-import { listItemInterface } from "interfaces/Article";
+import { listItemInterface } from "types/Article";
 interface listCardProps {
 	confirmToDelelte: (
 		selectedItemId: string | number,
