@@ -4,9 +4,9 @@ export interface listItemInterface {
 	coverUrl: string;
 	title: string;
 	createdAt: string | number;
-	likes: string | number;
-	visitors: string | number;
-	comments: string | number;
+	likes: string | number; // 点赞数量
+	visitors: string | number; // 访客数量
+	comments: string | number; // 留言数量
 }
 // 文章状态
 type published = "published"; // 已发布

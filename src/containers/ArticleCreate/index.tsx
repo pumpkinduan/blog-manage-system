@@ -13,14 +13,20 @@ import RichEditor from "components/ArticleCreate/RichEditor/index";
 import MarkdownEditor from "components/ArticleCreate/MarkdownEditor/index";
 import { articleProps } from "types/Article";
 import { FormInstance } from "antd/lib/form";
-class ArticleCreate extends Component<any, any> {
-	state: any = {
+interface IState {
+	isRichEditor: boolean;
+	content: string;
+	previewContent: string;
+	isPreview: boolean;
+	coverUrl: string;
+}
+class ArticleCreate extends Component<any, IState> {
+	readonly state = {
 		// isRichEditor来控制显示哪种类型的编辑器
 		// true为富文本; false为markdown
 		isRichEditor: true,
 
 		// 与文章相关的数据
-		article_sub_info: null, // 文章的次要信息，如标题 作者...
 		content: "", // html格式的内容，展示于前端网站中 保存至数据库
 		previewContent: "", // html格式的内容，在后台预览 不用保存至数据库
 		isPreview: false,

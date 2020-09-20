@@ -12,11 +12,9 @@ interface listCardProps {
 	selectedItemIndex: number;
 }
 class ListCard extends React.PureComponent<listCardProps> {
-	constructor(props: listCardProps) {
-		super(props);
-		this.eleDivRef = React.createRef();
-	}
-	eleDivRef: React.RefObject<HTMLDivElement>;
+	eleDivRef: React.RefObject<HTMLDivElement> = React.createRef<
+		HTMLDivElement
+	>();
 	render() {
 		const { listItem, selectedItemIndex, confirmToDelelte } = this.props;
 		return (
