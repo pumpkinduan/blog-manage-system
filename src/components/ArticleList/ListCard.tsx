@@ -3,20 +3,16 @@ import { Popconfirm, message } from "antd";
 import { Link } from "react-router-dom";
 import "./ListCard.scss";
 import { listItemInterface } from "types/Article";
-interface listCardProps {
-	confirmToDelelte: (
-		selectedItemId: string | number,
-		selectedItemIndex: number
-	) => void;
+interface IProps {
 	listItem: listItemInterface;
-	selectedItemIndex: number;
+	render?: (ref: React.RefObject<HTMLDivElement>) => React.ReactNode;
 }
-class ListCard extends React.PureComponent<listCardProps> {
+class ListCard extends React.PureComponent<IProps> {
 	eleDivRef: React.RefObject<HTMLDivElement> = React.createRef<
 		HTMLDivElement
 	>();
 	render() {
-		const { listItem, selectedItemIndex, confirmToDelelte } = this.props;
+		const { listItem } = this.props;
 		return (
 			<div className="cover-wrapper">
 				<div className="article-sub-info" ref={this.eleDivRef}>
@@ -43,7 +39,8 @@ class ListCard extends React.PureComponent<listCardProps> {
 						</span>
 					</p>
 					<p>发布时间：{listItem.createdAt}</p>
-					<div className="btn-controls">
+					{this.props.render && this.props.render(this.eleDivRef)}
+					{/* <div className="btn-controls">
 						<span className="edit-btn btn">编辑</span>
 						<Popconfirm
 							getPopupContainer={() =>
@@ -61,7 +58,7 @@ class ListCard extends React.PureComponent<listCardProps> {
 						>
 							<span className="del-btn btn">删除</span>
 						</Popconfirm>
-					</div>
+					</div> */}
 				</div>
 				<img src={listItem.coverUrl} alt="" />
 			</div>

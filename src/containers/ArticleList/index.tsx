@@ -149,10 +149,34 @@ class ArticleList extends Component {
 									delay={index * 100}
 								>
 									<ListCard
+										render={(ref) => (
+											<div className="btn-controls">
+												<span className="edit-btn btn">
+													编辑
+												</span>
+												<Popconfirm
+													getPopupContainer={() =>
+														ref.current ||
+														document.body
+													}
+													title="您真的要删除这篇文章嘛？"
+													onConfirm={() => {
+														this.confirmToDelelte(
+															item.id,
+															index
+														);
+													}}
+													okText="确定"
+													cancelText="取消"
+												>
+													<span className="del-btn btn">
+														删除
+													</span>
+												</Popconfirm>
+											</div>
+										)}
 										listItem={item}
-										confirmToDelelte={this.confirmToDelelte}
 										key={item.id}
-										selectedItemIndex={index}
 									/>
 								</QueueAnim>
 							</Col>

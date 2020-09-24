@@ -1,5 +1,6 @@
 @import '../../assets/styles/color.scss';
 @import '../../assets/styles/mixin.scss';
+
 .cover-wrapper {
     position: relative;
     border-radius: 10px;
@@ -55,31 +56,6 @@
                 strong {
                     color: $volcano4;
                     ;
-                }
-            }
-        }
-
-        .btn-controls {
-            position: relative;
-
-            .btn {
-                box-sizing: border-box;
-                cursor: pointer;
-                display: inline-block;
-                margin: 0 12px;
-                width: 45px;
-                height: 45px;
-                line-height: 45px;
-                text-align: center;
-                border-width: 1px;
-                border-style: solid;
-                border-color: transparent;
-                transition: all .3s;
-                color: #ccc;
-                &:hover, &:focus {
-                    border-radius: 50%;
-                    color: $volcano5;
-                    border-color: $volcano2;
                 }
             }
         }
