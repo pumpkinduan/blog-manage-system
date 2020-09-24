@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
-const Comment = () => {
-	return <div className="comment-container">comment</div>;
-};
+import React, { Component } from "react";
+import CommentListItem from "components/Comment";
+class Comment extends Component {
+	render() {
+		return <CommentListItem />;
+	}
+}
 export default Comment;

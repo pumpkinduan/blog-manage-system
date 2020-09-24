@@ -55,6 +55,7 @@
     "paths": {
       "@src": ["./*"],
       "@common/*": ["./common/*"],
+      "@assets/*": ["./assets/*"],
       "@components/*": ["./components/*"],
       "@containers/*": ["./containers/*"],
       "@redux/*": ["./redux/*"],
