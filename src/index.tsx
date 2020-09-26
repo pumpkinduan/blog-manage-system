@@ -2,7 +2,7 @@ import App from "./App";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import "./global.css";
+import "./global.scss";
 import React, { PureComponent } from "react";
 import "./App.css";
 import "antd/dist/antd.css";
@@ -28,7 +28,11 @@ ReactDOM.render(
 					exact
 					render={(props) => <Register {...props} />}
 				/>
-				<Route path="/login" exact render={(props) => <Login {...props} />} />
+				<Route
+					path="/login"
+					exact
+					render={(props) => <Login {...props} />}
+				/>
 				<Route
 					strict={true}
 					path="/"

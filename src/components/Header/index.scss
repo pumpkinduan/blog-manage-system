@@ -1,4 +1,3 @@
-@import '../../assets/styles/color.scss';
 .override-ant-row {
     background: #fff;
     height: 100px;
@@ -9,35 +8,43 @@
     left: 0;
     right: 0;
     border-bottom: 1px solid $purple1;
+
     .ant-col {
         display: flex;
         align-items: center;
         flex: auto;
     }
+
     .ant-col-left {
         height: 90px;
         cursor: pointer;
+
         .admin {
             margin-right: 10px;
             color: $purple4;
+
             &:hover {
                 color: $purple5;
             }
         }
     }
+
     // 右上侧的导航图标
     .ant-col-right {
         max-width: 450px;
         justify-content: flex-end;
+
         nav {
             cursor: pointer;
             color: #666;
             padding: 10px;
             transition: color .3s;
             font-size: 16px;
+
             .ant-badge {
                 font-size: inherit;
             }
+
             &:hover {
                 color: $purple5;
             }
@@ -51,36 +58,45 @@
     padding: 0;
     position: relative;
     width: 333px;
+
     .ant-dropdown-menu,
     .ant-dropdown-menu-items {
         padding: 0;
     }
+
     .ant-list-item {
         padding: 10px;
         cursor: pointer;
         transition: background-color .3s;
+
         &:hover {
             background-color: $purple1;
         }
+
         .ant-list-item-meta-avatar {
             margin-right: 6px;
         }
+
         .ant-list-item-action {
             margin-left: 40px;
         }
+
         .ant-list-item-meta-description,
         .ant-list-item-action li {
             font-size: 12px;
             margin-bottom: 2px;
         }
     }
+
     .ant-list-item-read {
         opacity: .4;
     }
+
     .bottom-btns {
         display: flex;
         align-items: center;
         justify-content: space-around;
+
         .ant-btn-text {
             font-size: 12px;
         }

@@ -145,8 +145,19 @@
     }
 }
 
-// 在父级容器中，水平垂直居中
-// @mixin 
+// 子元素的水平垂直居中，需要给父元素设置
+@mixin center($type: flex) {
+    @if $type=='flex' {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    // @if expr {
+
+    // }
+}
+
 // 设置模糊背景
 @mixin blur_bgc($blur: 180px) {
     width: 100%;

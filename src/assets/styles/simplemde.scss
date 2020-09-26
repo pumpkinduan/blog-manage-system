@@ -1,5 +1,5 @@
 // 自定义markdown编辑器的css样式
-@import './color.scss';
+// @import './color.scss';
 
 /**
  * simplemde v1.11.2
@@ -794,6 +794,7 @@ span.CodeMirror-selectedtext {
 
 .editor-preview,
 .editor-preview-side {
+
     h1,
     h2,
     h3,
@@ -809,6 +810,7 @@ span.CodeMirror-selectedtext {
 
 .editor-preview,
 .editor-preview-side {
+
     h1:before,
     h2:before,
     h3:before,
@@ -877,6 +879,7 @@ span.CodeMirror-selectedtext {
         margin-bottom: 10px;
         margin-top: 10px;
         background: $purple1;
+
         p {
             margin: 0px;
             line-height: 26px;
@@ -894,11 +897,13 @@ span.CodeMirror-selectedtext {
     margin-top: 8px;
     margin-bottom: 8px;
     padding-left: 20px;
+
     li {
         padding-left: 5px;
         list-style-type: "\1F44D";
         vertical-align: middle;
     }
+
     ul,
     ol {
         li {
@@ -919,6 +924,7 @@ span.CodeMirror-selectedtext {
 
 .editor-preview,
 .editor-preview-side {
+
     h1 code,
     h2 code,
     h3 code,
@@ -948,6 +954,7 @@ span.CodeMirror-selectedtext {
         font-weight: 600;
         color: $purple5;
         border-bottom: 2px dotted $purple6;
+
         &:hover {
             color: $purple6;
         }
