@@ -29,3 +29,43 @@ a {
     display: inline-block;
     text-decoration: none;
 }
+
+// 滚动条样式
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    height: 30px;
+    background-color: #999;
+    --webkit-border-radius: 4px;
+    outline-offset: -2px;
+}
+
+// 数量
+.count {
+    display: inline-block;
+    padding: 0 2px;
+    font-size: 16px;
+    font-weight: bold;
+    color: $red1;
+}
+
+// 名字
+.name {
+    display: inline-block;
+    padding: 0 2px;
+    font-size: 16px;
+    color: $blue4;
+}
+
+// 删除按钮
+.delete-btn.ant-btn {
+    border-radius: 5px;
+    background: $red1 !important;
+    border: none;
+    &:hover {
+        background: $red2 !important;
+    }
+}

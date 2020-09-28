@@ -1,18 +1,18 @@
-import React, { PureComponent } from "react";
-import "App.css";
-import "antd/dist/antd.css";
+import React, { PureComponent } from 'react';
+import 'App.css';
+import 'antd/dist/antd.css';
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
 	Redirect,
-} from "react-router-dom";
-import { getLocalStorage } from "./utils/index";
-import Home from "containers/Home/index";
-import Login from "containers/Login/index";
-import Register from "containers/Register/index";
-import Loading from "components/Loading/index";
-let isAuthencated = getLocalStorage("isAuthencated");
+} from 'react-router-dom';
+import { getLocalStorage } from './utils/index';
+import Home from 'containers/Home/index';
+import Login from 'containers/Login/index';
+import Register from 'containers/Register/index';
+import Loading from 'components/Loading/index';
+let isAuthencated = getLocalStorage('isAuthencated');
 class App extends PureComponent {
 	render() {
 		return (
@@ -24,7 +24,11 @@ class App extends PureComponent {
 						exact
 						render={(props) => <Register {...props} />}
 					/>
-					<Route path="/login" exact render={(props) => <Login {...props} />} />
+					<Route
+						path="/login"
+						exact
+						render={(props) => <Login {...props} />}
+					/>
 					<Route
 						strict={true}
 						path="/"
@@ -34,8 +38,8 @@ class App extends PureComponent {
 							}
 							return <Home {...props} />;
 						}}
-					/>{" "}
-				</Switch>{" "}
+					/>{' '}
+				</Switch>{' '}
 			</Router>
 		);
 	}
