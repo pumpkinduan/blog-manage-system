@@ -71,7 +71,11 @@ class SiderBar extends React.PureComponent<IProps> {
 		const activeItem = this.getActiveItem(siderLinks);
 		const activeSubItem = this.getActiveItem(activeItem?.subSiderLinks);
 		const defaultOpenKeys = activeItem && [activeItem.id]; // 展开的下拉项
-		const defaultSelectedKeys = activeSubItem && [activeSubItem.id]; // 当前选中的项
+		const defaultSelectedKeys =
+			(activeSubItem && [activeSubItem.id]) || defaultOpenKeys; // 当前选中的项
+		console.log('defaultOpenKeys', defaultOpenKeys);
+		console.log('defaultSelectedKeys', defaultSelectedKeys);
+
 		return (
 			<div className="wrapper">
 				<Sider
