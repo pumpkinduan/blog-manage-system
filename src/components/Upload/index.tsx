@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Upload, Modal } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import React, { Component } from 'react';
+import { Upload, Modal } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 function getBase64(file) {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
@@ -9,18 +9,24 @@ function getBase64(file) {
 		reader.onerror = (error) => reject(error);
 	});
 }
-class PicturesWall extends Component {
+interface IProps {
+	placehloder: string;
+	getUploadData: (fileList) => void;
+}
+class PicturesWall extends Component<IProps> {
 	state = {
 		previewVisible: false,
-		previewImage: "",
-		previewTitle: "",
+		previewImage: '',
+		previewTitle: '',
 		fileList: [
 			{
-				uid: "-1",
-				name: "image.png",
-				status: "done",
+				uid: '-1',
+				name: 'image.png',
+				// status: 'success',
+				size: 4,
+				type: 'png',
 				url:
-					"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+					'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
 			},
 		],
 	};
@@ -36,7 +42,7 @@ class PicturesWall extends Component {
 			previewImage: file.url || file.preview,
 			previewVisible: true,
 			previewTitle:
-				file.name || file.url.substring(file.url.lastIndexOf("/") + 1),
+				file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
 		});
 	};
 
@@ -79,7 +85,7 @@ class PicturesWall extends Component {
 				>
 					<img
 						alt="cover"
-						style={{ width: "100%" }}
+						style={{ width: '100%' }}
 						src={previewImage}
 					/>
 				</Modal>

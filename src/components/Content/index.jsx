@@ -38,7 +38,6 @@ class MainContent extends React.PureComponent {
 						</Tag>
 					))}
 				</nav>
-				{/* <Redirect from="/" to="/comment" /> */}
 				<section className="wrapper-content">
 					<Switch>
 						{routers.map((r) => (
