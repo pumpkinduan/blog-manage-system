@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Badge, Popover, Modal } from 'antd';
+import { Badge, Popover, Modal, message } from 'antd';
 import { SoundOutlined } from '@ant-design/icons';
 import { replyItemProps, commentItemProps } from 'types/Comment';
 import BaseTable from 'common/BaseTable';
@@ -62,7 +62,9 @@ const IconReplyBtn = ({ count, item }: IconTextProps) => {
 		setSearchValue(e.target.value);
 	};
 	// 删除所选的回复
-	const deleteSelectedReplys = () => {};
+	const deleteSelectedReplys = () => {
+		message.success('删除成功');
+	};
 	let replys = item.replys;
 	if (searchValue !== '') {
 		replys = item.replys.filter(

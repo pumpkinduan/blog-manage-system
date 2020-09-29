@@ -1,6 +1,5 @@
 // 不换行, 超出显示...
 @mixin no-wrap() {
-    width: 100%;
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;

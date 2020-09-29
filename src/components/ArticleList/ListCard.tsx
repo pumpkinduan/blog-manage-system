@@ -1,8 +1,8 @@
-import React from "react";
-import { Popconfirm, message } from "antd";
-import { Link } from "react-router-dom";
-import "./ListCard.scss";
-import { listItemInterface } from "types/Article";
+import React from 'react';
+import { Popconfirm, message } from 'antd';
+import { Link } from 'react-router-dom';
+import './ListCard.scss';
+import { listItemInterface } from 'types/Article';
 interface IProps {
 	listItem: listItemInterface;
 	render?: (ref: React.RefObject<HTMLDivElement>) => React.ReactNode;
@@ -20,7 +20,7 @@ class ListCard extends React.PureComponent<IProps> {
 						<Link
 							className="title"
 							to={{
-								pathname: "/articleCreate",
+								pathname: '/articleCreate',
 								state: { isEdited: true },
 							}}
 						>
@@ -40,25 +40,6 @@ class ListCard extends React.PureComponent<IProps> {
 					</p>
 					<p>发布时间：{listItem.createdAt}</p>
 					{this.props.render && this.props.render(this.eleDivRef)}
-					{/* <div className="btn-controls">
-						<span className="edit-btn btn">编辑</span>
-						<Popconfirm
-							getPopupContainer={() =>
-								this.eleDivRef.current || document.body
-							}
-							title="您真的要删除这篇文章嘛？"
-							onConfirm={() => {
-								confirmToDelelte(
-									listItem.id,
-									selectedItemIndex
-								);
-							}}
-							okText="确定"
-							cancelText="取消"
-						>
-							<span className="del-btn btn">删除</span>
-						</Popconfirm>
-					</div> */}
 				</div>
 				<img src={listItem.coverUrl} alt="" />
 			</div>

@@ -7,11 +7,11 @@ import {
 	Route,
 	Redirect,
 } from 'react-router-dom';
-import { getLocalStorage } from './utils/index';
-import Home from 'containers/Home/index';
-import Login from 'containers/Login/index';
-import Register from 'containers/Register/index';
-import Loading from 'components/Loading/index';
+import { getLocalStorage } from './utils';
+import Home from 'containers/Home';
+import Login from 'containers/Login';
+import Register from 'containers/Register';
+import Loading from 'components/Loading';
 let isAuthencated = getLocalStorage('isAuthencated');
 class App extends PureComponent {
 	render() {

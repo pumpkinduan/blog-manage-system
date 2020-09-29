@@ -2,8 +2,7 @@
     .extra-item {
         width: 300px;
     }
-    .ant-list-item-meta-title,
-    p {
+    .ant-list-item-meta-title {
         margin-bottom: 0;
     }
     .title-wrapper {
@@ -18,8 +17,8 @@
             }
         }
         .title {
-            max-width: 40px;
             @include no-wrap();
+            max-width: 160px;
             cursor: pointer;
             vertical-align: middle;
             &:hover {

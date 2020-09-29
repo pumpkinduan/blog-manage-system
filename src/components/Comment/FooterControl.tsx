@@ -14,8 +14,6 @@ const FooterControl = ({
 		Modal.confirm({
 			content: '您确定要删除所选中的回复嘛?',
 			onOk: deleteSelectedReplys,
-			okText: '确定',
-			cancelText: '取消',
 		});
 	};
 	return (

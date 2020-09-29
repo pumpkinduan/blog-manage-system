@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Avatar } from 'antd';
+import { List, Avatar, Modal, message, Row, Col } from 'antd';
 import ListCard from 'components/ArticleList';
 import { listItemInterface } from 'types/Article';
 import { replyItemProps, commentItemProps } from 'types/Comment';
@@ -44,13 +44,24 @@ const listItem: listItemInterface = {
 	likes: 1235,
 	visitors: 123,
 };
-const Title = ({ name }) => (
+const Title = ({ name, deleteSelectedComment }) => (
 	<div className="title-wrapper">
 		<span className="title">{name}</span>
-		<CloseOutlined className="delete-icon" />
+		<CloseOutlined
+			className="delete-icon"
+			onClick={deleteSelectedComment}
+		/>
 	</div>
 );
 const CommentListItem = () => {
+	const deleteSelectedComment = () => {
+		Modal.confirm({
+			content: '您确定要删除该留言嘛?',
+			onOk: () => {
+				message.success('删除成功');
+			},
+		});
+	};
 	return (
 		<List
 			className="comment-list-item"
@@ -60,9 +71,6 @@ const CommentListItem = () => {
 			renderItem={(item) => (
 				<Item
 					key={item.article_title}
-					actions={[
-						<IconReplyBtn item={item} count={item.replys.length} />,
-					]}
 					extra={
 						<div className="extra-item">
 							<ListCard listItem={listItem} />
@@ -70,9 +78,24 @@ const CommentListItem = () => {
 					}
 				>
 					<Meta
-						description={item.created_at}
+						description={
+							<Row align="middle" gutter={10}>
+								<Col>{item.created_at}</Col>
+								<Col>
+									<IconReplyBtn
+										item={item}
+										count={item.replys.length}
+									/>
+								</Col>
+							</Row>
+						}
 						avatar={<Avatar src={item.avatar} />}
-						title={<Title name={item.name} />}
+						title={
+							<Title
+								name={item.name}
+								deleteSelectedComment={deleteSelectedComment}
+							/>
+						}
 					/>
 					{item.content}
 				</Item>
