@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Badge, Popover, Modal } from 'antd';
 import { SoundOutlined } from '@ant-design/icons';
-import { replyItemProps, commentItemProps } from './CommentListItem';
+import { replyItemProps, commentItemProps } from 'types/Comment';
 import BaseTable from 'common/BaseTable';
 import { ColumnType } from 'antd/lib/table';
 import FooterControl from './FooterControl';

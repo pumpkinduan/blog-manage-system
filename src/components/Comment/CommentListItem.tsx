@@ -2,25 +2,9 @@ import React from 'react';
 import { List, Avatar } from 'antd';
 import ListCard from 'components/ArticleList';
 import { listItemInterface } from 'types/Article';
+import { replyItemProps, commentItemProps } from 'types/Comment';
 import IconReplyBtn from './IconReplyBtn';
 import './index.scss';
-export interface replyItemProps {
-	name: string;
-	avatar: string;
-	content: string;
-	created_at: string;
-	id: string | number;
-}
-export interface commentItemProps {
-	avatar: string;
-	name: string;
-	article_title: string;
-	article_cover: string;
-	content: string;
-	created_at: string;
-	replys: replyItemProps[];
-}
-
 const { Item } = List;
 const { Meta } = Item;
 const listData: commentItemProps[] = [];
@@ -37,6 +21,7 @@ for (let i = 1; i < 15; i++) {
 }
 for (let i = 0; i < 5; i++) {
 	listData.push({
+		id: i,
 		name: 'hhhhh',
 		article_title: `ant design part ${i}`,
 		avatar:
