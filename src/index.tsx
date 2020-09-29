@@ -1,10 +1,8 @@
-import App from './App';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import './global.scss';
-import React, { PureComponent } from 'react';
-import './App.css';
+import React from 'react';
 import 'antd/dist/antd.css';
 import {
 	BrowserRouter as Router,
