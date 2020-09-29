@@ -108,7 +108,7 @@ const IconReplyBtn = ({ count, item }: IconTextProps) => {
 			<Badge dot count={count}>
 				<Popover
 					content={
-						count ? `有${count}条回复@${item.name}` : '暂无回复'
+						count ? `有${count}条消息@了${item.name}` : '暂无回复'
 					}
 					placement="bottom"
 				>
