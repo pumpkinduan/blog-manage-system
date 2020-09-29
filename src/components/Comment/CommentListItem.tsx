@@ -4,6 +4,7 @@ import ListCard from 'components/ArticleList';
 import { listItemInterface } from 'types/Article';
 import { replyItemProps, commentItemProps } from 'types/Comment';
 import IconReplyBtn from './IconReplyBtn';
+import { CloseOutlined } from '@ant-design/icons';
 import './index.scss';
 const { Item } = List;
 const { Meta } = Item;
@@ -43,7 +44,12 @@ const listItem: listItemInterface = {
 	likes: 1235,
 	visitors: 123,
 };
-
+const Title = ({ name }) => (
+	<div className="title-wrapper">
+		<span className="title">{name}</span>
+		<CloseOutlined className="delete-icon" />
+	</div>
+);
 const CommentListItem = () => {
 	return (
 		<List
@@ -64,8 +70,9 @@ const CommentListItem = () => {
 					}
 				>
 					<Meta
+						description={item.created_at}
 						avatar={<Avatar src={item.avatar} />}
-						title={<p>{item.name}</p>}
+						title={<Title name={item.name} />}
 					/>
 					{item.content}
 				</Item>

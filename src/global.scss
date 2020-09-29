@@ -30,6 +30,10 @@ a {
     text-decoration: none;
 }
 
+span {
+    display: inline-block;
+}
+
 // 滚动条样式
 ::-webkit-scrollbar {
     width: 4px;

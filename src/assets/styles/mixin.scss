@@ -1,8 +1,10 @@
 // 不换行, 超出显示...
 @mixin no-wrap() {
-    text-overflow: ellipsis;
-    overflow: hidden;
+    width: 100%;
+    display: inline-block;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 // 限制行数，多行文本溢出显示...
@@ -20,11 +22,9 @@
 // 主题背景颜色变化(主要)
 @mixin bg_color_theme($bg_color: $theme_bright) {
     background: $bg_color;
-
     [data-theme="theme1"] & {
         background: $theme_skyblue;
     }
-
     [data-theme="theme2"] & {
         background: $theme_dark;
     }
@@ -33,11 +33,9 @@
 // 主题背景颜色变化(次要)
 @mixin bg_color_sub_theme($bg_color: $theme_sub_bright) {
     background: $bg_color;
-
     [data-theme="theme1"] & {
         background: $theme_sub_skyblue;
     }
-
     [data-theme="theme2"] & {
         background: $theme_sub_dark;
     }
@@ -48,15 +46,12 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-
     [data-dpr^="1"] & {
         background-image: url($url + "_163.png");
     }
-
     [data-dpr^="2"] & {
         background-image: url($url + "_163@2x.png");
     }
-
     [data-dpr^="3"] & {
         background-image: url($url + "_163@3x.png");
     }
@@ -65,11 +60,9 @@
 // 主题背景颜色变化，tabbar选项卡的边框颜色随之变化
 @mixin border_color($color: $theme_bright) {
     border-color: $color;
-
     [data-theme="theme1"] & {
         border-color: $theme_skyblue;
     }
-
     [data-theme="theme2"] & {
         border-color: $theme_dark;
     }
@@ -78,11 +71,9 @@
 // 主题背景颜色变化，tabbar选项卡的字体颜色随之变化
 @mixin font_color($color: $font_sub_bright) {
     color: $color;
-
     [data-theme="theme1"] & {
         color: $font_sub_skyblue;
     }
-
     [data-theme="theme2"] & {
         color: $font_sub_yellow;
     }
@@ -109,12 +100,10 @@
         background: $color;
         transition: transform .5s;
     }
-
     &:hover {
         &::after {
             transform: scale(1);
         }
-
     }
 }
 
@@ -123,14 +112,11 @@
     & {
         position: relative;
     }
-
     &:hover {
         &::after {
             transform: scale(1);
-
         }
     }
-
     &::after {
         content: " ";
         position: absolute;
@@ -152,9 +138,7 @@
         justify-content: center;
         align-items: center;
     }
-
     // @if expr {
-
     // }
 }
 
