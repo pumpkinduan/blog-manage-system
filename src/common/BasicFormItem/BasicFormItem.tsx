@@ -2,9 +2,8 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
 import { validatorResultProps } from 'utils/validators';
-import './index.css';
-
 const { Password } = Input;
+
 export interface BasicFormItemProps extends FormItemProps {
 	// 自定义的规则校验器，必须遵循tools文件中validatePwd这类函数返回的格式
 	customValidator?: (value: string) => validatorResultProps;
@@ -33,7 +32,7 @@ class BasicFormItem extends React.PureComponent<BasicFormItemProps> {
 		const MInput = type === 'password' ? Password : Input;
 		return (
 			<Form.Item
-				className="override-ant-form-item "
+				className="override-ant-form-item"
 				initialValue={initialValue}
 				hasFeedback={hasFeedback}
 				name={name}

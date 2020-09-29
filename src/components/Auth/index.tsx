@@ -2,17 +2,13 @@ import React from 'react';
 import './index.scss';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-
+import { Link } from 'react-router-dom';
+import { validateUserName, validatePwd } from 'utils/validators';
+import BasicFormItem from 'common/BasicFormItem';
 /**
  * 该组件(傻瓜组件)思想为:
  * 接受props传递来的数据进行展示，这里不做业务逻辑处理
  */
-
-// 密码包含 数字,英文,字符中的两种以上，长度6-20
-const pwdReg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).{6,20}$/;
-
-// 用户名至少包含 中文，数字和英文中的一种，且数字不能开头，长度4-12
-const usernameReg = /^(?![0-9])[\u4e00-\u9fa5_a-zA-Z0-9_]/;
 const validateMessages = {
 	string: {
 		min: '字符个数不得少于${min}个',
@@ -22,10 +18,8 @@ const validateMessages = {
 interface IProps {
 	loginText: string;
 	registerText: string;
-	showConfirmInput: boolean;
-	error: string;
+	isRegister: boolean;
 	onFinish: (data) => void;
-	onChange: (e) => void;
 }
 class Auth extends React.Component<IProps> {
 	// 点击登录，提交的数据被该函数的参数接收，可向后台发送请求
@@ -33,13 +27,7 @@ class Auth extends React.Component<IProps> {
 		this.props.onFinish(info);
 	};
 	render() {
-		const {
-			loginText,
-			registerText,
-			showConfirmInput,
-			error,
-			onChange,
-		} = this.props;
+		const { loginText, registerText, isRegister } = this.props;
 		return (
 			<div className="container">
 				<Form
@@ -48,91 +36,49 @@ class Auth extends React.Component<IProps> {
 					className="login-form"
 					onFinish={this.handleOnFinish}
 				>
-					<Form.Item
+					<BasicFormItem
 						name="username"
-						// 这里的字段要用exact而非help，避免清空input时无法显示 <请输入您的用户名> 提示文字
-						extra={error}
-						// validateStatus取值为undefined时才会采用默认的校验规则，不符合规则则会显示标红边框
-						validateStatus={error ? 'error' : undefined}
-						rules={[
-							{ required: true, message: '请输入您的用户名' },
-							{
-								pattern: usernameReg,
-								message:
-									'至少包含中文，数字或英文中的一种，数字不能开头',
-							},
-							{ min: 4 },
-							{ max: 12 },
-						]}
-					>
-						<Input
-							onChange={onChange}
-							autoComplete="off"
-							prefix={
-								<UserOutlined className="site-form-item-icon" />
-							}
-							placeholder="Username"
-							allowClear
-						/>
-					</Form.Item>
-					<Form.Item
+						customValidator={validateUserName}
+						required={true}
+						nonErrMessage="请输入您的用户名"
+						customController={
+							<Input
+								prefix={
+									<UserOutlined className="site-form-item-icon" />
+								}
+								placeholder="Username"
+							/>
+						}
+					/>
+					<BasicFormItem
 						name="password"
-						extra={error}
-						validateStatus={error ? 'error' : undefined}
-						rules={[
-							{ required: true, message: '请输入您的密码' },
-							{
-								pattern: pwdReg,
-								message: '密码包含 数字,英文,字符中的两种以上',
-							},
-							{ min: 6 },
-							{ max: 20 },
-						]}
-					>
-						<Input.Password
-							onChange={onChange}
-							autoComplete="off"
-							prefix={
-								<LockOutlined className="site-form-item-icon" />
-							}
-							type="password"
-							placeholder="Password"
-							allowClear
-						/>
-					</Form.Item>
-					{showConfirmInput ? (
-						<Form.Item
-							name="confirm"
-							dependencies={['password']}
-							rules={[
-								{
-									required: true,
-									message: '请确认您的密码',
-								},
-								({ getFieldValue }) => ({
-									validator(rule, value) {
-										if (
-											!value ||
-											getFieldValue('password') === value
-										) {
-											return Promise.resolve();
-										}
-										return Promise.reject(
-											'两次密码不一致，请重新输入!'
-										);
-									},
-								}),
-							]}
-						>
+						nonErrMessage="请输入您的密码"
+						customValidator={validatePwd}
+						required={true}
+						customController={
 							<Input.Password
-								allowClear
-								autoComplete="off"
 								prefix={
 									<LockOutlined className="site-form-item-icon" />
 								}
-								placeholder="Comfirm Password"
+								placeholder="Password"
 							/>
-						</Form.Item>
+						}
+					/>
+					{isRegister ? (
+						<BasicFormItem
+							name="confirm"
+							dependencies={['password']}
+							nonErrMessage="请输入您的确认密码"
+							required={true}
+							customController={
+								<Input.Password
+									prefix={
+										<LockOutlined className="site-form-item-icon" />
+									}
+									placeholder="Comfirm Your Password"
+								/>
+							}
+						/>
 					) : (
 						''
 					)}
@@ -151,14 +97,26 @@ class Auth extends React.Component<IProps> {
 						</div>
 						<div className="register-button-wrapper">
 							{/* 这里不用Link组件，在第一次点击跳转时会有闪烁的bug */}
-							{!showConfirmInput ? (
-								<a href="/register" className="register-button">
-									没有账号？{registerText}
-								</a>
+							{!isRegister ? (
+								<>
+									<span>没有账号?</span>
+									<Link
+										to={{ pathname: '/register' }}
+										className="register-button"
+									>
+										{registerText}
+									</Link>
+								</>
 							) : (
-								<a href="/login" className="login-button">
-									已有账号？ {loginText}
-								</a>
+								<>
+									<span>已有账号?</span>
+									<Link
+										to={{ pathname: '/login' }}
+										className="login-button"
+									>
+										{loginText}
+									</Link>
+								</>
 							)}
 						</div>
 					</Form.Item>

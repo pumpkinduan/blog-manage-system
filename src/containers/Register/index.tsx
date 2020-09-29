@@ -18,13 +18,12 @@ class NormalRegiterForm extends React.Component<any> {
 		}, 1000);
 	};
 	render() {
-		// showConfirmInput：是否显示确认密码框，注册时候需要
 		return (
 			<Auth
 				loginText="现在登录"
 				registerText="立即注册"
 				onFinish={this.onFinish}
-				showConfirmInput={true}
+				isRegister={true}
 			/>
 		);
 	}
