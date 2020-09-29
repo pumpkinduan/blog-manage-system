@@ -9,12 +9,6 @@ import BasicFormItem from 'common/BasicFormItem';
  * 该组件(傻瓜组件)思想为:
  * 接受props传递来的数据进行展示，这里不做业务逻辑处理
  */
-const validateMessages = {
-	string: {
-		min: '字符个数不得少于${min}个',
-		max: '字符个数不得大于${max}个',
-	},
-};
 interface IProps {
 	loginText: string;
 	registerText: string;
@@ -30,12 +24,7 @@ class Auth extends React.Component<IProps> {
 		const { loginText, registerText, isRegister } = this.props;
 		return (
 			<div className="container">
-				<Form
-					validateMessages={validateMessages}
-					name="normal_login"
-					className="login-form"
-					onFinish={this.handleOnFinish}
-				>
+				<Form className="login-form" onFinish={this.handleOnFinish}>
 					<BasicFormItem
 						name="username"
 						customValidator={validateUserName}
