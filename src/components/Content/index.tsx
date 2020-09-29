@@ -13,10 +13,8 @@ interface tagProps {
 	title: string;
 }
 class MainContent extends React.PureComponent<IProps> {
-	componentWillMount() {
-		console.log('componentWillMount');
-	}
 	render() {
+		console.log('render');
 		const { tags = [], removeTag } = this.props;
 		return (
 			<Content
@@ -48,13 +46,13 @@ class MainContent extends React.PureComponent<IProps> {
 					))}
 				</nav>
 				<section className="wrapper-content">
+					<Redirect from="/*" to="/dashboard" />
 					<Switch>
-						<Redirect from="/" to="/dashboard" />
 						{routers.map((r) => (
 							<Route
 								path={r.path}
 								key={r.path}
-								// strict={true}
+								strict={true}
 								exact={r.exact}
 								render={(props) => <r.component {...props} />}
 							/>
