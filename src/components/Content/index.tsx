@@ -1,12 +1,18 @@
 import { Layout, Tag } from 'antd';
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import { routers } from '../../router/router';
-import { Redirect, Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import './index.scss';
 const { Content } = Layout;
-class MainContent extends React.PureComponent {
+interface IProps {
+	tags: tagProps[];
+	removeTag: (index: number) => void;
+}
+interface tagProps {
+	path: string;
+	title: string;
+}
+class MainContent extends React.PureComponent<IProps> {
 	render() {
 		const { tags = [], removeTag } = this.props;
 		return (
@@ -48,16 +54,12 @@ class MainContent extends React.PureComponent {
 								exact={r.exact}
 								render={(props) => <r.component {...props} />}
 							/>
-						))}{' '}
+						))}
 					</Switch>
 				</section>
 			</Content>
 		);
 	}
 }
-MainContent.propTypes = {
-	tags: PropTypes.arrayOf(PropTypes.object).isRequired,
-	removeTag: PropTypes.func.isRequired,
-};
 
 export default MainContent;
