@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './index.scss';
 import Header from '../../components/Header/index';
 import SiderBar from '../../components/SiderBar/index';
-import Content from '../../components/Content/index';
+import MainContent from '../../components/Content/index';
 import { Layout } from 'antd';
 import { connect } from 'react-redux';
 import { showGlobalLoading } from '../../redux/actionCreators/index';
@@ -21,7 +21,7 @@ const Home = (props) => {
 		props.dispatch(showGlobalLoading(true));
 		setTimeout(() => {
 			props.dispatch(showGlobalLoading(false));
-			window.location.replace('/login');
+			props.history.replace('/login');
 		}, 1000);
 	};
 
@@ -49,7 +49,7 @@ const Home = (props) => {
 			<Header logout={logout} {...props} />
 			<Layout style={{ backgroundColor: '#fff' }}>
 				<SiderBar addTag={addTag} {...props} />
-				<Content tags={tags} {...props} removeTag={removeTag} />
+				<MainContent tags={tags} {...props} removeTag={removeTag} />
 			</Layout>
 		</Layout>
 	);

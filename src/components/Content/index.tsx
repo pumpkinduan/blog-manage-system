@@ -1,7 +1,7 @@
 import { Layout, Tag } from 'antd';
 import React from 'react';
 import { routers } from '../../router/router';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import './index.scss';
 const { Content } = Layout;
 interface IProps {
@@ -13,6 +13,9 @@ interface tagProps {
 	title: string;
 }
 class MainContent extends React.PureComponent<IProps> {
+	componentWillMount() {
+		console.log('componentWillMount');
+	}
 	render() {
 		const { tags = [], removeTag } = this.props;
 		return (
@@ -46,11 +49,12 @@ class MainContent extends React.PureComponent<IProps> {
 				</nav>
 				<section className="wrapper-content">
 					<Switch>
+						<Redirect from="/" to="/dashboard" />
 						{routers.map((r) => (
 							<Route
 								path={r.path}
 								key={r.path}
-								strict={true}
+								// strict={true}
 								exact={r.exact}
 								render={(props) => <r.component {...props} />}
 							/>
