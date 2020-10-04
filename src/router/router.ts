@@ -13,7 +13,7 @@ export const routers = [
 		component: silentLoadable(() => import("containers/ArticleList")),
 	},
 	{
-		path: "/articleCreate",
+		path: "/articleCreate/:id",
 		exact: true,
 		requireAuth: true,
 		component: silentLoadable(() => import("containers/ArticleCreate")),

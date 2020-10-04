@@ -94,3 +94,14 @@ span {
         background: $red1;
     }
 }
+
+.author {
+    margin-right: 8px;
+    color: $purple4;
+}
+
+.created_at {
+    color: $purple5;
+    padding: 0 4px;
+    display: inline-block;
+}

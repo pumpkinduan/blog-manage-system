@@ -1,8 +1,8 @@
-import { Layout, Tag } from 'antd';
-import React from 'react';
-import { routers } from '../../router/router';
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
-import './index.scss';
+import { Layout, Tag } from "antd";
+import React from "react";
+import { routers } from "../../router/router";
+import { Switch, Route, Link, Redirect } from "react-router-dom";
+import "./index.scss";
 const { Content } = Layout;
 interface IProps {
 	tags: tagProps[];
@@ -14,27 +14,27 @@ interface tagProps {
 }
 class MainContent extends React.PureComponent<IProps> {
 	render() {
-		console.log('render');
+		console.log("render");
 		const { tags = [], removeTag } = this.props;
 		return (
 			<Content
 				className="main-content"
 				style={{
-					padding: tags.length ? '36px 20px' : '0 20px',
+					padding: tags.length ? "36px 20px" : "0 20px",
 				}}
 			>
 				<nav
 					className="tag-nav"
-					style={{ padding: tags.length ? '8px 10px' : '' }}
+					style={{ padding: tags.length ? "8px 10px" : "" }}
 				>
 					{tags.map((tag, index) => (
 						<Tag
 							key={tag.path}
 							color="purple"
 							style={{
-								marginLeft: '5px',
-								padding: '3px 5px',
-								cursor: 'pointer',
+								marginLeft: "5px",
+								padding: "3px 5px",
+								cursor: "pointer",
 							}}
 							onClose={() => {
 								removeTag(index);
@@ -46,7 +46,7 @@ class MainContent extends React.PureComponent<IProps> {
 					))}
 				</nav>
 				<section className="wrapper-content">
-					<Redirect from="/*" to="/dashboard" />
+					{/* <Redirect from="/*" to="/dashboard" /> */}
 					<Switch>
 						{routers.map((r) => (
 							<Route
