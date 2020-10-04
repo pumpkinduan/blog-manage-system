@@ -66,7 +66,7 @@ export const validatePwd = (value: string): validatorResultProps => {
 // 用户名至少包含 中文，数字和英文中的一种，且数字不能开头，长度4-12
 export const validateUserName = (value: string): validatorResultProps => {
 	const res = validateIllegalChar(value);
-	if (res.status) {
+	if (!res.status) {
 		return res;
 	}
 	if (value.length < 4 || value.length > 12) {
@@ -83,7 +83,7 @@ export const validateUserName = (value: string): validatorResultProps => {
 
 export const validateNickName = (value: string): validatorResultProps => {
 	const res = validateIllegalChar(value);
-	if (res.status) {
+	if (!res.status) {
 		return res;
 	}
 	if (value.length < 1 || value.length > 12) {
