@@ -4,26 +4,30 @@ export const routers = [
 		path: "/dashboard",
 		exact: true,
 		requireAuth: true,
-		component: silentLoadable(() => import("containers/DashBoard/index")),
+		component: silentLoadable(() => import("containers/DashBoard")),
 	},
 	{
 		path: "/articleList",
 		exact: true,
 		requireAuth: true,
-		component: silentLoadable(() => import("containers/ArticleList/index")),
+		component: silentLoadable(() => import("containers/ArticleList")),
 	},
 	{
 		path: "/articleCreate",
 		exact: true,
 		requireAuth: true,
-		component: silentLoadable(
-			() => import("containers/ArticleCreate/index")
-		),
+		component: silentLoadable(() => import("containers/ArticleCreate")),
 	},
 	{
 		path: "/comment",
 		exact: true,
 		requireAuth: true,
-		component: silentLoadable(() => import("containers/Comment/index")),
+		component: silentLoadable(() => import("containers/Comment")),
+	},
+	{
+		path: "/personalCenter",
+		exact: true,
+		requireAuth: true,
+		component: silentLoadable(() => import("containers/PersonalCenter")),
 	},
 ];
