@@ -12,9 +12,12 @@ export const pwdReg = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)])+$).
 export const usernameReg = /^(?![0-9])[\u4e00-\u9fa5_a-zA-Z0-9_]/;
 
 // 非法字符
-const illegal_char = /[&\\"$'<>`|]/;
+const illegalCharReg = /[&\\"$'<>`|]/;
+
+// 邮箱
+const emailReg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
 export const validateIllegalChar = (value: string): validatorResultProps => {
-	if (illegal_char.test(value)) {
+	if (illegalCharReg.test(value)) {
 		return {
 			status: false,
 			msg: "不能输入特殊字符 &\"$'`| <>",
@@ -90,6 +93,18 @@ export const validateNickName = (value: string): validatorResultProps => {
 		return {
 			status: false,
 			msg: "昵称长度为1-12位",
+		};
+	}
+	return {
+		status: true,
+		msg: "",
+	};
+};
+export const validateEmail = (value: string): validatorResultProps => {
+	if (!emailReg.test(value)) {
+		return {
+			msg: "请输入有效的邮箱",
+			status: false,
 		};
 	}
 	return {
