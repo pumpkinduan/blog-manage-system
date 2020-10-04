@@ -1,12 +1,33 @@
 .w-e-toolbar {
-    border: none !important;
+    border-top: none !important;
     background: #fff !important;
     padding: 4px;
     font-size: 15px;
+    height: 40px;
 }
 
 // 富文本编辑器 编辑区域的高度
 .w-e-text-container {
     height: 600px !important;
-    border: none !important;
+    // border: none !important;
+}
+
+.w-e-error {
+    .w-e-text-container {
+        border: 2px solid $red1 !important;
+    }
+
+    .placeholder {
+        font-weight: bold;
+        color: $red1;
+        visibility: visible;
+    }
+}
+
+.placeholder {
+    visibility: hidden;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    padding: 10px 0 0 11px;
 }

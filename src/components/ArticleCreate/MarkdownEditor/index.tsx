@@ -49,6 +49,9 @@ class MarkdownEditor extends Component<IProps> {
 		editor.codemirror.on(
 			"change",
 			_.debounce(() => {
+				console.log("====================================");
+				console.log(24163464);
+				console.log("====================================");
 				if (!editor.value()) {
 					this.setState({
 						isEmpty: true,

@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input } from "antd";
 import { FormItemProps } from "antd/lib/form";
 import { validatorResultProps } from "utils/validators";
+import "./index.scss";
 const { Password } = Input;
 
 export interface BasicFormItemProps extends FormItemProps {

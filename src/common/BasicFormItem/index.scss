@@ -1,3 +1,5 @@
 .override-ant-form-item {
-    margin-bottom: 28px;
+    .ant-input-prefix {
+        color: inherit !important;
+    }
 }

@@ -75,8 +75,13 @@ class ArticleCreate extends Component<any, IState> {
 	getContentOnEditor = () => {
 		let currentEditor = this.getCurrentEditor();
 		return this.state.isRichEditor
-			? currentEditor.txt.html()
+			? currentEditor.txt.text()
 			: currentEditor.markdown(currentEditor.value()); //markdown格式==>html格式
+	};
+	// 输入的内容为空格
+	isBlankSpace = (value) => {
+		const reg = /^(&nbsp;)+$/;
+		return reg.test(value);
 	};
 	onPublish = (status) => {
 		// post
@@ -89,32 +94,23 @@ class ArticleCreate extends Component<any, IState> {
 			.then(
 				(vals) => {
 					let content = this.getContentOnEditor();
-					if (content !== "") {
-						let data = Object.assign(vals, {
-							content,
-							status,
-							coverUrl,
-						});
+					if (!content) return;
+					let data = Object.assign(vals, {
+						content,
+						status,
+						coverUrl,
+					});
 
-						// post data
-						// setLocalStorage("text", content);
-						this.clearAllContent();
-						notification.success({
-							message: status,
-							duration: 1,
-							style: {
-								cursor: "pointer",
-							},
-						});
-					} else {
-						notification.warn({
-							message: "文章内容不能为空噢~",
-							duration: 1,
-							style: {
-								cursor: "pointer",
-							},
-						});
-					}
+					// post data
+					// setLocalStorage("text", content);
+					this.clearAllContent();
+					notification.success({
+						message: status,
+						duration: 1,
+						style: {
+							cursor: "pointer",
+						},
+					});
 				},
 				(err) => {
 					console.log(err);
@@ -133,7 +129,7 @@ class ArticleCreate extends Component<any, IState> {
 		let currentEditor = this.getCurrentEditor();
 		// 清空编辑器
 		if (isRichEditor) {
-			currentEditor.txt.html("");
+			currentEditor.txt.text("写点东西吧...");
 			removeLocalStorage("rich_text"); // 富文本编辑器的缓存内容
 		} else {
 			removeLocalStorage("smde_marked_text"); // markdown编辑器的缓存内容

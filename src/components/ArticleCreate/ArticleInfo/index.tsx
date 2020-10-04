@@ -62,18 +62,6 @@ class ArticleInfo extends React.PureComponent {
 	getFormInstance = () => {
 		return this.formRef.current;
 	};
-	confirm = (e) => {
-		message.success("已清空文章信息");
-		this.onReset();
-	};
-	cancel = (e) => {
-		message.error("您已取消");
-	};
-	onReset = () => {
-		// clear the values of title, tag, author and description on storage and UI
-		this.formRef.current?.resetFields();
-		removeLocalStorage("article_sub_info");
-	};
 	onValuesChange = (changedValues, allValues) => {
 		setLocalStorage("article_sub_info", allValues);
 	};
@@ -90,7 +78,6 @@ class ArticleInfo extends React.PureComponent {
 						required={true}
 						key={item.name}
 						name={item.name}
-						className={item.className}
 						customController={item.children}
 					/>
 				))}
