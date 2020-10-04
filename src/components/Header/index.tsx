@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
 	SearchOutlined,
 	DownOutlined,
 	MessageOutlined,
 	ExpandOutlined,
 	BellOutlined,
-} from '@ant-design/icons';
-import './index.scss';
-import { Link } from 'react-router-dom';
+} from "@ant-design/icons";
+import "./index.scss";
+import { Link } from "react-router-dom";
 import {
 	// Input,
 	Popover,
@@ -19,41 +19,41 @@ import {
 	Button,
 	Row,
 	Col,
-} from 'antd';
-import { setFullScreenStatus, createRandomColor } from '../../utils/index';
-import CustomInput from '../../common/Input/index';
+} from "antd";
+import { setFullScreenStatus, createRandomColor } from "../../utils/index";
+import CustomInput from "../../common/Input/index";
 const MyHeader = (props) => {
 	// 留言消息数据
 	let [data, setData] = useState([
 		{
-			title: '小屁@了你：',
-			content: '你好啊，我是测试小哥，文章写得不错哦',
+			title: "小屁@了你：",
+			content: "你好啊，我是测试小哥，文章写得不错哦",
 			src:
-				'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-			time: '3 days ago',
+				"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+			time: "3 days ago",
 			read: false,
 		},
 		{
-			title: '粉粉回复了你',
-			content: '期待更新！！！',
+			title: "粉粉回复了你",
+			content: "期待更新！！！",
 			src:
-				'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-			time: '5 days ago',
+				"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+			time: "5 days ago",
 			read: false,
 		},
 		{
-			title: '大先生',
-			content: '你好啊，博客好漂亮啊',
+			title: "大先生",
+			content: "你好啊，博客好漂亮啊",
 			src:
-				'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-			time: '6 days ago',
+				"https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+			time: "6 days ago",
 			read: false,
 		},
 		{
-			title: '好好先生',
-			content: '大佬嘛，哈哈',
-			src: '',
-			time: '3年前',
+			title: "好好先生",
+			content: "大佬嘛，哈哈",
+			src: "",
+			time: "3年前",
 			read: false,
 		},
 	]);
@@ -74,10 +74,10 @@ const MyHeader = (props) => {
 		// 留言数据清空时的显示状态
 		setData([
 			{
-				title: '你真棒',
-				content: '已经读完所有消息啦',
-				time: '',
-				src: '',
+				title: "你真棒",
+				content: "已经读完所有消息啦",
+				time: "",
+				src: "",
 				read: true,
 			},
 		]);
@@ -85,9 +85,9 @@ const MyHeader = (props) => {
 
 	const hanldeReadComment = (e) => {
 		let classList = e.currentTarget.classList;
-		if (!classList.contains('ant-list-item-read')) {
+		if (!classList.contains("ant-list-item-read")) {
 			setCommentCounts(commentCounts - 1); // 读完一条消息，消息数量减1
-			classList.add('ant-list-item-read');
+			classList.add("ant-list-item-read");
 		}
 	};
 	// 用于展示实时留言消息
@@ -100,7 +100,7 @@ const MyHeader = (props) => {
 				<List.Item
 					actions={[item.time]}
 					onClick={hanldeReadComment}
-					style={{ borderBottom: '1px solid #eee' }}
+					style={{ borderBottom: "1px solid #eee" }}
 				>
 					<List.Item.Meta
 						title={item.title}
@@ -111,8 +111,8 @@ const MyHeader = (props) => {
 							) : (
 								<Avatar
 									style={{
-										fontWeight: 'bolder',
-										color: '#fff',
+										fontWeight: "bolder",
+										color: "#fff",
 										background: createRandomColor(),
 									}}
 								>
@@ -126,7 +126,7 @@ const MyHeader = (props) => {
 		>
 			<div
 				className="bottom-btns"
-				style={{ display: commentCounts ? 'flex' : 'none' }}
+				style={{ display: commentCounts ? "flex" : "none" }}
 			>
 				<Button
 					block={true}
@@ -148,9 +148,7 @@ const MyHeader = (props) => {
 				<h1>
 					<span className="admin">Pumpkin</span>
 					<img
-						width="50"
-						height="50"
-						style={{ borderRadius: '50%' }}
+						className="avatar"
 						src="http://demo.qfpffmp.cn/cssthemes5/twts_141_PurpleAdmin/images/faces/face1.jpg"
 						alt=""
 					/>
@@ -177,7 +175,7 @@ const MyHeader = (props) => {
 						// overlayStyle={{ minWidth: "20%" }}
 						overlayClassName="override-ant-dropdown"
 						placement="bottomRight"
-						trigger={['click']}
+						trigger={["click"]}
 						overlay={list}
 					>
 						<Badge dot count={commentCounts}>
@@ -185,7 +183,7 @@ const MyHeader = (props) => {
 								content={
 									commentCounts
 										? `新增${commentCounts}条消息`
-										: '暂无消息'
+										: "暂无消息"
 								}
 								placement="bottomRight"
 							>
@@ -200,7 +198,7 @@ const MyHeader = (props) => {
 							content={
 								visitorCounts
 									? `新增${visitorCounts}位访客`
-									: '暂无新增访客'
+									: "暂无新增访客"
 							}
 							placement="bottom"
 						>
@@ -231,16 +229,11 @@ const MyHeader = (props) => {
 								</Menu.Item>
 							</Menu>
 						}
-						trigger={['click']}
+						trigger={["click"]}
 					>
 						<div>
 							<img
-								width={30}
-								height={30}
-								style={{
-									borderRadius: '50%',
-									marginRight: '6px',
-								}}
+								className="avatar-small"
 								src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
 								alt=""
 							/>

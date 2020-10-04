@@ -3,7 +3,7 @@ import E from "wangeditor";
 import "./index.scss";
 import { setLocalStorage, getLocalStorage } from "../../../utils/index";
 interface IProps {
-	content: string;
+	content?: string;
 }
 class RichEditor extends Component<IProps> {
 	wangeditorRef: React.RefObject<HTMLDivElement> = React.createRef();

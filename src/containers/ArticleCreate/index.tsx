@@ -40,6 +40,9 @@ class ArticleCreate extends Component<any, IState> {
 		ArticleInfo
 	>();
 	componentDidMount() {
+		console.log("====================================");
+		console.log(this.props.history);
+		console.log("====================================");
 		if (this.props.isEdited) {
 			// api
 		}

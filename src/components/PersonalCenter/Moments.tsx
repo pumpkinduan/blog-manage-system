@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import { Tabs, List, Tag, Space } from "antd";
+import { List, Tag, Space } from "antd";
 import { articleProps } from "types/Article";
 import {
 	TeamOutlined,
@@ -9,8 +9,6 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { STATUS, status } from "types/Article";
-import { Moments, Settings } from "components/PersonalCenter";
-const { TabPane } = Tabs;
 const { Item } = List;
 const { Meta } = Item;
 const listData: articleProps[] = [];
@@ -41,24 +39,63 @@ const IconText = ({ icon, text }) => (
 		{text}
 	</Space>
 );
-class personalCenter extends PureComponent {
-	createStatusText = (status: status) => {
+export const Moments = () => {
+	const createStatusText = (status: status) => {
 		if (status === STATUS.PUBLISHED) return `发布该文章`;
 		if (status === STATUS.UPDATED) return `更新该文章`;
 		if (status === STATUS.DRAFTED) return `存至草稿`;
 		if (status === STATUS.DELETED) return `删除该文章`;
 	};
-	render() {
-		return (
-			<Tabs defaultActiveKey="1">
-				<TabPane tab="个人动态" key="1">
-					<Moments />
-				</TabPane>
-				<TabPane tab="个人设置" key="2">
-					<Settings />
-				</TabPane>
-			</Tabs>
-		);
-	}
-}
-export default personalCenter;
+	return (
+		<List
+			className="comment-list-item"
+			itemLayout="vertical"
+			size="large"
+			dataSource={listData}
+			renderItem={(item) => (
+				<Item
+					key={item.id}
+					actions={[
+						<IconText icon={<LikeOutlined />} text={item.likes} />,
+						<IconText
+							icon={<CommentOutlined />}
+							text={item.comments}
+						/>,
+						<IconText
+							icon={<TeamOutlined />}
+							text={item.visitors}
+						/>,
+						<IconText
+							icon={<UploadOutlined rotate={180} />}
+							text={item.downloads}
+						/>,
+					]}
+				>
+					<Meta
+						description={<Tags tags={item.tags} />}
+						title={
+							<Link
+								to={{
+									pathname: "articleCreate",
+									state: { id: item.id },
+								}}
+							>
+								{item.title}
+							</Link>
+						}
+					/>
+					<>
+						<section style={{ marginBottom: "10px" }}>
+							{item.description}
+						</section>
+						<p style={{ fontSize: "12px" }}>
+							<b className="author">{item.author}</b>
+							<Tag color="volcano">{item.createdAt}</Tag>
+							{createStatusText(item.status)}
+						</p>
+					</>
+				</Item>
+			)}
+		/>
+	);
+};

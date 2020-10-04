@@ -14,7 +14,6 @@ interface tagProps {
 }
 class MainContent extends React.PureComponent<IProps> {
 	render() {
-		console.log("render");
 		const { tags = [], removeTag } = this.props;
 		return (
 			<Content
@@ -52,7 +51,6 @@ class MainContent extends React.PureComponent<IProps> {
 							<Route
 								path={r.path}
 								key={r.path}
-								strict={true}
 								exact={r.exact}
 								render={(props) => <r.component {...props} />}
 							/>
