@@ -76,7 +76,21 @@ span {
     border-radius: 5px;
     background: $red1 !important;
     border: none;
+
     &:hover {
         background: $red2 !important;
+    }
+}
+
+// hover 状态时的删除图标
+.delete-icon {
+    font-size: 10px;
+    border-radius: 50%;
+    padding: 3px;
+    cursor: pointer;
+
+    &:hover {
+        color: #fff;
+        background: $red1;
     }
 }
