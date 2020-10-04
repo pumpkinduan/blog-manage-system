@@ -8,6 +8,7 @@ import {
 	removeLocalStorage,
 } from "utils/index";
 import { FormInstance } from "antd/lib/form";
+import BasicFormItem from "common/BasicFormItem";
 const { Item } = Form;
 const items = [
 	{
@@ -51,9 +52,6 @@ const items = [
 		),
 	},
 ];
-const validateMessages = {
-	required: "'${name}'不能为空噢~",
-};
 class ArticleInfo extends React.PureComponent {
 	formRef: React.RefObject<FormInstance> = React.createRef<FormInstance>();
 	componentDidMount() {
@@ -82,24 +80,19 @@ class ArticleInfo extends React.PureComponent {
 	render() {
 		return (
 			<Form
-				validateMessages={validateMessages}
 				onValuesChange={this.onValuesChange}
 				ref={this.formRef}
 				className="articl-info-container"
 			>
 				{items.map((item) => (
-					<Item
+					<BasicFormItem
+						hasFeedback={false}
+						required={true}
 						key={item.name}
 						name={item.name}
 						className={item.className}
-						rules={[
-							{
-								required: true,
-							},
-						]}
-					>
-						{item.children}
-					</Item>
+						customController={item.children}
+					/>
 				))}
 			</Form>
 		);
