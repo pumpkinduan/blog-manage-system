@@ -22,7 +22,8 @@ const listItem: articleProps = {
 	createdAt: "3天前",
 	likes: 1235,
 	visitors: 123,
-	description: "description",
+	description:
+		"段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。",
 	status: "published",
 	content: "content",
 	tags: ["react", "nodeJs"],
@@ -89,7 +90,7 @@ class personalCenter extends PureComponent {
 									<section style={{ marginBottom: "10px" }}>
 										{item.description}
 									</section>
-									<p>
+									<p style={{ fontSize: "12px" }}>
 										<b className="author">{item.author}</b>
 										<Tag color="volcano">
 											{item.createdAt}

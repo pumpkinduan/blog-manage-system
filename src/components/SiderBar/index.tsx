@@ -60,14 +60,6 @@ interface IProps {
 	[props: string]: any;
 }
 class SiderBar extends React.PureComponent<IProps> {
-	state = {
-		collapsed: false,
-	};
-	toggleCollapsed = () => {
-		this.setState({
-			collapsed: !this.state.collapsed,
-		});
-	};
 	getActiveItem = (siderLinks: siderLinkProps[] = []) => {
 		const pathname = this.props.location?.pathname;
 		return siderLinks.find((item) => pathname?.includes(item.path));

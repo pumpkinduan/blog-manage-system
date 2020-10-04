@@ -1,21 +1,26 @@
 .wrapper {
     margin-top: 100px;
+
     .override-ant-layout-sider {
         position: relative;
         min-height: 100vh;
         height: 100%;
+
         .ant-menu-inline {
             border: none;
         }
+
         // 自定义菜单栏激活状态下的字体样式
         .ant-menu-item-selected a,
         .ant-menu-item-selected a:hover {
             color: $purple4;
         }
+
         // 祛除在折叠状态下，hover图标时在右侧显示的子菜单项，同时解决了图标右侧出现的1px白色间隙bug
         .ant-menu-inline-collapsed {
             width: 0;
         }
+
         // 自定义菜单栏某些状态下的字体样式
         .ant-menu-item:hover,
         .ant-menu-item-active,
@@ -27,19 +32,23 @@
         .ant-menu-item a:hover {
             color: $purple5;
         }
+
         // 去除菜单子项被点击时的背景颜色
         .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
             background-color: #fff;
         }
+
         // 去除菜单子项右侧边框
         .ant-menu-inline .ant-menu-selected::after,
         .ant-menu-inline .ant-menu-item-selected::after {
             opacity: 0;
         }
+
         .ant-menu-inline .ant-menu-item,
         .ant-menu-inline .ant-menu-submenu-title {
             width: 100%;
         }
+
         // 自定义折叠容器的位置
         .ant-layout-sider-trigger {
             position: absolute;
@@ -51,13 +60,16 @@
             top: 40%;
             border-right: 1px solid $purple2;
             transform: translate(-60%, 50%);
+
             span {
                 margin-left: 15px;
             }
+
             &:hover {
                 color: $purple5;
             }
         }
+
         // 当菜单栏被折叠时，隐藏所有图标
         .ant-menu-item,
         .ant-menu-submenu-title,

@@ -6,6 +6,11 @@ body {
     color: #8a8a8a;
 }
 
+#root {
+    height: 100%;
+    overflow: hidden;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
