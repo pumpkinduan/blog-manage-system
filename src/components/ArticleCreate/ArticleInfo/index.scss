@@ -1,1 +1,13 @@
-.articl-info-container {}
+.custom-dropdown {
+    padding: 0;
+
+    .ant-select-item {
+        font-size: 12px;
+    }
+}
+
+.ant-select-selection-placeholder {
+    font-size: 12px;
+    text-shadow: 0 0 1px #999;
+    opacity: .5;
+}

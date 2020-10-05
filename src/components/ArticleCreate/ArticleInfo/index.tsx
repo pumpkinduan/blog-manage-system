@@ -1,7 +1,6 @@
 import React from "react";
 import CustomInput from "common/Input/index";
-import "./index.scss";
-import { Form, Popconfirm, message } from "antd";
+import { Form, Select, Tag } from "antd";
 import {
 	setLocalStorage,
 	getLocalStorage,
@@ -9,47 +8,58 @@ import {
 } from "utils/index";
 import { FormInstance } from "antd/lib/form";
 import BasicFormItem from "common/BasicFormItem";
-const { Item } = Form;
+import "./index.scss";
+const { Option } = Select;
+const options = [
+	{ value: "NodeJs" },
+	{ value: "JavaScript" },
+	{ value: "TypeScript" },
+	{ value: "CSS" },
+	{ value: "React" },
+	{ value: "VueJs" },
+];
+const tagRender = (props) => {
+	const { label, value, closable, onClose } = props;
+	return (
+		<Tag color="purple" closable={closable} onClose={onClose}>
+			{props.label}
+		</Tag>
+	);
+};
 const items = [
 	{
 		name: "title",
 		className: "article-title",
-		children: (
-			<CustomInput
-				placeholder="请拟个文章标题"
-				width="40%"
-				prefix="Title:"
-			/>
-		),
+		label: "Title",
+		controller: <CustomInput placeholder="请拟个文章标题" width="40%" />,
 	},
 	{
 		name: "author",
 		className: "article-author",
-		children: (
-			<CustomInput
-				placeholder="请输入作者"
-				width="20%"
-				prefix="Author:"
-			/>
-		),
+		label: "Title",
+		controller: <CustomInput placeholder="请输入作者" width="20%" />,
 	},
 	{
 		name: "tag",
 		className: "article-tag",
-		children: (
-			<CustomInput
-				placeholder="请输入文章分类"
-				width="20%"
-				prefix="Tag:"
-			/>
+		label: "Tags",
+		controller: (
+			<Select
+				bordered={false}
+				dropdownClassName="custom-dropdown"
+				mode="tags"
+				style={{ width: "50%" }}
+				placeholder="分类"
+				tagRender={tagRender}
+				options={options}
+			></Select>
 		),
 	},
 	{
 		name: "description",
+		label: "Description",
 		className: "article-description",
-		children: (
-			<CustomInput placeholder="请简要描述文章" prefix="Description:" />
-		),
+		controller: <CustomInput placeholder="请简要描述文章" />,
 	},
 ];
 class ArticleInfo extends React.PureComponent {
@@ -74,11 +84,12 @@ class ArticleInfo extends React.PureComponent {
 			>
 				{items.map((item) => (
 					<BasicFormItem
+						label={item.label}
 						hasFeedback={false}
 						required={true}
 						key={item.name}
 						name={item.name}
-						customController={item.children}
+						customController={item.controller}
 					/>
 				))}
 			</Form>
