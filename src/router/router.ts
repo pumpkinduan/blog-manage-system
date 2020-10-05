@@ -26,7 +26,7 @@ export const routers = [
 	},
 	{
 		path: "/personalCenter",
-		exact: true,
+		exact: false,
 		requireAuth: true,
 		component: silentLoadable(() => import("containers/PersonalCenter")),
 	},

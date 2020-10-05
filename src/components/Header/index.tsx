@@ -137,7 +137,14 @@ const MyHeader = (props) => {
 					清空消息
 				</Button>
 				<Button block={true} type="text" size="large">
-					<Link to="/comments">查看更多</Link>
+					<Link
+						to={{
+							pathname: "/personalCenter",
+							state: { activeKey: "words" },
+						}}
+					>
+						查看更多
+					</Link>
 				</Button>
 			</div>
 		</List>

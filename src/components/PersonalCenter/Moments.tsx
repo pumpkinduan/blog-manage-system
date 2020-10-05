@@ -12,27 +12,33 @@ import { STATUS, status } from "types/Article";
 const { Item } = List;
 const { Meta } = Item;
 const listData: articleProps[] = [];
-const listItem: articleProps = {
-	id: 12,
-	coverUrl:
-		"https://2heng.xin/wp-content/uploads//2019/12/2572384-1024x640.jpg",
-	title: "你好啊，欢迎学习React技术全家桶",
-	comments: 123,
-	createdAt: "3天前",
-	likes: 1235,
-	visitors: 123,
-	description:
-		"段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。",
-	status: "published",
-	content: "content",
-	tags: ["react", "nodeJs"],
-	downloads: 11,
-	author: "pumpkin",
-};
-for (let i = 0; i < 5; i++) {
+
+for (let i = 1; i < 5; i++) {
+	const listItem: articleProps = {
+		id: i,
+		coverUrl:
+			"https://2heng.xin/wp-content/uploads//2019/12/2572384-1024x640.jpg",
+		title: "你好啊，欢迎学习React技术全家桶",
+		comments: 123,
+		createdAt: "3天前",
+		likes: 1235,
+		visitors: 123,
+		description:
+			"段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。",
+		status: "published",
+		content: "content",
+		tags: ["react", "nodeJs"],
+		downloads: 11,
+		author: "pumpkin",
+	};
 	listData.push(listItem);
 }
-const Tags = ({ tags }) => tags.map((tag) => <Tag color="purple">{tag}</Tag>);
+const Tags = ({ tags }) =>
+	tags.map((tag) => (
+		<Tag key={tag} color="purple">
+			{tag}
+		</Tag>
+	));
 const IconText = ({ icon, text }) => (
 	<Space>
 		{icon}
