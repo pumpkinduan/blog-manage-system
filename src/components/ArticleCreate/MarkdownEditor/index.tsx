@@ -49,9 +49,6 @@ class MarkdownEditor extends Component<IProps> {
 		editor.codemirror.on(
 			"change",
 			_.debounce(() => {
-				console.log("====================================");
-				console.log(24163464);
-				console.log("====================================");
 				if (!editor.value()) {
 					this.setState({
 						isEmpty: true,
@@ -61,7 +58,7 @@ class MarkdownEditor extends Component<IProps> {
 						isEmpty: false,
 					});
 				}
-			}, 300)
+			}, 100)
 		);
 		// 1. 由编辑文章进入，显示已经发布了，并获取到的数据(数据为markdown格式的，并非HTML格式)
 		// 2. 由创建文章进入，显示空数据或是编辑过但没有发布的数据(如：路由切换，数据保存至storage)
@@ -70,7 +67,6 @@ class MarkdownEditor extends Component<IProps> {
 		let markdownText =
 			this.props.content && sitdown.HTMLToMD(this.props.content);
 		markdownText && editor.value(markdownText);
-		this.setState({ isEmpty: !!markdownText });
 	}
 	render() {
 		const { isEmpty } = this.state;

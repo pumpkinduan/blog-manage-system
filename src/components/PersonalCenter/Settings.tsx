@@ -31,7 +31,12 @@ export const Settings = () => {
 	};
 	return (
 		<div>
-			<Form form={form} {...formItemLayout} labelAlign="left">
+			<Form
+				form={form}
+				{...formItemLayout}
+				labelAlign="left"
+				layout="vertical"
+			>
 				<BasicFormItem
 					name="nickname"
 					customValidator={validateNickName}
@@ -73,8 +78,11 @@ export const Settings = () => {
 					</Button>
 				</Col>
 			</Row>
-
-			<h3 style={{ marginBottom: "15px" }}>关于我：</h3>
+			<Form.Item
+				label="关于我"
+				required
+				style={{ marginBottom: "10px" }}
+			></Form.Item>
 			<MarkdownEditor
 				ref={markdownEditorRef}
 				content={`<h3 id="ssssg">ssssg</h3>
