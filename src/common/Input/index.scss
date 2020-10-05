@@ -2,7 +2,33 @@
 .custom-input {
     width: 100%;
     position: relative;
-    padding: 5px 0;
+    overflow: hidden;
+
+    // input框聚焦时：
+    .ant-input-focused,
+    .ant-input:focus,
+    .ant-input-affix-wrapper-focused,
+    .ant-input-affix-wrapper:focus {
+        box-shadow: none;
+    }
+
+    &:focus-within::after {
+        transform: translateX(0%);
+    }
+
+    // 当聚焦input时，添加下划线样式，利用伪元素实现
+    &::after {
+        content: "";
+        display: inline-block;
+        width: 100%;
+        bottom: 0px;
+        left: 0px;
+        transform: translateX(-100%);
+        position: absolute;
+        height: 1px;
+        background: $purple3;
+        transition: transform .5s;
+    }
 
     .override-ant-input-affix-wrapper {
         position: relative;
@@ -11,40 +37,13 @@
         color: $purple4;
         overflow: hidden;
         background-color: transparent;
-        font-size: 17px;
         text-shadow: 0 0 4px #ddd;
+        font-size: 12px;
 
         .ant-input {
             background-color: transparent;
-            margin-left: 10px;
+            margin-left: 5px;
             font-size: 12px;
-            padding-top: 4px;
-        }
-
-        // 当聚焦input时，添加下划线样式，利用伪元素实现
-        &::after {
-            content: "";
-            display: inline-block;
-            width: 100%;
-            bottom: 0px;
-            left: 0px;
-            transform: translateX(-100%);
-            position: absolute;
-            height: 1px;
-            background: $purple3;
-            transition: transform .5s;
-        }
-    }
-
-    // input框聚焦时：
-    .ant-input-focused,
-    .ant-input:focus,
-    .ant-input-affix-wrapper-focused,
-    .ant-input-affix-wrapper:focus {
-        box-shadow: none;
-
-        &::after {
-            transform: translateX(0%);
         }
     }
 }
