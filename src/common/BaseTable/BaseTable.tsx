@@ -1,17 +1,17 @@
-import React from 'react';
-import { Row, Col, Table, Input } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-import { TableProps } from 'antd/lib/table';
+import React from "react";
+import { Row, Col, Table, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { TableProps } from "antd/lib/table";
 
-import './index.scss';
+import "./index.scss";
 export interface BaseTableProps extends TableProps<any> {
 	dataSource: any[];
 	showSearchInput?: boolean;
-	onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => any;
+	onSearchChange?: (e: React.ChangeEvent<HTMLInputElement>) => any;
 }
 class BaseTable extends React.Component<BaseTableProps> {
 	onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		typeof this.props.onSearchChange === 'function' &&
+		typeof this.props.onSearchChange === "function" &&
 			this.props.onSearchChange(e);
 	};
 	render() {
@@ -27,10 +27,10 @@ class BaseTable extends React.Component<BaseTableProps> {
 						{showSearchInput && (
 							<Input
 								suffix={
-									<SearchOutlined style={{ color: '#999' }} />
+									<SearchOutlined style={{ color: "#999" }} />
 								}
 								onChange={this.onSearchChange}
-								style={{ width: '100%' }}
+								style={{ width: "100%" }}
 								placeholder="搜索"
 							/>
 						)}
@@ -39,7 +39,7 @@ class BaseTable extends React.Component<BaseTableProps> {
 				<Table
 					className="override-ant-table"
 					showSorterTooltip={false}
-					rowClassName={() => 'editable-row'}
+					rowClassName={() => "editable-row"}
 					bordered={false}
 					scroll={{ y: 550 }}
 					pagination={false}

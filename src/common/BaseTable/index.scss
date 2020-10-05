@@ -2,30 +2,42 @@
     height: 100%;
     background: #fff;
     position: relative;
+
     .header-control {
         height: 50px;
         padding: 10px 0;
     }
+
     .override-ant-table {
+
         .ant-table-thead>tr>th,
         .ant-table-tbody>tr>td {
             text-align: center;
         }
     }
+
     .ant-table-thead>tr>th {
         background: inherit;
     }
-    .ant-table-thead {
+
+    .ant-table-thead>tr {
         background-color: $table-head-bgc;
-        // border-radius: 15px 15px 0 0 !important;
+        border-radius: 15px 15px 0 0 !important;
     }
-    .ant-table-container table>thead>tr:first-child th:first-child {
-        border-top-left-radius: 15px;
+
+    .ant-table-container table>thead>tr:first-child {
+        th:first-child {
+            border-top-left-radius: inherit;
+
+        }
+
+        th:nth-last-child(2) {
+            border-top-right-radius: inherit;
+
+        }
     }
-    .ant-table-container table>thead>tr:first-child th:last-child {
-        border-top-right-radius: 15px;
-    }
+
     .ant-table-cell-scrollbar {
-        box-shadow: none;
+        display: none;
     }
 }

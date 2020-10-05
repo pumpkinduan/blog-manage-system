@@ -50,7 +50,6 @@ export const Moments = () => {
 		<List
 			className="comment-list-item"
 			itemLayout="vertical"
-			size="large"
 			dataSource={listData}
 			renderItem={(item) => (
 				<Item

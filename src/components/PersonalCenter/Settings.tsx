@@ -43,6 +43,7 @@ export const Settings = () => {
 					nonErrMessage="请输入您的昵称"
 					label="昵称"
 				/>
+				<BasicFormItem name="notice" required={false} label="公告" />
 				<BasicFormItem
 					name="email"
 					label="邮箱"
