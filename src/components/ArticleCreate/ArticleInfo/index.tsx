@@ -13,7 +13,7 @@ const { Option } = Select;
 const options = [
 	{ value: "NodeJs" },
 	{ value: "JavaScript" },
-	{ value: "TypeScript" },
+	{ value: "日常" },
 	{ value: "CSS" },
 	{ value: "React" },
 	{ value: "VueJs" },
