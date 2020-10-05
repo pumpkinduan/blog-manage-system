@@ -54,7 +54,6 @@ export const Moments = () => {
 	};
 	return (
 		<List
-			className="comment-list-item"
 			itemLayout="vertical"
 			dataSource={listData}
 			renderItem={(item) => (
