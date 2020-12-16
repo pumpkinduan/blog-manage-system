@@ -1,4 +1,4 @@
-export interface exceptionResultInterface {
+export interface ExceptionResultInterface {
     statusCode: number,
     timestamp: number,
     time: string,

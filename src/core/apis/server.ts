@@ -1,16 +1,23 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import store from '../../redux/store'
 import { showGlobalLoading } from '../../redux/actionCreators/index'
+import { ResultInterface, ExceptionResultInterface } from "interfaces/index.interface";
+import { message } from "antd";
 // import { Spin } from 'antd';
 // import Loading from '../../components/Loading/index'
 //进行全局的默认配置
-axios.defaults.baseURL = process.env.NODE_ENV === "production" ? "http://pumpkinduan.cn:3000" : "/api";
+axios.defaults.baseURL = process.env.NODE_ENV === "production" ? "http://pumpkinduan.cn:3000" : "http://127.0.0.1:5000/v1";
 axios.defaults.timeout = 10000;
 // 添加请求拦截器
-let reqCount = 0; //记录请求次数，处理并发请求
+// let reqCount = 0; //记录请求次数，处理并发请求
 axios.interceptors.request.use(
     function (config) {
-        reqCount++;
+        const accessToken = localStorage.getItem('accessToken');
+        if (accessToken) {
+            config.headers['Content-Type'] = 'application/json';
+            config.headers['Authorization'] = 'Bearer ' + accessToken;
+        }
+        // reqCount++;
         store.dispatch(showGlobalLoading(true));
         return config;
     },
@@ -23,84 +30,61 @@ axios.interceptors.request.use(
 // 添加响应拦截器
 axios.interceptors.response.use(
     function (response) {
-        reqCount--;
-        if (reqCount <= 0) {
-            store.dispatch(showGlobalLoading(false));
-        }
+        // reqCount--;
+        // if (reqCount <= 0) {
+        //     store.dispatch(showGlobalLoading(false));
+        // }
+        store.dispatch(showGlobalLoading(false));
         return response;
     },
-    function (error) {
+    function (err) {
         // 对响应错误做点什么
         store.dispatch(showGlobalLoading(false));
-        reqCount--;
-        if (reqCount <= 0) { }
-        let resErr = error;
-        if (error.response) {
-            resErr = error.response.data;
+        // reqCount--;
+        // if (reqCount <= 0) { }
+        const response = err.response as AxiosResponse<ResultInterface> | undefined
+
+        if (response === undefined) {
+            message.error('请求超时')
+            return Promise.reject({});
         }
-        if (error.message.includes("timeout")) {
+
+        if (Array.isArray(response.data.message)) {
+            response.data.message.forEach((msg) => {
+                message.error(msg);
+            })
+        } else {
+            message.error(response.data.message);
         }
-        return Promise.reject(resErr);
+
+        return Promise.reject(response);
     }
 );
 
 //封装get和post请求
 export default {
-    get(path, params = {}) {
-        return new Promise((resolve, reject) => {
-            axios
-                .get(path, {
-                    params
-                })
-                .then(
-                    response => {
-                        resolve(response.data);
-                    },
-                    error => {
-                        reject(error);
-                    }
-                );
-        });
+    async get<Data = any>(path, params = {}): Promise<ResultInterface<Data>> {
+        const response = await axios
+            .get(path, {
+                params
+            })
+        return response.data;
     },
-    post(path, data) {
-        return new Promise((resolve, reject) => {
-            axios.post(path, data).then(
-                response => {
-                    resolve(response);
-                },
-                error => {
-                    reject(error);
-                }
-            );
-        });
+    async post<Data = any>(path, data): Promise<ResultInterface<Data>> {
+        const response = await axios.post(path, data);
+        return response.data;
     },
-    put(path, data) {
-        return new Promise((resolve, reject) => {
-            axios.put(path, data).then(
-                response => {
-                    resolve(response);
-                },
-                error => {
-                    reject(error);
-                }
-            );
-        });
+    async put(path, data): Promise<ResultInterface> {
+        const response = await axios.put(path, data);
+        return response.data;
     },
-    delete(path, params = {}) {
-        return new Promise((resolve, reject) => {
-            axios
-                .delete(path, {
-                    params
-                })
-                .then(
-                    response => {
-                        resolve(response.data);
-                    },
-                    error => {
-                        reject(error);
-                    }
-                );
-        });
+    async delete(path, params = {}): Promise<ResultInterface> {
+        const response = await axios
+            .delete(path, {
+                params
+            });
+        return response.data;
+
     },
     all(promises) {
         return new Promise((resolve, reject) => {

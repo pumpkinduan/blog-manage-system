@@ -26,16 +26,16 @@ class Auth extends React.Component<IProps> {
 			<div className="container">
 				<Form className="login-form" onFinish={this.handleOnFinish}>
 					<BasicFormItem
-						name="username"
+						name="account"
 						customValidator={validateUserName}
 						required={true}
-						nonErrMessage="请输入您的用户名"
+						nonErrMessage="请输入您的用户名或邮箱"
 						customController={
 							<Input
 								prefix={
 									<UserOutlined className="site-form-item-icon" />
 								}
-								placeholder="Username"
+								placeholder="Username Or Email"
 							/>
 						}
 					/>
@@ -79,8 +79,7 @@ class Auth extends React.Component<IProps> {
 								type="primary"
 								block={true}
 								htmlType="submit"
-								className="login-form-button"
-							>
+								className="login-form-button">
 								{loginText}
 							</Button>
 						</div>
@@ -91,8 +90,7 @@ class Auth extends React.Component<IProps> {
 									<span>没有账号?</span>
 									<Link
 										to={{ pathname: '/register' }}
-										className="register-button"
-									>
+										className="register-button">
 										{registerText}
 									</Link>
 								</>
@@ -101,8 +99,7 @@ class Auth extends React.Component<IProps> {
 									<span>已有账号?</span>
 									<Link
 										to={{ pathname: '/login' }}
-										className="login-button"
-									>
+										className="login-button">
 										{loginText}
 									</Link>
 								</>
