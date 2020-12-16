@@ -9,12 +9,12 @@ axios.defaults.timeout = 10000;
 // 添加请求拦截器
 let reqCount = 0; //记录请求次数，处理并发请求
 axios.interceptors.request.use(
-    function(config) {
+    function (config) {
         reqCount++;
         store.dispatch(showGlobalLoading(true));
         return config;
     },
-    function(error) {
+    function (error) {
         store.dispatch(showGlobalLoading(false));
         return Promise.reject(error);
     }
@@ -22,24 +22,23 @@ axios.interceptors.request.use(
 
 // 添加响应拦截器
 axios.interceptors.response.use(
-    function(response) {
+    function (response) {
         reqCount--;
         if (reqCount <= 0) {
             store.dispatch(showGlobalLoading(false));
         }
         return response;
     },
-    function(error) {
+    function (error) {
         // 对响应错误做点什么
         store.dispatch(showGlobalLoading(false));
         reqCount--;
-        if (reqCount <= 0) {}
+        if (reqCount <= 0) { }
         let resErr = error;
         if (error.response) {
             resErr = error.response.data;
         }
         if (error.message.includes("timeout")) {
-            // Vue.$dialog({ textAlign: 'center' });
         }
         return Promise.reject(resErr);
     }
@@ -103,12 +102,11 @@ export default {
                 );
         });
     },
-
     all(promises) {
         return new Promise((resolve, reject) => {
             axios.all(promises).then(
                 axios.spread(
-                    function(...result) {
+                    function (...result) {
                         // 所有请求现在都执行完成
                         resolve(result);
                     }
