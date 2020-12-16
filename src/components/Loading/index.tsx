@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import './index.scss';
 import { Spin } from 'antd';
 import { connect } from 'react-redux';
+import './index.scss';
 interface IProps {
 	loadingStatus: boolean;
 }
