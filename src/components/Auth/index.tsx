@@ -29,7 +29,7 @@ class Auth extends React.Component<IProps> {
 						name="account"
 						customValidator={validateUserName}
 						required={true}
-						nonErrMessage="请输入您的用户名或邮箱"
+						nonErrMessage="请输入您的用户名"
 						customController={
 							<Input
 								prefix={
