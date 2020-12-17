@@ -1,26 +1,21 @@
 import React from 'react';
-import Auth from 'components/Auth/index';
-import { message } from 'antd';
+import Auth, { Status } from 'components/Auth';
 import { login } from 'core/apis';
+import { setLocalStorage } from 'utils';
 
-class NormalLoginForm extends React.Component<any> {
+class NormalLoginForm extends React.PureComponent<any> {
 	// 点击登录，提交的数据被该函数的参数接收，可向后台发送请求
-	onFinish = (info) => {
+	onFinish = async (info) => {
 		// request api
-		console.log(info);
-
-		login(info).then((res) => {
-			console.log(res);
-			message.success('成功登录');
-			this.props.history.push('/dashboard');
-		});
+		const res = await login(info);
+		setLocalStorage('accessToken', res.data?.accessToken);
+		this.props.history.push('/dashboard');
 	};
 	render() {
 		return (
 			<Auth
-				isRegister={false}
-				loginText="现在登录"
-				registerText="立即注册"
+				status={Status.Login}
+				btnText="现在登录"
 				onFinish={this.onFinish}
 			/>
 		);

@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from "react";
-import "./index.scss";
-import Header from "../../components/Header/index";
-import SiderBar from "../../components/SiderBar/index";
-import MainContent from "../../components/Content/index";
-import { Layout } from "antd";
-import { connect } from "react-redux";
-import { showGlobalLoading } from "../../redux/actionCreators/index";
-import { removeLocalStorage } from "../../utils/index";
+import React, { useEffect, useState } from 'react';
+import './index.scss';
+import Header from '../../components/Header/index';
+import SiderBar from '../../components/SiderBar/index';
+import MainContent from '../../components/Content/index';
+import { Layout } from 'antd';
+import { connect } from 'react-redux';
+import { showGlobalLoading } from '../../redux/actionCreators/index';
+import { removeLocalStorage } from '../../utils/index';
 // import { useHistory } from "react-router-dom";
 const Home = (props) => {
 	let [tags, setTags] = useState([
-		{ title: "DashBoard", path: "/dashboard" },
+		{ title: 'DashBoard', path: '/dashboard' },
 	]);
 	useEffect(() => {
-		console.log("去获取数据");
+		console.log('去获取数据');
 	});
 	const logout = () => {
-		removeLocalStorage("isAuthencated");
-		removeLocalStorage("auth_token");
+		removeLocalStorage('accessToken');
 		props.dispatch(showGlobalLoading(true));
 		setTimeout(() => {
 			props.dispatch(showGlobalLoading(false));
-			props.history.replace("/login");
+			props.history.replace('/login');
 		}, 1000);
 	};
 
@@ -45,9 +44,9 @@ const Home = (props) => {
 		setTags([...tempTags]);
 	};
 	return (
-		<Layout style={{ flexDirection: "column", height: "100%" }}>
+		<Layout style={{ flexDirection: 'column', height: '100%' }}>
 			<Header logout={logout} {...props} />
-			<Layout style={{ backgroundColor: "#fff" }}>
+			<Layout style={{ backgroundColor: '#fff' }}>
 				<SiderBar addTag={addTag} {...props} />
 				<MainContent tags={tags} {...props} removeTag={removeTag} />
 			</Layout>

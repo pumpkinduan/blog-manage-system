@@ -3,28 +3,50 @@ import './index.scss';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { validateEmail, validatePwd } from 'utils/validators';
+import { validateEmail, validateNickName, validatePwd } from 'utils/validators';
 import BasicFormItem from 'common/BasicFormItem';
 /**
  * 该组件(傻瓜组件)思想为:
  * 接受props传递来的数据进行展示，这里不做业务逻辑处理
  */
+
+export enum Status {
+	Login,
+	Register,
+}
 interface IProps {
-	loginText: string;
-	registerText: string;
-	isRegister: boolean;
+	btnText: string;
+	status: Status;
 	onFinish: (data) => void;
 }
-class Auth extends React.Component<IProps> {
+class Auth extends React.PureComponent<IProps> {
 	// 点击登录，提交的数据被该函数的参数接收，可向后台发送请求
 	handleOnFinish = (info) => {
 		this.props.onFinish(info);
 	};
 	render() {
-		const { loginText, registerText, isRegister } = this.props;
+		const { btnText, status } = this.props;
+		const isRegister = status === Status.Register;
 		return (
 			<div className="container">
 				<Form className="login-form" onFinish={this.handleOnFinish}>
+					{isRegister && (
+						<BasicFormItem
+							name="username"
+							customValidator={validateNickName}
+							required={true}
+							nonErrMessage="请输入您的用户名"
+							customController={
+								<Input
+									prefix={
+										<UserOutlined className="site-form-item-icon" />
+									}
+									placeholder="Username"
+								/>
+							}
+						/>
+					)}
+
 					<BasicFormItem
 						name="email"
 						customValidator={validateEmail}
@@ -35,7 +57,7 @@ class Auth extends React.Component<IProps> {
 								prefix={
 									<UserOutlined className="site-form-item-icon" />
 								}
-								placeholder="Username Or Email"
+								placeholder="Email"
 							/>
 						}
 					/>
@@ -53,7 +75,7 @@ class Auth extends React.Component<IProps> {
 							/>
 						}
 					/>
-					{isRegister ? (
+					{isRegister && (
 						<BasicFormItem
 							name="confirm"
 							dependencies={['password']}
@@ -68,8 +90,6 @@ class Auth extends React.Component<IProps> {
 								/>
 							}
 						/>
-					) : (
-						''
 					)}
 
 					<Form.Item>
@@ -80,7 +100,7 @@ class Auth extends React.Component<IProps> {
 								block={true}
 								htmlType="submit"
 								className="login-form-button">
-								{loginText}
+								{btnText}
 							</Button>
 						</div>
 						<div className="register-button-wrapper">
@@ -91,7 +111,7 @@ class Auth extends React.Component<IProps> {
 									<Link
 										to={{ pathname: '/register' }}
 										className="register-button">
-										{registerText}
+										立即注册
 									</Link>
 								</>
 							) : (
@@ -100,7 +120,7 @@ class Auth extends React.Component<IProps> {
 									<Link
 										to={{ pathname: '/login' }}
 										className="login-button">
-										{loginText}
+										立即登录
 									</Link>
 								</>
 							)}

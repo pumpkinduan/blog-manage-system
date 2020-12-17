@@ -17,7 +17,7 @@ import Register from './containers/Register/index';
 import Loading from './components/Loading/index';
 import locale from 'antd/es/locale/zh_CN';
 import { ConfigProvider } from 'antd';
-let isAuthencated = getLocalStorage('isAuthencated');
+let accessToken = getLocalStorage('accessToken');
 ReactDOM.render(
 	<ConfigProvider locale={locale}>
 		<Provider store={store}>
@@ -38,13 +38,13 @@ ReactDOM.render(
 						strict={true}
 						path="/"
 						render={(props) => {
-							if (!isAuthencated) {
+							if (!accessToken) {
 								return <Redirect to="/login" />;
 							}
 							return <Home {...props} />;
 						}}
-					/>{' '}
-				</Switch>{' '}
+					/>
+				</Switch>
 			</Router>
 		</Provider>
 	</ConfigProvider>,
