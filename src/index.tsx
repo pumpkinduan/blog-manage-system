@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import { store } from './redux/store';
 import './global.scss';
 import React from 'react';
 import 'antd/dist/antd.css';
@@ -10,14 +10,13 @@ import {
 	Route,
 	Redirect,
 } from 'react-router-dom';
-import { getLocalStorage } from './utils/index';
 import Home from './containers/Home/index';
 import Login from './containers/Login/index';
 import Register from './containers/Register/index';
 import Loading from './components/Loading/index';
 import locale from 'antd/es/locale/zh_CN';
 import { ConfigProvider } from 'antd';
-let accessToken = getLocalStorage('accessToken');
+let accessToken = localStorage.getItem('accessToken');
 ReactDOM.render(
 	<ConfigProvider locale={locale}>
 		<Provider store={store}>

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import store from '../../redux/store'
-import { showGlobalLoading } from '../../redux/actionCreators/index'
+import { store, persistor } from 'redux/store'
+import { showGlobalLoading } from 'redux/actionCreators/index'
 import { ResultInterface } from "interfaces/index.interface";
 import { message } from "antd";
 // import { Spin } from 'antd';
@@ -15,7 +15,7 @@ axios.interceptors.request.use(
         const accessToken = localStorage.getItem('accessToken');
         if (accessToken) {
             config.headers['Content-Type'] = 'application/json';
-            config.headers['Authorization'] = 'Bearer ' + accessToken;
+            config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         // reqCount++;
         store.dispatch(showGlobalLoading(true));

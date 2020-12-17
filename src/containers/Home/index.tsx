@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import './index.scss';
-import Header from '../../components/Header/index';
-import SiderBar from '../../components/SiderBar/index';
-import MainContent from '../../components/Content/index';
+import Header from 'components/Header';
+import SiderBar from 'components/SiderBar';
+import MainContent from 'components/Content';
 import { Layout } from 'antd';
-import { connect } from 'react-redux';
-import { showGlobalLoading } from '../../redux/actionCreators/index';
-import { removeLocalStorage } from '../../utils/index';
+import { connect, useSelector } from 'react-redux';
+import { showGlobalLoading } from 'redux/actionCreators';
+import { removeLocalStorage } from 'utils';
+import { getUserProfile } from 'core/apis';
+import { appState } from 'redux/reducers';
+import './index.scss';
 // import { useHistory } from "react-router-dom";
 const Home = (props) => {
 	let [tags, setTags] = useState([
 		{ title: 'DashBoard', path: '/dashboard' },
 	]);
+	// const storeUserInfo = useSelector((store: appState) => store.userInfo);
+
 	useEffect(() => {
-		console.log('去获取数据');
-	});
+		getUserProfile().then((res) => {
+			console.log(res);
+		});
+	}, []);
 	const logout = () => {
 		removeLocalStorage('accessToken');
 		props.dispatch(showGlobalLoading(true));
