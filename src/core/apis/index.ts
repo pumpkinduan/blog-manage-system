@@ -1,22 +1,22 @@
-import { UserInterface, CommentInterface, USER_TYPE } from 'interfaces/index.interface';
+import { UserInterface, CommentInterface } from 'interfaces/index.interface';
 import server from './server';
 
 
 
 // 登录与注册
-export const login = async (data: UserInterface.loginInterface) => await server.post('/login', data);
+export const login = async (data: UserInterface.loginInterface) => await server.post<{ accessToken: string }>('/login', data);
 
 export const register = async (data: UserInterface.CreateUser) => await server.post('/register', data);
 
 // comment
-export const getComments = async (page: number, pageSize: number) => await server.get('/comments', { page, pageSize });
+export const getComments = async (page: number, pageSize: number) => await server.get<CommentInterface.BasicComment[]>('/comments', { page, pageSize });
 
-export const createComment = async (data: CommentInterface.CreateComment) => await server.post('/comments/create', data);
+export const createComment = async (data: CommentInterface.CreateComment) => await server.post<CommentInterface.BasicComment>('/comments/create', data);
 
 export const deleteComment = async (id: string) => await server.delete(`/comments/${id}`);
 
 // user
-export const getUsers = async (page, pageSize, type: USER_TYPE) => await server.get('/users', {
+export const getUsers = async (page, pageSize, type: UserInterface.USER_TYPE) => await server.get<UserInterface.ADMIN[] | UserInterface.NORMAL[]>('/users', {
     page, pageSize, type
 });
 
