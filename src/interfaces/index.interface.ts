@@ -1,6 +1,7 @@
-export * from './user.interface'
-export * from './comment.interface'
-export * from './post.interface'
+// @babel/plugin-proposal-export-namespace-from
+export * as UserInterface from './user.interface';
+export *  as CommentInterface from './comment.interface'
+export *  as PostInterface from './post.interface'
 export * from './result.interface'
 export * from './logger.interface'
 export * from './exeception.interface'
