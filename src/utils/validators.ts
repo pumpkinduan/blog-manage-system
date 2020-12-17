@@ -83,6 +83,18 @@ export const validateUserName = (value: string): validatorResultProps => {
 		msg: "",
 	};
 };
+export const validateEmail = (value: string): validatorResultProps => {
+	if (!emailReg.test(value)) {
+		return {
+			msg: "请输入有效的邮箱",
+			status: false,
+		};
+	}
+	return {
+		status: true,
+		msg: "",
+	};
+};
 
 export const validateNickName = (value: string): validatorResultProps => {
 	const res = validateIllegalChar(value);
@@ -93,18 +105,6 @@ export const validateNickName = (value: string): validatorResultProps => {
 		return {
 			status: false,
 			msg: "昵称长度为1-12位",
-		};
-	}
-	return {
-		status: true,
-		msg: "",
-	};
-};
-export const validateEmail = (value: string): validatorResultProps => {
-	if (!emailReg.test(value)) {
-		return {
-			msg: "请输入有效的邮箱",
-			status: false,
 		};
 	}
 	return {

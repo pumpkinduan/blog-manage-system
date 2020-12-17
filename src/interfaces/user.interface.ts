@@ -1,8 +1,7 @@
 // 后台管理系统的用户表，有控制编辑查看的权限
 type userId = string;
 type postId = string;
-type email = string
-type username = string
+
 export enum USER_TYPE {
 	NORMAL = 'normal',
 	ADMIN = 'admin',
@@ -32,7 +31,7 @@ export namespace UserInterface {
 	}
 
 	export interface loginInterface {
-		account: email | username;
+		email: string;
 		password: string;
 	}
 }

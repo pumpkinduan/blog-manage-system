@@ -3,7 +3,7 @@ import './index.scss';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { validateUserName, validatePwd } from 'utils/validators';
+import { validateEmail, validatePwd } from 'utils/validators';
 import BasicFormItem from 'common/BasicFormItem';
 /**
  * 该组件(傻瓜组件)思想为:
@@ -26,10 +26,10 @@ class Auth extends React.Component<IProps> {
 			<div className="container">
 				<Form className="login-form" onFinish={this.handleOnFinish}>
 					<BasicFormItem
-						name="account"
-						customValidator={validateUserName}
+						name="email"
+						customValidator={validateEmail}
 						required={true}
-						nonErrMessage="请输入您的用户名"
+						nonErrMessage="请输入您的邮箱账号"
 						customController={
 							<Input
 								prefix={
