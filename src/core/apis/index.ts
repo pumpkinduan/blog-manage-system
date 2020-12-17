@@ -1,7 +1,7 @@
 import { UserInterface, CommentInterface } from 'interfaces/index.interface';
 import server from './server';
 
-
+type User = UserInterface.ADMIN | UserInterface.NORMAL
 
 // 登录与注册
 export const login = async (data: UserInterface.loginInterface) => await server.post<{ accessToken: string }>('/login', data);
@@ -16,9 +16,11 @@ export const createComment = async (data: CommentInterface.CreateComment) => awa
 export const deleteComment = async (id: string) => await server.delete(`/comments/${id}`);
 
 // user
-export const getUsers = async (page, pageSize, type: UserInterface.USER_TYPE) => await server.get<UserInterface.ADMIN[] | UserInterface.NORMAL[]>('/users', {
+export const getUsers = async (page, pageSize, type: UserInterface.USER_TYPE) => await server.get<User[]>('/users', {
     page, pageSize, type
 });
+
+export const getUserProfile = async () => await server.get<User>('users/profile');
 
 export const createUser = async (data: UserInterface.CreateUser) => await server.post('/users', data);
 

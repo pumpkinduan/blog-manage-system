@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import store from '../../redux/store'
 import { showGlobalLoading } from '../../redux/actionCreators/index'
-import { ResultInterface, ExceptionResultInterface } from "interfaces/index.interface";
+import { ResultInterface } from "interfaces/index.interface";
 import { message } from "antd";
 // import { Spin } from 'antd';
 // import Loading from '../../components/Loading/index'
