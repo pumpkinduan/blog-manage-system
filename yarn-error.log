@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe D:\Program Files\nodejs\node_global\node_modules\yarn\bin\yarn.js
+  C:\Program Files\nodejs\node.exe D:\Program Files\nodejs\node_global\node_modules\yarn\bin\yarn.js add @babel/plugin-proposal-export-namespace-from --dev
 
 PATH: 
-  C:\Python38\Scripts\;C:\Python38\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;D:\Program Files\Microsoft VS Code;E:\Pumpkin\星纵FQ;D:\Program Files\nodejs\node_global;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;D:\Program Files\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Roaming\npm;C:\Program Files\nodejs;C:\Users\Administrator\AppData\Local\GitHubDesktop\bin;D:\Program Files\nodejs\node_global;
+  C:\Python38\Scripts\;C:\Python38\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;D:\Program Files\Microsoft VS Code;E:\Pumpkin\星纵FQ;D:\Program Files\nodejs\node_global;C:\Program Files\TortoiseSVN\bin;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;D:\Program Files\Microsoft VS Code\bin;C:\Users\Administrator\AppData\Roaming\npm;C:\Program Files\nodejs;C:\Users\Administrator\AppData\Local\GitHubDesktop\bin;D:\Program Files\nodejs\node_global;F:\Program Files\mysql-5.7.27-winx64\bin;E:\番茄工具\番茄工具;
 
 Yarn version: 
   1.22.4
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: ENOENT: no such file or directory, copyfile 'C:\Users\Administrator\AppData\Local\Yarn\Cache\v6\npm-ansi-styles-2.2.1-b432dd3358b634cf75e1e4664368240533c1ddbe-integrity\node_modules\ansi-styles\index.js' -> 'C:\Users\Administrator\Desktop\blog-manage-system\node_modules\node-sass\node_modules\ansi-styles\index.js'
+  Error: EPERM: operation not permitted, unlink 'C:\Users\Administrator\Desktop\blog-manage-system\node_modules\_node-sass@4.14.1@node-sass\vendor\win32-x64-72\binding.node'
 
 npm manifest: 
   {
@@ -192,6 +192,9 @@ npm manifest:
           {
             "legacy": true
           }
+        ],
+        [
+          "@babel/plugin-proposal-export-namespace-from"
         ]
       ]
     }
