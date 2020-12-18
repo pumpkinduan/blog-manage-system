@@ -10,9 +10,8 @@ import {
 	Route,
 	Redirect,
 } from 'react-router-dom';
-import Home from './containers/Home/index';
-import Login from './containers/Login/index';
-import Register from './containers/Register/index';
+import Home from './containers/Home';
+import { Login, Register } from './containers/Open';
 import { GlobalLoading } from './components/Loading/GlobalLoading';
 import locale from 'antd/es/locale/zh_CN';
 import { ConfigProvider } from 'antd';
