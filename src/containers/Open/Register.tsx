@@ -3,8 +3,9 @@ import { AuthForm, Status } from './components/AuthForm';
 import { notification } from 'antd';
 import { register } from 'core/apis';
 import { UserInterface } from 'interfaces/index.interface';
-
+import { useHistory } from 'react-router-dom';
 export const NormalRegiterForm = (props) => {
+	const history = useHistory();
 	// 点击注册
 	const onFinish = (info: UserInterface.CreateUser) => {
 		info.type = UserInterface.USER_TYPE.ADMIN; // admin
@@ -15,7 +16,7 @@ export const NormalRegiterForm = (props) => {
 				duration: 1,
 			});
 			setTimeout(() => {
-				props.history.push('/login');
+				history.push('/login');
 			}, 500);
 		});
 	};
