@@ -1,10 +1,10 @@
 // 配合react用于路由懒加载
 
 import Loadable from 'react-loadable'
-import Loading from '../components/Loading'
+import { GlobalLoading } from '../components/Loading/GlobalLoading'
 
 // 有加载动画
-export function loadable(loader, loading = Loading, delay = 250, timeout = 10000) {
+export function loadable(loader, loading = GlobalLoading, delay = 250, timeout = 10000) {
     return Loadable({
         loader,
         loading,
