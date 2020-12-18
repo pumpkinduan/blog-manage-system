@@ -1,33 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import Header from 'components/Header';
-import SiderBar from 'components/SiderBar';
-import MainContent from 'components/Content';
 import { Layout } from 'antd';
 import { connect } from 'react-redux';
-import { controlGlobalLoading } from 'redux/actionCreators';
+import { useHistory } from 'react-router-dom';
 import { removeLocalStorage } from 'utils';
 import { getUserProfile } from 'core/apis';
-import './index.scss';
-// import { useHistory } from "react-router-dom";
-const Home = (props) => {
-	let [tags, setTags] = useState([
+import { Header } from './Header';
+import SiderBar from 'components/SiderBar';
+import MainContent from 'components/Content';
+import { store } from 'redux/store';
+import { initAdminInfo } from 'redux/actionCreators';
+import { UserInterface } from 'interfaces/index.interface';
+const Home = () => {
+	const [tags, setTags] = useState([
 		{ title: 'DashBoard', path: '/dashboard' },
 	]);
-
 	useEffect(() => {
 		getUserProfile().then((res) => {
-			console.log(res);
+			store.dispatch(initAdminInfo(res.data as UserInterface.ADMIN));
 		});
 	}, []);
-	const logout = () => {
-		removeLocalStorage('accessToken');
-		props.dispatch(controlGlobalLoading({ status: 'start' }));
-		setTimeout(() => {
-			props.dispatch(controlGlobalLoading({ status: 'end' }));
-			props.history.replace('/login');
-		}, 1000);
-	};
-
 	// 用于在内容区域生成 导航tag
 	const addTag = (tag) => {
 		// 避免添加重复的tag
@@ -49,10 +40,10 @@ const Home = (props) => {
 	};
 	return (
 		<Layout style={{ flexDirection: 'column', height: '100%' }}>
-			<Header logout={logout} {...props} />
+			<Header />
 			<Layout style={{ backgroundColor: '#fff' }}>
-				<SiderBar addTag={addTag} {...props} />
-				<MainContent tags={tags} {...props} removeTag={removeTag} />
+				<SiderBar addTag={addTag} />
+				<MainContent tags={tags} removeTag={removeTag} />
 			</Layout>
 		</Layout>
 	);

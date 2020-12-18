@@ -16,6 +16,7 @@ export interface AdminProfiles {
 	github: string;
 	brief: string;
 	notice?: string;
+	avatar?: string;
 }
 export interface ADMIN extends Record<'username' | 'email', string> {
 	type: USER_TYPE.ADMIN;

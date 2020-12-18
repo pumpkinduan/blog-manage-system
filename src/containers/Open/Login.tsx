@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { login } from 'core/apis';
 import { AuthForm, Status } from './components/AuthForm';
 import { useHistory } from 'react-router-dom';
-export const NormalLoginForm = (props) => {
+export const NormalLoginForm = () => {
 	const history = useHistory();
 	// 点击登录，提交的数据被该函数的参数接收，可向后台发送请求
 	const onFinish = useCallback(

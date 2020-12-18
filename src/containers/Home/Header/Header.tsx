@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
 	SearchOutlined,
 	DownOutlined,
@@ -6,8 +6,7 @@ import {
 	ExpandOutlined,
 	BellOutlined,
 } from '@ant-design/icons';
-import './index.scss';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
 	Popover,
 	Badge,
@@ -19,9 +18,17 @@ import {
 	Row,
 	Col,
 } from 'antd';
-import { setFullScreenStatus, createRandomColor } from '../../utils/index';
-import CustomInput from '../../common/Input/index';
-const MyHeader = (props) => {
+import { setFullScreenStatus, createRandomColor } from 'utils';
+import CustomInput from 'common/Input';
+import { useSelector } from 'react-redux';
+import { StoreStateType } from 'redux/reducers';
+import { MessageList } from './MessageList';
+import './style.scss';
+export const Header = () => {
+	const history = useHistory();
+	const adminInfo = useSelector(
+		(storeState: StoreStateType) => storeState.adminInfo
+	);
 	// 留言消息数据
 	let [data, setData] = useState([
 		{
@@ -29,7 +36,7 @@ const MyHeader = (props) => {
 			content: '你好啊，我是测试小哥，文章写得不错哦',
 			src:
 				'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-			time: '3 days ago',
+			createdAt: '3 days ago',
 			read: false,
 		},
 		{
@@ -37,7 +44,7 @@ const MyHeader = (props) => {
 			content: '期待更新！！！',
 			src:
 				'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-			time: '5 days ago',
+			createdAt: '5 days ago',
 			read: false,
 		},
 		{
@@ -45,14 +52,14 @@ const MyHeader = (props) => {
 			content: '你好啊，博客好漂亮啊',
 			src:
 				'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-			time: '6 days ago',
+			createdAt: '6 days ago',
 			read: false,
 		},
 		{
 			title: '好好先生',
 			content: '大佬嘛，哈哈',
 			src: '',
-			time: '3年前',
+			createdAt: '3年前',
 			read: false,
 		},
 	]);
@@ -64,9 +71,8 @@ const MyHeader = (props) => {
 	const handleVisibleChange = (flag) => {
 		setVisible(flag);
 	};
-	const { logout } = props;
 	const clearVisitorCounts = () => setVisitorCounts(0);
-	const clearCommentMsg = () => {
+	const onClearCommentMsg = () => {
 		// 清空留言数
 		setCommentCounts(0);
 
@@ -75,78 +81,30 @@ const MyHeader = (props) => {
 			{
 				title: '你真棒',
 				content: '已经读完所有消息啦',
-				time: '',
+				createdAt: '',
 				src: '',
 				read: true,
 			},
 		]);
 	};
 
-	const hanldeReadComment = (e) => {
+	const onReadOneComment = (e) => {
 		let classList = e.currentTarget.classList;
 		if (!classList.contains('ant-list-item-read')) {
 			setCommentCounts(commentCounts - 1); // 读完一条消息，消息数量减1
 			classList.add('ant-list-item-read');
 		}
 	};
-	// 用于展示实时留言消息
-	const list = (
-		<List
-			// selectable={false}
-			itemLayout="vertical"
-			dataSource={data}
-			renderItem={(item, index) => (
-				<List.Item
-					actions={[item.time]}
-					onClick={hanldeReadComment}
-					style={{ borderBottom: '1px solid #eee' }}>
-					<List.Item.Meta
-						title={item.title}
-						description={item.content}
-						avatar={
-							item.src && item.title ? (
-								<Avatar src={item.src} />
-							) : (
-								<Avatar
-									style={{
-										fontWeight: 'bolder',
-										color: '#fff',
-										background: createRandomColor(),
-									}}>
-									{item.title.substring(0, 1)}
-								</Avatar>
-							)
-						}
-					/>
-				</List.Item>
-			)}>
-			<div
-				className="bottom-btns"
-				style={{ display: commentCounts ? 'flex' : 'none' }}>
-				<Button
-					block={true}
-					type="text"
-					size="large"
-					onClick={clearCommentMsg}>
-					清空消息
-				</Button>
-				<Button block={true} type="text" size="large">
-					<Link
-						to={{
-							pathname: '/personalCenter',
-							state: { activeKey: 'words' },
-						}}>
-						查看更多
-					</Link>
-				</Button>
-			</div>
-		</List>
-	);
+	const logout = useCallback(() => {
+		localStorage.removeItem('accessToken');
+		history.replace('/login');
+	}, []);
+
 	return (
 		<Row align="middle" className="override-ant-row">
 			<Col flex={1} className="ant-col-left">
 				<h1>
-					<span className="admin">Pumpkin</span>
+					<span className="admin">{adminInfo.username}</span>
 					<img
 						className="avatar"
 						src="http://demo.qfpffmp.cn/cssthemes5/twts_141_PurpleAdmin/images/faces/face1.jpg"
@@ -169,7 +127,13 @@ const MyHeader = (props) => {
 						overlayClassName="override-ant-dropdown"
 						placement="bottomRight"
 						trigger={['click']}
-						overlay={list}>
+						overlay={
+							<MessageList
+								dataSource={data}
+								onClearCommentMsg={onClearCommentMsg}
+								onReadOneComment={onReadOneComment}
+							/>
+						}>
 						<Badge dot count={commentCounts}>
 							<Popover
 								content={
@@ -226,7 +190,7 @@ const MyHeader = (props) => {
 								src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png"
 								alt=""
 							/>
-							<span>Pumpkin</span> <DownOutlined />
+							<span>{adminInfo.username}</span> <DownOutlined />
 						</div>
 					</Dropdown>
 				</nav>
@@ -234,4 +198,3 @@ const MyHeader = (props) => {
 		</Row>
 	);
 };
-export default MyHeader;

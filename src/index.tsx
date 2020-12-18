@@ -22,24 +22,16 @@ ReactDOM.render(
 			<Router>
 				<GlobalLoading />
 				<Switch>
-					<Route
-						path="/register"
-						exact
-						render={(props) => <Register {...props} />}
-					/>
-					<Route
-						path="/login"
-						exact
-						render={(props) => <Login {...props} />}
-					/>
+					<Route path="/register" exact render={() => <Register />} />
+					<Route path="/login" exact render={() => <Login />} />
 					<Route
 						strict={true}
 						path="/"
-						render={(props) => {
+						render={() => {
 							if (!accessToken) {
 								return <Redirect to="/login" />;
 							}
-							return <Home {...props} />;
+							return <Home />;
 						}}
 					/>
 				</Switch>
