@@ -3,18 +3,16 @@ import Header from 'components/Header';
 import SiderBar from 'components/SiderBar';
 import MainContent from 'components/Content';
 import { Layout } from 'antd';
-import { connect, useSelector } from 'react-redux';
-import { showGlobalLoading } from 'redux/actionCreators';
+import { connect } from 'react-redux';
+import { controlGlobalLoading } from 'redux/actionCreators';
 import { removeLocalStorage } from 'utils';
 import { getUserProfile } from 'core/apis';
-import { appState } from 'redux/reducers';
 import './index.scss';
 // import { useHistory } from "react-router-dom";
 const Home = (props) => {
 	let [tags, setTags] = useState([
 		{ title: 'DashBoard', path: '/dashboard' },
 	]);
-	// const storeUserInfo = useSelector((store: appState) => store.userInfo);
 
 	useEffect(() => {
 		getUserProfile().then((res) => {
@@ -23,9 +21,9 @@ const Home = (props) => {
 	}, []);
 	const logout = () => {
 		removeLocalStorage('accessToken');
-		props.dispatch(showGlobalLoading(true));
+		props.dispatch(controlGlobalLoading({ status: 'start' }));
 		setTimeout(() => {
-			props.dispatch(showGlobalLoading(false));
+			props.dispatch(controlGlobalLoading({ status: 'end' }));
 			props.history.replace('/login');
 		}, 1000);
 	};

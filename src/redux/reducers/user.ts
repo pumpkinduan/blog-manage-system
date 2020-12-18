@@ -1,7 +1,7 @@
 import { UserInterface } from 'interfaces/index.interface';
-import { AppendUserInfoAction, APPEND_USER_INFO } from 'redux/actionTypes';
+import { INIT_ADMIN_INFO, ActionResultInterface } from 'redux/actionTypes';
 
-const userInfoInitialState: UserInterface.ADMIN = {
+const initialState: UserInterface.ADMIN = {
     type: UserInterface.USER_TYPE.ADMIN,
     username: 'Pumpkin',
     email: 'duanzz@ursalink.com',
@@ -14,9 +14,9 @@ const userInfoInitialState: UserInterface.ADMIN = {
 
 }
 
-export const appendUserInfo = (state: UserInterface.ADMIN = userInfoInitialState, action: AppendUserInfoAction) => {
+export const initAdminInfo = (state = initialState, action: ActionResultInterface<UserInterface.ADMIN>): UserInterface.ADMIN => {
     switch (action.type) {
-        case APPEND_USER_INFO:
+        case INIT_ADMIN_INFO:
             return { ...state, ...action.payload }
         default:
             return state

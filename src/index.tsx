@@ -13,7 +13,7 @@ import {
 import Home from './containers/Home/index';
 import Login from './containers/Login/index';
 import Register from './containers/Register/index';
-import Loading from './components/Loading/index';
+import { GlobalLoading } from './components/Loading/GlobalLoading';
 import locale from 'antd/es/locale/zh_CN';
 import { ConfigProvider } from 'antd';
 let accessToken = localStorage.getItem('accessToken');
@@ -21,7 +21,7 @@ ReactDOM.render(
 	<ConfigProvider locale={locale}>
 		<Provider store={store}>
 			<Router>
-				<Loading />
+				<GlobalLoading />
 				<Switch>
 					<Route
 						path="/register"

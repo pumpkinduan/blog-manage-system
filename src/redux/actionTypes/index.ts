@@ -1,9 +1,9 @@
-import { UserInterface } from "interfaces/index.interface";
+export const CONTROL_LOADING = 'CONTROL_LOADING';
 
-export const SHOWLOADING = 'SHOWLOADING';
+export const INIT_ADMIN_INFO = 'INIT_ADMIN_INFO';
 
-export const APPEND_USER_INFO = 'APPEND_USER_INFO';
-export interface AppendUserInfoAction {
-    type: typeof APPEND_USER_INFO
-    payload: UserInterface.ADMIN
+// action的数据格式
+export interface ActionResultInterface<D = any> {
+    type: string;
+    payload: D;
 }

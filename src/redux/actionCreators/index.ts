@@ -1,7 +1,7 @@
-import { SHOWLOADING, APPEND_USER_INFO, AppendUserInfoAction } from '../actionTypes'
-
+import { CONTROL_LOADING, INIT_ADMIN_INFO, ActionResultInterface } from '../actionTypes'
 import { UserInterface } from 'interfaces/index.interface'
+import { LoadingStateInterface } from 'redux/reducers/loading'
 
-export const showGlobalLoading = loadingStatus => ({ type: SHOWLOADING, loadingStatus })
+export const controlGlobalLoading = (data: LoadingStateInterface): ActionResultInterface<LoadingStateInterface> => ({ type: CONTROL_LOADING, payload: data })
 
-export const appendUserInfo = (data: UserInterface.ADMIN): AppendUserInfoAction => ({ type: APPEND_USER_INFO, payload: data })
+export const initAdminInfo = (data: UserInterface.ADMIN): ActionResultInterface<UserInterface.ADMIN> => ({ type: INIT_ADMIN_INFO, payload: data })

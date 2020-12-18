@@ -1,10 +1,8 @@
 import axios, { AxiosResponse } from "axios";
-import { store, persistor } from 'redux/store'
-import { showGlobalLoading } from 'redux/actionCreators/index'
+import { store } from 'redux/store'
+import { controlGlobalLoading } from 'redux/actionCreators/index'
 import { ResultInterface } from "interfaces/index.interface";
 import { message } from "antd";
-// import { Spin } from 'antd';
-// import Loading from '../../components/Loading/index'
 //进行全局的默认配置
 axios.defaults.baseURL = process.env.NODE_ENV === "production" ? "http://pumpkinduan.cn:3000" : "http://127.0.0.1:5000/v1";
 axios.defaults.timeout = 10000;
@@ -18,11 +16,11 @@ axios.interceptors.request.use(
             config.headers['Authorization'] = `Bearer ${accessToken}`;
         }
         // reqCount++;
-        store.dispatch(showGlobalLoading(true));
+        store.dispatch(controlGlobalLoading({ status: 'start' }));
         return config;
     },
     function (error) {
-        store.dispatch(showGlobalLoading(false));
+        store.dispatch(controlGlobalLoading({ status: 'end' }));
         return Promise.reject(error);
     }
 );
@@ -32,14 +30,14 @@ axios.interceptors.response.use(
     function (response) {
         // reqCount--;
         // if (reqCount <= 0) {
-        //     store.dispatch(showGlobalLoading(false));
+        //     store.dispatch(controlGlobalLoading({ status: 'end' }));
         // }
-        store.dispatch(showGlobalLoading(false));
+        store.dispatch(controlGlobalLoading({ status: 'end' }));
         return response;
     },
     function (err) {
         // 对响应错误做点什么
-        store.dispatch(showGlobalLoading(false));
+        store.dispatch(controlGlobalLoading({ status: 'end' }));
         // reqCount--;
         // if (reqCount <= 0) { }
         const response = err.response as AxiosResponse<ResultInterface> | undefined
