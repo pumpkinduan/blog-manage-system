@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Avatar, Modal, message, Row, Col } from 'antd';
 import ListCard from 'components/ArticleList';
-import { listItemInterface } from 'types/Article';
+import { ListItemInterface } from 'types/Article';
 import { replyItemProps, commentItemProps } from 'types/Comment';
 import IconReplyBtn from './IconReplyBtn';
 import { CloseOutlined } from '@ant-design/icons';
@@ -34,7 +34,7 @@ for (let i = 0; i < 5; i++) {
 		replys: replys,
 	});
 }
-const listItem: listItemInterface = {
+const listItem: ListItemInterface = {
 	id: 12,
 	coverUrl:
 		'https://2heng.xin/wp-content/uploads//2019/12/2572384-1024x640.jpg',
@@ -75,8 +75,7 @@ const CommentListItem = () => {
 						<div className="extra-item">
 							<ListCard listItem={listItem} />
 						</div>
-					}
-				>
+					}>
 					<Meta
 						description={
 							<Row align="middle" gutter={10}>

@@ -4,9 +4,9 @@ import ListCard from 'components/ArticleList/ListCard';
 import LoadButton from '../../common/LoadButton/index';
 import QueueAnim from 'rc-queue-anim';
 import './index.scss';
-import { listItemInterface } from 'types/Article';
+import { ListItemInterface } from 'types/Article';
 
-const lists: listItemInterface[] = [
+const lists: ListItemInterface[] = [
 	{
 		id: 12,
 		coverUrl:
@@ -82,7 +82,7 @@ const lists: listItemInterface[] = [
 interface intialState {
 	spin: boolean;
 	page: number;
-	lists: listItemInterface[];
+	lists: ListItemInterface[];
 }
 class ArticleList extends Component {
 	state: intialState = { spin: false, page: 1, lists: lists };
@@ -140,14 +140,13 @@ class ArticleList extends Component {
 		return (
 			<div className="article-list-container">
 				<Row align="middle" gutter={[12, 15]}>
-					{lists.map((item: listItemInterface, index: number) => {
+					{lists.map((item: ListItemInterface, index: number) => {
 						return (
 							<Col span={8} key={index}>
 								<QueueAnim
 									type="bottom"
 									interval={100}
-									delay={index * 100}
-								>
+									delay={index * 100}>
 									<ListCard
 										render={(ref) => (
 											<div className="btn-controls">
@@ -165,8 +164,7 @@ class ArticleList extends Component {
 															item.id,
 															index
 														);
-													}}
-												>
+													}}>
 													<span className="del-btn btn">
 														删除
 													</span>

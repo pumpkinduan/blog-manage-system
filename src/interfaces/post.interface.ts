@@ -1,12 +1,12 @@
 import { CommentInterface } from 'interfaces/index.interface'
-type basicPostString = Record<'coverUrl' | 'title' | 'createdAt' | 'id', string>;
+type basicPostString = Record<'coverUrl' | 'title' | 'createdAt' | 'id' | 'category' | 'description' | 'author', string>;
 type basicPostNumber = Record<
-    'likes' | 'visitors' | 'downloads',
+    'likes' | 'totalComments' | 'browsers',
     number
 >;
 // 可用于前后端 
 // 文章状态
-export type status = 'published' | 'drafted' | 'updated' | 'deleted';
+export type PostStatus = 'published' | 'drafted' | 'updated' | 'deleted';
 export enum STATUS {
     PUBLISHED = 'published',
     DRAFTED = 'drafted',
@@ -16,13 +16,11 @@ export enum STATUS {
 // 文章列表
 export interface BasicPost extends basicPostString, basicPostNumber {
     tags: string[];
-    status: status;
+    status: PostStatus;
 }
 // 文章详情
 export interface DetailPost extends BasicPost {
-    author?: string;
     content: string;
-    description: string;
     comments: CommentInterface.BasicComment[]; // 一篇文章下关联的留言，与留言为一对多关系
 }
 export type CreatePost = Pick<

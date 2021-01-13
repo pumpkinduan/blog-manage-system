@@ -2,15 +2,13 @@ import React from 'react';
 import { Popconfirm, message } from 'antd';
 import { Link } from 'react-router-dom';
 import './ListCard.scss';
-import { listItemInterface } from 'types/Article';
+import { ListItemInterface } from 'types/Article';
 interface IProps {
-	listItem: listItemInterface;
+	listItem: ListItemInterface;
 	render?: (ref: React.RefObject<HTMLDivElement>) => React.ReactNode;
 }
 class ListCard extends React.PureComponent<IProps> {
-	eleDivRef: React.RefObject<HTMLDivElement> = React.createRef<
-		HTMLDivElement
-	>();
+	eleDivRef: React.RefObject<HTMLDivElement> = React.createRef<HTMLDivElement>();
 	render() {
 		const { listItem } = this.props;
 		return (
@@ -22,8 +20,7 @@ class ListCard extends React.PureComponent<IProps> {
 							to={{
 								pathname: '/articleCreate',
 								state: { isEdited: true },
-							}}
-						>
+							}}>
 							{listItem.title}
 						</Link>
 					</h1>
