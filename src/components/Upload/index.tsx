@@ -68,21 +68,21 @@ class PicturesWall extends Component<IProps> {
 		return (
 			<div className="clearfix">
 				<Upload
+					name="file"
+					data={{ type: 'POST' }}
 					key="upload"
-					action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+					action="http://127.0.0.1:5000/v1/photo/upload"
 					listType="picture-card"
 					fileList={fileList}
 					onPreview={this.handlePreview}
-					onChange={this.handleChange}
-				>
+					onChange={this.handleChange}>
 					{fileList.length >= 8 ? null : uploadButton}
 				</Upload>
 				<Modal
 					visible={previewVisible}
 					title={previewTitle}
 					footer={null}
-					onCancel={this.handleCancel}
-				>
+					onCancel={this.handleCancel}>
 					<img
 						alt="cover"
 						style={{ width: '100%' }}
