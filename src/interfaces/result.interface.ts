@@ -3,5 +3,5 @@ export interface ResultInterface<D = any> {
     statusCode: number;
     message?: string;
     success: boolean;
-    data?: D;
+    data: D;
 }

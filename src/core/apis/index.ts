@@ -2,8 +2,8 @@ import { UserInterface, CommentInterface, PhotoInterface } from 'interfaces/inde
 import server from './server';
 
 type User = UserInterface.ADMIN | UserInterface.NORMAL
-
-export type Params = { page?: number, pageSize?: number }
+const defaultParam: Params = { page: 1, pageSize: 10 }
+export type Params = { page: number, pageSize: number }
 
 // 登录与注册
 export const login = async (data: UserInterface.loginInterface) => await server.post<{ accessToken: string }>('/login', data);
@@ -11,14 +11,14 @@ export const login = async (data: UserInterface.loginInterface) => await server.
 export const register = async (data: UserInterface.CreateUser) => await server.post('/register', data);
 
 // comment
-export const getComments = async (params: Params) => await server.get<CommentInterface.BasicComment[]>('/comments', params);
+export const getComments = async (params = defaultParam) => await server.get<CommentInterface.BasicComment[]>('/comments', params);
 
 export const createComment = async (data: CommentInterface.CreateComment) => await server.post<CommentInterface.BasicComment>('/comments/create', data);
 
 export const deleteComment = async (id: string) => await server.delete(`/comments/${id}`);
 
 // user
-export const getUsers = async (params: Params & { type: UserInterface.USER_TYPE }) => await server.get<User[]>('/users', params);
+export const getUsers = async (params: Params & { type: UserInterface.USER_TYPE } = { pageSize: 10, page: 1, type: UserInterface.USER_TYPE.NORMAL }) => await server.get<User[]>('/users', params);
 
 export const getUserProfile = async () => await server.get<User>('users/profile');
 
@@ -39,7 +39,7 @@ export const deletePhoto = async (id: string) => await server.delete(`/photo/del
  * @param page { 当前页面 }
  * @param pageSize { 每页大小 }
  */
-export const getPhotos = async (params: Params & { type: PhotoInterface.CreatePhoto }) => await server.get<PhotoInterface.CreatePhoto>('/photo/upload', params);
+export const getPhotos = async (params: Params & { type: PhotoInterface.PHOTO_TYPE } = { pageSize: 10, page: 1, type: PhotoInterface.PHOTO_TYPE.WALL }) => await server.get<PhotoInterface.CreatePhoto>('/photo/upload', params);
 
 // post
 export * from './post'

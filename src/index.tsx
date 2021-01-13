@@ -15,6 +15,11 @@ import { Login, Register } from './containers/Open';
 import { GlobalLoading } from './components/Loading/GlobalLoading';
 import locale from 'antd/es/locale/zh_CN';
 import { ConfigProvider } from 'antd';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.locale('zh-cn');
+dayjs.extend(relativeTime);
 let accessToken = localStorage.getItem('accessToken');
 ReactDOM.render(
 	<ConfigProvider locale={locale}>

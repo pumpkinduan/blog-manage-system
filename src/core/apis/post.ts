@@ -1,11 +1,11 @@
 import { PostInterface } from 'interfaces/index.interface';
 import server from './server';
 import { Params } from './'
-
+const defaultParam: Params = { page: 1, pageSize: 10 }
 /**
  * 获取文章列表
  */
-export const getPostLists = async (params: Params) => await server.get<PostInterface.BasicPost[]>('/posts', params);
+export const getPostLists = async (params = defaultParam) => await server.get<PostInterface.BasicPost[]>('/posts', params);
 
 /**
  * 获取指定文章详情
@@ -24,7 +24,7 @@ export const getPostArchives = async () => await server.get<PostInterface.Archiv
 /**
  * 获取指定文章下的留言
  */
-export const getPostComments = async (id: string, params: Params) => await server.get<PostInterface.DetailPost>(`/posts/${id}/comments`, params);
+export const getPostComments = async (id: string, params = defaultParam) => await server.get<PostInterface.DetailPost>(`/posts/${id}/comments`, params);
 
 
 export const createPost = async (data: PostInterface.CreatePost) => await server.post<PostInterface.BasicPost>('/posts/create', data);
