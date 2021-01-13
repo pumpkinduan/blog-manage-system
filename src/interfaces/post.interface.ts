@@ -36,3 +36,17 @@ export type CreatePost = Pick<
     | 'coverUrl'
 >;
 export type UpdatePost = CreatePost;
+
+export type Category = { category: string, count: number }
+
+export type Archive = {
+    fullyear: number;
+    lists: {
+        month: number;
+        count: number;
+        items: {
+            id: number;
+            title: string;
+        }[]
+    }[]
+}
