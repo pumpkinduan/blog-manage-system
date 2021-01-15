@@ -20,7 +20,6 @@ import 'dayjs/locale/zh-cn';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
-let accessToken = localStorage.getItem('accessToken');
 ReactDOM.render(
 	<ConfigProvider locale={locale}>
 		<Provider store={store}>
@@ -31,9 +30,9 @@ ReactDOM.render(
 					<Route path="/login" exact render={() => <Login />} />
 					<Route
 						strict={true}
-						path="/"
+						path="/*"
 						render={() => {
-							if (!accessToken) {
+							if (!localStorage.getItem('accessToken')) {
 								return <Redirect to="/login" />;
 							}
 							return <Home />;
