@@ -1,18 +1,18 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
 	getLocalStorage,
 	setLocalStorage,
 	removeLocalStorage,
-} from "utils/index";
-import "./index.scss";
-import { Modal, notification } from "antd";
-import ArticleInfo from "components/ArticleCreate/ArticleInfo/index";
-import PicturesWall from "components/Upload/index";
-import ArticleControl from "components/ArticleCreate/ArticleControl/index";
-import RichEditor from "components/ArticleCreate/RichEditor/index";
-import MarkdownEditor from "components/ArticleCreate/MarkdownEditor/index";
-import { articleProps } from "types/Article";
-import { FormInstance } from "antd/lib/form";
+} from 'utils/index';
+import './index.scss';
+import { Modal, notification } from 'antd';
+import ArticleInfo from 'components/ArticleCreate/ArticleInfo/index';
+// import PicturesWall from "components/Upload/index";
+import ArticleControl from 'components/ArticleCreate/ArticleControl/index';
+import RichEditor from 'components/ArticleCreate/RichEditor/index';
+import MarkdownEditor from 'components/ArticleCreate/MarkdownEditor/index';
+import { articleProps } from 'types/Article';
+import { FormInstance } from 'antd/lib/form';
 interface IState {
 	isRichEditor: boolean;
 	content: string;
@@ -27,22 +27,18 @@ class ArticleCreate extends Component<any, IState> {
 		isRichEditor: true,
 
 		// 与文章相关的数据
-		content: "", // html格式的内容，展示于前端网站中 保存至数据库
-		previewContent: "", // html格式的内容，在后台预览 不用保存至数据库
+		content: '', // html格式的内容，展示于前端网站中 保存至数据库
+		previewContent: '', // html格式的内容，在后台预览 不用保存至数据库
 		isPreview: false,
-		coverUrl: "",
+		coverUrl: '',
 	};
 	richEditorRef: React.RefObject<RichEditor> = React.createRef<RichEditor>();
-	markdownEditorRef: React.RefObject<MarkdownEditor> = React.createRef<
-		MarkdownEditor
-	>();
-	articleInfoRef: React.RefObject<ArticleInfo> = React.createRef<
-		ArticleInfo
-	>();
+	markdownEditorRef: React.RefObject<MarkdownEditor> = React.createRef<MarkdownEditor>();
+	articleInfoRef: React.RefObject<ArticleInfo> = React.createRef<ArticleInfo>();
 	componentDidMount() {
-		console.log("====================================");
+		console.log('====================================');
 		console.log(this.props.history);
-		console.log("====================================");
+		console.log('====================================');
 		if (this.props.isEdited) {
 			// api
 		}
@@ -63,7 +59,7 @@ class ArticleCreate extends Component<any, IState> {
 	onPreview = () => {
 		this.setState({
 			isPreview: true,
-			previewContent: getLocalStorage("rich_text"),
+			previewContent: getLocalStorage('rich_text'),
 		});
 	};
 	// TODO: 获取当前使用的编辑器，富文本或markdown
@@ -108,7 +104,7 @@ class ArticleCreate extends Component<any, IState> {
 						message: status,
 						duration: 1,
 						style: {
-							cursor: "pointer",
+							cursor: 'pointer',
 						},
 					});
 				},
@@ -129,14 +125,14 @@ class ArticleCreate extends Component<any, IState> {
 		let currentEditor = this.getCurrentEditor();
 		// 清空编辑器
 		if (isRichEditor) {
-			currentEditor.txt.text("写点东西吧...");
-			removeLocalStorage("rich_text"); // 富文本编辑器的缓存内容
+			currentEditor.txt.text('写点东西吧...');
+			removeLocalStorage('rich_text'); // 富文本编辑器的缓存内容
 		} else {
-			removeLocalStorage("smde_marked_text"); // markdown编辑器的缓存内容
-			currentEditor.value("");
+			removeLocalStorage('smde_marked_text'); // markdown编辑器的缓存内容
+			currentEditor.value('');
 		}
 		this.articleInfoRef.current?.getFormInstance()?.resetFields();
-		removeLocalStorage("article_sub_info");
+		removeLocalStorage('article_sub_info');
 	};
 	// 获取上传的图片信息
 	getUploadData = (fileList) => {
@@ -150,18 +146,18 @@ class ArticleCreate extends Component<any, IState> {
 					title="预览文章"
 					visible={isPreview}
 					onOk={this.handleOk}
-					onCancel={this.handleCancel}
-				>
+					onCancel={this.handleCancel}>
 					<div
-						dangerouslySetInnerHTML={{ __html: previewContent }}
-					></div>
+						dangerouslySetInnerHTML={{
+							__html: previewContent,
+						}}></div>
 				</Modal>
 				<ArticleInfo ref={this.articleInfoRef} />
 				<div className="article-cover">
-					<PicturesWall
+					{/* <PicturesWall
 						getUploadData={this.getUploadData}
 						placehloder="上传文章封面"
-					/>
+					/> */}
 				</div>
 				<ArticleControl
 					clearAllContent={this.clearAllContent}
