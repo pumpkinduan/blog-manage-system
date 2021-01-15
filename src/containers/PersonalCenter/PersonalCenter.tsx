@@ -14,7 +14,7 @@ enum ActiveKeys {
 const PersonalCenter = () => {
 	const history = useHistory<HistoryType>();
 	const defaultActiveKey =
-		history.location.state?.activeKey || ActiveKeys.MOMENTS;
+		history.location.state?.activeKey || ActiveKeys.SETTINGS;
 	return (
 		<Tabs defaultActiveKey={defaultActiveKey}>
 			<TabPane tab="个人动态" key={ActiveKeys.MOMENTS}>
