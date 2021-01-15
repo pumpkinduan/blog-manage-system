@@ -5,11 +5,12 @@ const initialState: UserInterface.ADMIN = {
     type: UserInterface.USER_TYPE.ADMIN,
     username: 'Pumpkin',
     email: 'duanzz@ursalink.com',
+    avatar: '',
     profiles: {
         nickname: '伊内个南瓜瓜',
         github: '',
         brief: '',
-        notice: ''
+        notice: '',
     }
 
 }
