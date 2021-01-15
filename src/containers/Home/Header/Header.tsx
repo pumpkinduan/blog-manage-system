@@ -21,13 +21,13 @@ import {
 import { setFullScreenStatus, createRandomColor } from 'utils';
 import CustomInput from 'common/Input';
 import { useSelector } from 'react-redux';
-import { StoreStateType } from 'redux/reducers';
+import { RootState } from 'redux/reducers';
 import { MessageList } from './MessageList';
 import './style.scss';
 export const Header = () => {
 	const history = useHistory();
 	const adminInfo = useSelector(
-		(storeState: StoreStateType) => storeState.adminInfo
+		(storeState: RootState) => storeState.adminInfo
 	);
 	// 留言消息数据
 	let [data, setData] = useState([
