@@ -3,8 +3,14 @@ import { store } from 'redux/store'
 import { controlGlobalLoading } from 'redux/actionCreators/index'
 import { ResultInterface } from "interfaces/index.interface";
 import { message } from "antd";
+
+// 接口前缀
+const api_prefix = 'v1';
+// 服务器地址
+const baseURL = process.env.NODE_ENV === "production" ? "http://pumpkinduan.cn:3000" : "http://127.0.0.1:5000";
+
 //进行全局的默认配置
-axios.defaults.baseURL = process.env.NODE_ENV === "production" ? "http://pumpkinduan.cn:3000" : "http://127.0.0.1:5000/v1";
+axios.defaults.baseURL = baseURL;
 axios.defaults.timeout = 10000;
 // 添加请求拦截器
 // let reqCount = 0; //记录请求次数，处理并发请求
@@ -61,28 +67,29 @@ axios.interceptors.response.use(
 
 //封装get和post请求
 export default {
+    baseURL,
+    api_prefix,
     async get<Data = any>(path, params = {}): Promise<ResultInterface<Data>> {
         const response = await axios
-            .get(path, {
+            .get(api_prefix + path, {
                 params
             })
         return response.data;
     },
     async post<Data = any>(path, data): Promise<ResultInterface<Data>> {
-        const response = await axios.post(path, data);
+        const response = await axios.post(api_prefix + path, data);
         return response.data;
     },
     async put(path, data): Promise<ResultInterface> {
-        const response = await axios.put(path, data);
+        const response = await axios.put(api_prefix + path, data);
         return response.data;
     },
     async delete(path, params = {}): Promise<ResultInterface> {
         const response = await axios
-            .delete(path, {
+            .delete(api_prefix + path, {
                 params
             });
         return response.data;
-
     },
     all(promises) {
         return new Promise((resolve, reject) => {

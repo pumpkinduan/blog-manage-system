@@ -1,12 +1,12 @@
 import React from 'react';
 import { Spin } from 'antd';
 import { useSelector } from 'react-redux';
-import { StoreStateType } from 'redux/reducers';
+import { RootState } from 'redux/reducers';
 import './index.scss';
 
 export const GlobalLoading = () => {
 	const globalLoading = useSelector(
-		(store: StoreStateType) => store.globalLoading
+		(store: RootState) => store.globalLoading
 	);
 	return (
 		<Spin

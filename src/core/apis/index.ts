@@ -20,7 +20,7 @@ export const deleteComment = async (id: string) => await server.delete(`/comment
 // user
 export const getUsers = async (params: Params & { type: UserInterface.USER_TYPE } = { pageSize: 10, page: 1, type: UserInterface.USER_TYPE.NORMAL }) => await server.get<User[]>('/users', params);
 
-export const getUserProfile = async () => await server.get<User>('users/profile');
+export const getUserProfile = async () => await server.get<User>('/users/profile');
 
 export const createUser = async (data: UserInterface.CreateUser) => await server.post('/users', data);
 
@@ -43,5 +43,7 @@ export const getPhotos = async (params: Params & { type: PhotoInterface.PHOTO_TY
 
 // post
 export * from './post'
+
+export { default as server } from './server'
 
 
