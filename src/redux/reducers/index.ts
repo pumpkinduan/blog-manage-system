@@ -6,4 +6,4 @@ export const appReducer = combineReducers({
     globalLoading: controlGlobalLoading,
     adminInfo: initAdminInfo
 })
-export type StoreStateType = ReturnType<typeof appReducer>;
+export type RootState = ReturnType<typeof appReducer>;

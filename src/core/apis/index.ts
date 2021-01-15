@@ -24,7 +24,7 @@ export const getUserProfile = async () => await server.get<User>('users/profile'
 
 export const createUser = async (data: UserInterface.CreateUser) => await server.post('/users', data);
 
-export const updateAdminProfile = async (id: string, data: UserInterface.AdminProfiles) => await server.put(`/users/admin/${id}`, data);
+export const updateAdminProfile = async (data: UserInterface.AdminProfiles) => await server.put(`/users/admin`, data);
 
 export const deleteUser = async (id: string) => await server.delete(`/users/${id}`);
 
