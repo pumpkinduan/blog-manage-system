@@ -3,6 +3,7 @@ import { INIT_ADMIN_INFO, ActionResultInterface } from 'redux/actionTypes';
 
 const initialState: UserInterface.ADMIN = {
     type: UserInterface.USER_TYPE.ADMIN,
+    id: 1,
     username: 'Pumpkin',
     email: 'duanzz@ursalink.com',
     avatar: '',

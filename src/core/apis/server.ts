@@ -7,7 +7,7 @@ import { message } from "antd";
 // 接口前缀
 const api_prefix = 'v1';
 // 服务器地址
-const baseURL = process.env.NODE_ENV === "production" ? "http://pumpkinduan.cn:3000" : "http://127.0.0.1:5000";
+const baseURL = process.env.NODE_ENV === "production" ? "http://pumpkinduan.cn:3000/" : "http://127.0.0.1:5000/";
 
 //进行全局的默认配置
 axios.defaults.baseURL = baseURL;

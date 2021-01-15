@@ -19,6 +19,7 @@ export interface AdminProfiles {
 	notice?: string;
 }
 export interface ADMIN extends Record<'username' | 'email', string> {
+	id: number;
 	type: USER_TYPE.ADMIN;
 	avatar: string;
 	profiles?: AdminProfiles;
