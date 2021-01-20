@@ -53,6 +53,14 @@ axios.interceptors.response.use(
             return Promise.reject({});
         }
 
+        if (response.status === 401) {
+            // token 过期，失效，请重新登录
+            message.error(response.data.message);
+            localStorage.removeItem('accessToken');
+            window.location.href = '/login';
+            return Promise.reject();
+        }
+
         if (Array.isArray(response.data.message)) {
             response.data.message.forEach((msg) => {
                 message.error(msg);
