@@ -11,7 +11,7 @@ export const GlobalLoading = () => {
 	return (
 		<Spin
 			className="loading-container"
-			delay={200}
+			delay={300}
 			spinning={globalLoading.status === 'end' ? false : true}
 			size="large"
 		/>
