@@ -25,10 +25,10 @@ const formItems = [
 		label: '昵称',
 	},
 	{
-		name: 'nickname',
+		name: 'email',
 		customValidator: validateEmail,
 		nonErrMessage: '请输入您的邮箱',
-		label: '昵称',
+		label: '邮箱',
 	},
 	{
 		name: 'github',
