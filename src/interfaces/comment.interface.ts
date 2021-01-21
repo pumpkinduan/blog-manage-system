@@ -3,6 +3,12 @@ type User = {
     username: string;
 }
 type Reply = Pick<BasicComment, 'id' | 'createdAt' | 'content'> & { targetUser: User; sourceUser: User };
+
+export enum COMMENT_TYPE {
+    POST = 'POST',
+    ADMIN = 'ADMIN',
+    ALL = 'ALL'
+}
 export interface BasicComment {
     id: string;
     content: string;

@@ -1,9 +1,10 @@
+import { COMMENT_TYPE } from 'interfaces/comment.interface';
 import { UserInterface, CommentInterface, PhotoInterface } from 'interfaces/index.interface';
 import server from './server';
 
 type User = UserInterface.ADMIN | UserInterface.NORMAL
 const defaultParam: Params = { page: 1, pageSize: 10 }
-export type Params = { page: number, pageSize: number }
+export type Params = { page?: number, pageSize?: number }
 
 // 登录与注册
 export const login = async (data: UserInterface.loginInterface) => await server.post<{ accessToken: string }>('/login', data);
@@ -11,11 +12,11 @@ export const login = async (data: UserInterface.loginInterface) => await server.
 export const register = async (data: UserInterface.CreateUser) => await server.post('/register', data);
 
 // comment
-export const getComments = async (params = defaultParam) => await server.get<CommentInterface.BasicComment[]>('/comments', params);
+export const getComments = async (params: Params & { type?: COMMENT_TYPE } = defaultParam) => await server.get<CommentInterface.BasicComment[]>('/comments', params);
 
 export const createComment = async (data: CommentInterface.CreateComment) => await server.post<CommentInterface.BasicComment>('/comments/create', data);
 
-export const deleteComment = async (id: string) => await server.delete(`/comments/${id}`);
+export const deleteComments = async (ids: string) => await server.delete(`/comments/${ids}`);
 
 // user
 export const getUsers = async (params: Params & { type: UserInterface.USER_TYPE } = { pageSize: 10, page: 1, type: UserInterface.USER_TYPE.NORMAL }) => await server.get<User[]>('/users', params);

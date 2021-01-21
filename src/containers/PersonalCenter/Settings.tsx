@@ -14,7 +14,7 @@ import { BasicUpload } from 'components/BasicUpload';
 
 const formItemLayout = {
 	labelCol: { span: 2 },
-	wrapperCol: { span: 10 },
+	wrapperCol: { md: 8, sm: 12, lg: 6 },
 };
 
 const formItems = [
@@ -51,10 +51,8 @@ export const Settings = () => {
 		const editor = markdownEditorRef.current?.editor;
 		return editor?.markdown(editor.value()); //markdown格式==>html格式
 	};
-	console.log('adminInfo', adminInfo);
-
 	// 保存信息
-	const save = async () => {
+	const handleOnSave = async () => {
 		const mdContent = getContentOnEditor();
 		if (!mdContent) return;
 		const profiles = (await form.validateFields()) as AdminProfiles;
@@ -81,15 +79,28 @@ export const Settings = () => {
 		<div>
 			<Form form={form} {...formItemLayout} labelAlign="left">
 				{formItems.map((item, index) => (
-					<BasicFormItem
-						key={index}
-						{...item}
-						wrapperCol={{ md: 10, span: 6, lg: 4 }}
-					/>
+					<BasicFormItem key={index} {...item} />
 				))}
 			</Form>
-			<Row align="middle" gutter={10} style={{ margin: '15px 0' }}>
-				<Col>
+			<Form.Item
+				labelCol={formItemLayout.labelCol}
+				labelAlign="left"
+				label="关于我"
+				required>
+				<MarkdownEditor
+					ref={markdownEditorRef}
+					content={adminInfo.profiles?.brief}
+				/>
+			</Form.Item>
+			<Button
+				shape="round"
+				type="primary"
+				onClick={handleOnSave}
+				style={{ position: 'relative', top: '-40px' }}>
+				保存
+			</Button>
+			<Row>
+				{/* <Col>
 					<BasicUpload
 						listType="picture"
 						key="upload"
@@ -100,21 +111,9 @@ export const Settings = () => {
 							userId: adminInfo.id,
 						}}
 					/>
-				</Col>
-				<Col>
-					<Button shape="round" type="primary" onClick={save}>
-						保存
-					</Button>
-				</Col>
+				</Col> */}
+				<Col></Col>
 			</Row>
-			<Form.Item
-				label="关于我"
-				required
-				style={{ marginBottom: '10px' }}></Form.Item>
-			<MarkdownEditor
-				ref={markdownEditorRef}
-				content={adminInfo.profiles?.brief}
-			/>
 		</div>
 	);
 };
