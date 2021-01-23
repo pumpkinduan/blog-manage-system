@@ -1,20 +1,20 @@
-import React from 'react';
-import { Tabs } from 'antd';
-import { Moments, Settings, Words } from './';
-import { useHistory } from 'react-router';
+import React from "react";
+import { Tabs } from "antd";
+import { Moments, Settings, Words } from "./";
+import { useHistory } from "react-router";
 
 const { TabPane } = Tabs;
 
 type HistoryType = { activeKey: ActiveKeys };
 enum ActiveKeys {
-	MOMENTS = 'moments',
-	SETTINGS = 'settings',
-	WORDS = 'words',
+	MOMENTS = "moments",
+	SETTINGS = "settings",
+	WORDS = "words",
 }
 const PersonalCenter = () => {
 	const history = useHistory<HistoryType>();
 	const defaultActiveKey =
-		history.location.state?.activeKey || ActiveKeys.SETTINGS;
+		history.location.state?.activeKey || ActiveKeys.MOMENTS;
 	return (
 		<Tabs defaultActiveKey={defaultActiveKey}>
 			<TabPane tab="个人动态" key={ActiveKeys.MOMENTS}>
