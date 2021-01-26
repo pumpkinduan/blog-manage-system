@@ -1,18 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
-import { List, Tag, Space, Spin } from "antd";
-import { TeamOutlined, LikeOutlined, CommentOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import { STATUS, PostStatus, BasicPost } from "interfaces/post.interface";
-import { getPostLists } from "core/apis";
-import dayjs from "dayjs";
-import InfiniteScroll from "react-infinite-scroller";
-import styled from "styled-components";
+import React, { useEffect, useState, useRef } from 'react';
+import { List, Tag, Space, Spin } from 'antd';
+import { TeamOutlined, LikeOutlined, CommentOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
+import { STATUS, PostStatus, BasicPost } from 'interfaces/post.interface';
+import { getPostLists } from 'core/apis';
+import dayjs from 'dayjs';
+import InfiniteScroll from 'react-infinite-scroller';
+import styled from 'styled-components';
 const { Item } = List;
 const { Meta } = Item;
 
 const Wrapper = styled.div`
 	overflow: auto;
-	height: 500px;
+	height: ${(props: { height: number }) => props.height + 'px'};
 `;
 
 const Footer = styled.footer`
@@ -62,14 +62,13 @@ export const Moments = () => {
 		requestData(++ref.current.page);
 	};
 	return (
-		<Wrapper>
+		<Wrapper height={window.innerHeight - 100 - 44 - 46 - 60}>
 			<InfiniteScroll
 				initialLoad={false}
 				pageStart={0}
 				loadMore={handleLoadMore}
 				hasMore={!loading && hasMore}
-				useWindow={false}
-			>
+				useWindow={false}>
 				<Spin spinning={loading} delay={300}>
 					<List
 						itemLayout="vertical"
@@ -90,26 +89,24 @@ export const Moments = () => {
 										icon={<TeamOutlined />}
 										text={item.browsers}
 									/>,
-								]}
-							>
+								]}>
 								<Meta
 									description={<Tags tags={item.tags} />}
 									title={
 										<Link
 											to={{
-												pathname: "articleCreate",
+												pathname: 'articleCreate',
 												state: { id: item.id },
-											}}
-										>
+											}}>
 											{item.title}
 										</Link>
 									}
 								/>
 								<>
-									<section style={{ marginBottom: "10px" }}>
+									<section style={{ marginBottom: '10px' }}>
 										{item.description}
 									</section>
-									<p style={{ fontSize: "12px" }}>
+									<p style={{ fontSize: '12px' }}>
 										<b className="author">{item.author}</b>
 										<Tag color="volcano">
 											{dayjs(item.createdAt).fromNow()}
