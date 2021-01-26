@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { replyItemProps } from 'types/Comment';
-import { AdvancedTable } from 'components/CutomTable';
-import { SearchInput } from 'components/CutomTable/components';
+import { BaseTable } from 'components/CutomTable';
 import { ColumnType } from 'antd/lib/table';
 import FooterControl from 'components/Comment/FooterControl';
 import { message } from 'antd';
@@ -9,8 +8,12 @@ import { getComments, deleteComments } from 'core/apis';
 import { BasicComment, COMMENT_TYPE } from 'interfaces/comment.interface';
 import dayjs from 'dayjs';
 export const Words = () => {
+	const [pagination, setPagination] = useState({
+		current: 1,
+		pageSize: 15,
+		total: 0,
+	});
 	const [visibleFooter, setVisibleFooter] = useState(false);
-	const [searchValue, setSearchValue] = useState('');
 	const [dataSource, setDataSource] = useState<BasicComment[]>([]);
 	const [selectedRows, setSelectedRows] = useState<BasicComment[]>([]);
 
@@ -34,12 +37,16 @@ export const Words = () => {
 		},
 	];
 
-	const requestData = useCallback(async () => {
-		const res = await getComments({ type: COMMENT_TYPE.ADMIN });
+	const requestData = useCallback(async (current = 1) => {
+		const res = await getComments({
+			type: COMMENT_TYPE.ADMIN,
+			page: current,
+			pageSize: 15,
+		});
+		setPagination({ ...pagination, current, total: res.sum });
 		setDataSource(res.data);
 		setSelectedRows([]);
 	}, []);
-
 	useEffect(() => {
 		requestData();
 	}, [requestData]);
@@ -63,31 +70,24 @@ export const Words = () => {
 			setSelectedRows(selectedRows);
 		},
 	};
-	let filteredDataSource = dataSource;
-	if (searchValue !== '') {
-		filteredDataSource = dataSource.filter(
-			(data) =>
-				data.sourceUser.username.includes(searchValue) ||
-				data.content.includes(searchValue)
-		);
-	}
 	return (
-		<AdvancedTable
-			headerControllerConfig={[
-				{
-					type: 'search',
-					component: (
-						<SearchInput
-							onSearchChange={(value) => {
-								setSearchValue(value);
-							}}
-						/>
-					),
-				},
-			]}
+		<BaseTable
+			onChange={(_pagination) => {
+				requestData(_pagination.current);
+			}}
+			pagination={pagination}
+			scroll={{
+				y:
+					window.innerHeight -
+					100 -
+					46 -
+					44 -
+					40 -
+					(visibleFooter ? 160 : 120),
+			}}
 			rowSelection={rowSelection}
 			rowKey={(record: replyItemProps) => record.id}
-			dataSource={filteredDataSource}
+			dataSource={dataSource}
 			columns={columns}
 			footer={() => (
 				<FooterControl

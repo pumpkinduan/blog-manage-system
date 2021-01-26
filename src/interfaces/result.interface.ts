@@ -4,4 +4,5 @@ export interface ResultInterface<D = any> {
     message?: string;
     success: boolean;
     data: D;
+    sum: number
 }
