@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^4.10.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-eslint": "10.1.0",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.1.0",
