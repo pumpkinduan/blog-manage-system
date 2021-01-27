@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { replyItemProps } from 'types/Comment';
 import { BaseTable } from 'components/CutomTable';
 import { ColumnType } from 'antd/lib/table';
-import FooterControl from 'components/Comment/FooterControl';
+import FooterControl from '../Comment/FooterControl';
 import { message } from 'antd';
 import { getComments, deleteComments } from 'core/apis';
 import { BasicComment, COMMENT_TYPE } from 'interfaces/comment.interface';

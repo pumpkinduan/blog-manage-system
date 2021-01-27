@@ -3,7 +3,7 @@ import { Badge, Popover, Modal, message } from 'antd';
 import { SoundOutlined } from '@ant-design/icons';
 import { ColumnType } from 'antd/lib/table';
 import FooterControl from './FooterControl';
-import { BasicComment, Reply } from 'interfaces/comment.interface';
+import { BasicComment } from 'interfaces/comment.interface';
 import dayjs from 'dayjs';
 import { AdvancedTable } from 'components/CutomTable';
 import { SearchInput } from 'components/CutomTable/components';

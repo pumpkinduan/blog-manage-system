@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Row, Col, Modal } from 'antd';
 interface IProps {
 	selectedCount: number;
@@ -20,8 +20,7 @@ const FooterControl = ({
 		<Row
 			align="middle"
 			justify="space-between"
-			style={{ display: visible ? 'flex' : 'none' }}
-		>
+			style={{ display: visible ? 'flex' : 'none' }}>
 			<Col>
 				已选中{<span className="count">{selectedCount}</span>}条回复
 			</Col>
@@ -29,8 +28,7 @@ const FooterControl = ({
 				<Button
 					className="delete-btn"
 					type="primary"
-					onClick={handleDelete}
-				>
+					onClick={handleDelete}>
 					删除
 				</Button>
 			</Col>
