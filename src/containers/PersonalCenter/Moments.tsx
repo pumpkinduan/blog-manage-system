@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { List, Tag, Space } from 'antd';
 import { TeamOutlined, LikeOutlined, CommentOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
@@ -27,14 +27,14 @@ export const Moments = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 	const [hasMore, setHasMore] = useState<boolean>(true);
 
-	const requestData = async (page = 1) => {
+	const requestData = useCallback(async (page = 1) => {
 		const result = await getPostLists({ page, pageSize: 10 });
 		if (result.data.length < 10) {
 			setHasMore(false);
 		}
 		setLoading(false);
 		setDatasouce((dataSource) => [...dataSource, ...result.data]);
-	};
+	}, []);
 
 	useEffect(() => {
 		requestData();

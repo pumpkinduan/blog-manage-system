@@ -1,8 +1,9 @@
 type User = {
     id: string;
     username: string;
+    avatar: string;
 }
-type Reply = Pick<BasicComment, 'id' | 'createdAt' | 'content'> & { targetUser: User; sourceUser: User };
+export type Reply = Pick<BasicComment, 'id' | 'createdAt' | 'content'> & { targetUser: User; sourceUser: User };
 
 export enum COMMENT_TYPE {
     POST = 'POST',

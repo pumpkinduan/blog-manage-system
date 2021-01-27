@@ -49,7 +49,7 @@ export const Words = () => {
 	}, []);
 	useEffect(() => {
 		requestData();
-	}, [requestData]);
+	}, []);
 	const controlVisibleFooter = (selectedRowkeys) => {
 		if (selectedRowkeys.length > 0) return setVisibleFooter(true);
 		setVisibleFooter(false);
@@ -57,6 +57,7 @@ export const Words = () => {
 	// 删除所选的回复
 	const handleOnDelete = async () => {
 		await deleteComments(selectedRows.map((data) => data.id).join(','));
+		setVisibleFooter(false);
 		message.success('删除成功');
 		await requestData();
 	};

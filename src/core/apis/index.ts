@@ -18,6 +18,8 @@ export const createComment = async (data: CommentInterface.CreateComment) => awa
 
 export const deleteComments = async (ids: string) => await server.delete(`/comments/${ids}`);
 
+export const deleteReplies = async (ids: string) => await server.delete(`/reply/${ids}`);
+
 // user
 export const getUsers = async (params: Params & { type: UserInterface.USER_TYPE } = { pageSize: 10, page: 1, type: UserInterface.USER_TYPE.NORMAL }) => await server.get<User[]>('/users', params);
 
