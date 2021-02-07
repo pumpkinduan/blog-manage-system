@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import {
 	getLocalStorage,
 	setLocalStorage,
-	removeLocalStorage,
+	removeLocalStorage
 } from 'utils/index';
 import './index.scss';
 import { Modal, notification } from 'antd';
 import ArticleInfo from 'components/ArticleCreate/ArticleInfo/index';
 // import PicturesWall from "components/Upload/index";
 import ArticleControl from 'components/ArticleCreate/ArticleControl/index';
-import RichEditor from 'components/ArticleCreate/RichEditor/index';
+// import RichEditor from 'components/ArticleCreate/RichEditor/index';
+import { RichEditor } from 'components/Editor';
 import MarkdownEditor from 'components/ArticleCreate/MarkdownEditor/index';
 import { articleProps } from 'types/Article';
 import { FormInstance } from 'antd/lib/form';
@@ -30,9 +31,9 @@ class ArticleCreate extends Component<any, IState> {
 		content: '', // html格式的内容，展示于前端网站中 保存至数据库
 		previewContent: '', // html格式的内容，在后台预览 不用保存至数据库
 		isPreview: false,
-		coverUrl: '',
+		coverUrl: ''
 	};
-	richEditorRef: React.RefObject<RichEditor> = React.createRef<RichEditor>();
+	richEditorRef: any = React.createRef();
 	markdownEditorRef: React.RefObject<MarkdownEditor> = React.createRef<MarkdownEditor>();
 	articleInfoRef: React.RefObject<ArticleInfo> = React.createRef<ArticleInfo>();
 	componentDidMount() {
@@ -46,25 +47,26 @@ class ArticleCreate extends Component<any, IState> {
 	// 控制预览的模态框显示
 	handleOk = (e) => {
 		this.setState({
-			isPreview: false,
+			isPreview: false
 		});
 	};
 	// 控制预览的模态框显示
 	handleCancel = (e) => {
 		this.setState({
-			isPreview: false,
+			isPreview: false
 		});
 	};
 	// 显示预览的模态框
 	onPreview = () => {
 		this.setState({
 			isPreview: true,
-			previewContent: getLocalStorage('rich_text'),
+			previewContent: getLocalStorage('rich_text')
 		});
 	};
 	// TODO: 获取当前使用的编辑器，富文本或markdown
 	getCurrentEditor = () => {
-		if (this.state.isRichEditor) return this.richEditorRef.current?.editor;
+		if (this.state.isRichEditor)
+			return this.richEditorRef.current?.getEditorInstance();
 		return this.markdownEditorRef.current?.editor;
 	};
 	// TODO: 获取在编辑器中写的内容
@@ -94,7 +96,7 @@ class ArticleCreate extends Component<any, IState> {
 					let data = Object.assign(vals, {
 						content,
 						status,
-						coverUrl,
+						coverUrl
 					});
 
 					// post data
@@ -104,8 +106,8 @@ class ArticleCreate extends Component<any, IState> {
 						message: status,
 						duration: 1,
 						style: {
-							cursor: 'pointer',
-						},
+							cursor: 'pointer'
+						}
 					});
 				},
 				(err) => {
@@ -116,7 +118,7 @@ class ArticleCreate extends Component<any, IState> {
 	// 切换编辑器
 	toggleEditor = () => {
 		this.setState({
-			isRichEditor: !this.state.isRichEditor,
+			isRichEditor: !this.state.isRichEditor
 		});
 	};
 	// 清空文章信息
@@ -149,7 +151,7 @@ class ArticleCreate extends Component<any, IState> {
 					onCancel={this.handleCancel}>
 					<div
 						dangerouslySetInnerHTML={{
-							__html: previewContent,
+							__html: previewContent
 						}}></div>
 				</Modal>
 				<ArticleInfo ref={this.articleInfoRef} />

@@ -15,19 +15,9 @@
 .w-e-error {
 	.w-e-text-container {
 		border: 2px solid $red1 !important;
+		.placeholder {
+			left: 0;
+			top: 0;
+		}
 	}
-
-	.placeholder {
-		font-weight: bold;
-		color: $red1;
-		visibility: visible;
-	}
-}
-
-.placeholder {
-	visibility: hidden;
-	position: absolute;
-	top: 40px;
-	left: 0;
-	padding: 10px 0 0 11px;
 }

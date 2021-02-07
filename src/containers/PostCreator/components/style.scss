@@ -1,0 +1,27 @@
+.article-controls {
+	width: 100%;
+	padding: 20px 0;
+	.btn {
+		margin-right: 10px;
+		color: #fff;
+		padding: 10px;
+		border-radius: 3px;
+		font-size: 16px;
+		cursor: pointer;
+
+		&:hover {
+			opacity: 0.66;
+		}
+	}
+	.switch-btn {
+		background: rgb(236, 118, 136);
+	}
+
+	.post-btn {
+		background: #13ce66;
+	}
+
+	.draft-btn {
+		background: #ffba00;
+	}
+}

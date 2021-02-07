@@ -1,13 +1,13 @@
-import { Layout, Menu } from "antd";
-import React from "react";
+import { Layout, Menu } from 'antd';
+import React from 'react';
 import {
 	UserOutlined,
 	RadarChartOutlined,
 	MessageOutlined,
-	ProfileOutlined,
-} from "@ant-design/icons";
-import "./index.scss";
-import { NavLink } from "react-router-dom";
+	ProfileOutlined
+} from '@ant-design/icons';
+import './index.scss';
+import { NavLink } from 'react-router-dom';
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 interface siderLinkProps {
@@ -19,41 +19,41 @@ interface siderLinkProps {
 }
 const siderLinks = [
 	{
-		id: "1",
-		title: "DashBoard",
+		id: '1',
+		title: 'DashBoard',
 		icon: <RadarChartOutlined />,
-		path: "/dashboard",
+		path: '/dashboard'
 	},
 	{
-		id: "2",
+		id: '2',
 		icon: <ProfileOutlined />,
-		title: "文章管理",
-		path: "/article",
+		title: '文章管理',
+		path: '/article',
 		subSiderLinks: [
 			{
-				id: "21",
-				title: "文章列表",
-				path: "/articleList",
+				id: '21',
+				title: '文章列表',
+				path: '/articleList'
 			},
 			{
-				id: "22",
-				title: "文章创建",
-				path: "/articleCreate",
-			},
-		],
+				id: '22',
+				title: '文章创建',
+				path: '/postCreator'
+			}
+		]
 	},
 	{
-		id: "3",
+		id: '3',
 		icon: <MessageOutlined />,
-		title: "留言",
-		path: "/comment",
+		title: '留言',
+		path: '/comment'
 	},
 	{
-		id: "4",
+		id: '4',
 		icon: <UserOutlined />,
-		title: "个人中心",
-		path: "/personalCenter",
-	},
+		title: '个人中心',
+		path: '/personalCenter'
+	}
 ];
 interface IProps {
 	addTag: (subItem) => void;
@@ -72,8 +72,8 @@ class SiderBar extends React.PureComponent<IProps> {
 		const defaultOpenKeys = activeItem && [activeItem.id]; // 展开的下拉项
 		const defaultSelectedKeys =
 			(activeSubItem && [activeSubItem.id]) || defaultOpenKeys; // 当前选中的项
-		console.log("defaultOpenKeys", defaultOpenKeys);
-		console.log("defaultSelectedKeys", defaultSelectedKeys);
+		console.log('defaultOpenKeys', defaultOpenKeys);
+		console.log('defaultSelectedKeys', defaultSelectedKeys);
 
 		return (
 			<div className="wrapper">
@@ -81,29 +81,25 @@ class SiderBar extends React.PureComponent<IProps> {
 					theme="light"
 					collapsible={true}
 					collapsedWidth={2}
-					className="override-ant-layout-sider"
-				>
+					className="override-ant-layout-sider">
 					<Menu
 						mode="inline"
 						defaultOpenKeys={defaultOpenKeys || []}
-						defaultSelectedKeys={defaultSelectedKeys || []}
-					>
+						defaultSelectedKeys={defaultSelectedKeys || []}>
 						{siderLinks.map((item) => {
 							return item.subSiderLinks ? (
 								<SubMenu
 									popupClassName="override-submenu"
 									key={item.id}
 									icon={item.icon}
-									title={item.title}
-								>
+									title={item.title}>
 									{item.subSiderLinks.map((subItem) => {
 										return (
 											<Menu.Item
 												key={subItem.id}
 												onClick={() => {
 													addTag(subItem);
-												}}
-											>
+												}}>
 												<NavLink to={subItem.path}>
 													{subItem.title}
 												</NavLink>
@@ -117,8 +113,7 @@ class SiderBar extends React.PureComponent<IProps> {
 									key={item.id}
 									onClick={() => {
 										addTag(item);
-									}}
-								>
+									}}>
 									<NavLink to={item.path}>
 										{item.title}
 									</NavLink>
