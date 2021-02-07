@@ -1,44 +1,41 @@
-import React, { useEffect } from "react";
-import { Upload, Button, Row, Col, message } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import BasicFormItem from "common/BasicFormItem";
-import { Form } from "antd";
-import { validateNickName, validateEmail } from "utils/validators";
-import MarkdownEditor from "components/ArticleCreate/MarkdownEditor";
-import { updateAdminProfile, server } from "core/apis";
-import { AdminProfiles } from "interfaces/user.interface";
-import { useSelector } from "react-redux";
-import { RootState } from "redux/reducers";
-import { PhotoInterface } from "interfaces/index.interface";
-import { BasicUpload } from "components/BasicUpload";
+import React, { useEffect } from 'react';
+import { Button, message } from 'antd';
+import BasicFormItem from 'common/BasicFormItem';
+import { Form } from 'antd';
+import { validateNickName, validateEmail } from 'utils/validators';
+import MarkdownEditor from 'components/ArticleCreate/MarkdownEditor';
+import { updateAdminProfile, server } from 'core/apis';
+import { AdminProfiles } from 'interfaces/user.interface';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/reducers';
 
 const formItemLayout = {
 	labelCol: { span: 2 },
-	wrapperCol: { md: 8, sm: 12, lg: 6 },
+	wrapperCol: { md: 8, sm: 12, lg: 6 }
 };
 
 const formItems = [
 	{
-		name: "nickname",
+		name: 'nickname',
 		customValidator: validateNickName,
-		nonErrMessage: "请输入您的昵称",
-		label: "昵称",
+		nonErrMessage: '请输入您的昵称',
+		label: '昵称'
 	},
 	{
-		name: "email",
+		name: 'email',
 		customValidator: validateEmail,
-		nonErrMessage: "请输入您的邮箱",
-		label: "邮箱",
+		nonErrMessage: '请输入您的邮箱',
+		label: '邮箱'
 	},
 	{
-		name: "github",
-		nonErrMessage: "请输入您的Github账号",
-		label: "Github",
+		name: 'github',
+		nonErrMessage: '请输入您的Github账号',
+		label: 'Github'
 	},
 	{
-		name: "notice",
-		label: "公告",
-	},
+		name: 'notice',
+		label: '公告'
+	}
 ];
 export const Settings = () => {
 	const [form] = Form.useForm();
@@ -69,7 +66,7 @@ export const Settings = () => {
 				nickname: profiles.nickname,
 				email: adminInfo.email,
 				github: profiles.github,
-				notice: profiles.notice,
+				notice: profiles.notice
 			});
 		};
 		initFormValues();
@@ -86,8 +83,7 @@ export const Settings = () => {
 				labelCol={formItemLayout.labelCol}
 				labelAlign="left"
 				label="关于我"
-				required
-			>
+				required>
 				<MarkdownEditor
 					ref={markdownEditorRef}
 					content={adminInfo.profiles?.brief}
@@ -97,25 +93,9 @@ export const Settings = () => {
 				shape="round"
 				type="primary"
 				onClick={handleOnSave}
-				style={{ position: "relative", top: "-40px" }}
-			>
+				style={{ position: 'relative', top: '-40px' }}>
 				保存
 			</Button>
-			<Row>
-				{/* <Col>
-					<BasicUpload
-						listType="picture"
-						key="upload"
-						name="file"
-						placehloder="更换头像"
-						data={{
-							type: PhotoInterface.PHOTO_TYPE.AVATAR,
-							userId: adminInfo.id,
-						}}
-					/>
-				</Col> */}
-				<Col></Col>
-			</Row>
 		</>
 	);
 };

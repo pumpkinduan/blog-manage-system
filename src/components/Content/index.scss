@@ -1,19 +1,21 @@
 .main-content {
-    position: relative;
-    transition: padding .3s;
-    margin-top: 100px;
-    box-shadow: 0 0 0 1px $purple1;
+	position: relative;
+	transition: padding 0.3s;
+	margin-top: 100px;
+	box-shadow: 0 0 0 1px $purple1;
+	height: auto;
+	overflow-y: scroll;
 }
 
 .tag-nav {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    background: #fff;
-    transition: padding .3s;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	background: #fff;
+	transition: padding 0.3s;
 }
 
 .wrapper-content {
-    margin-top: 10px;
+	margin-top: 10px;
 }
