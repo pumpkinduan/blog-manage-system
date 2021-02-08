@@ -2,10 +2,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import { RichEditor, Some_APIS } from 'components/Editor';
 import { PostProfile, PostProfileExposed } from './components/PostProfile';
 import { BasicUpload } from 'components/BasicUpload';
-import { notification, Tooltip } from 'antd';
+import { message, notification, Tooltip } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { STATUS } from 'interfaces/post.interface';
-import { createPost, deletePhoto, getPostDetail } from 'core/apis';
+import {
+	createPost,
+	deletePhotoByPath,
+	getPostDetail,
+	updatePost,
+	server
+} from 'core/apis';
 import { PHOTO_TYPE } from 'interfaces/photo.interface';
 import { PhotoInterface, ResultInterface } from 'interfaces/index.interface';
 import { useHistory } from 'react-router';
@@ -24,20 +30,24 @@ function getBase64(file): Promise<any> {
 const PostCreator = () => {
 	const refEditor = useRef<Some_APIS>();
 	const refPostProfile = useRef<PostProfileExposed>();
-	const ref = useRef<{ photoInfo: PhotoInterface.BasicPhoto | null }>({
-		photoInfo: null
+	const ref = useRef<{ photoPath: string }>({
+		photoPath: ''
 	});
-	const [imgBase64, setImgBase64] = useState('');
+	const [coverUrl, setCoverUrl] = useState('');
 
 	const history = useHistory<{ isEdited: boolean; postId: string }>();
-	console.log(history);
+	const isEdited = history.location.state?.isEdited;
+	const postId = history.location.state?.postId;
+	console.log(isEdited);
 
 	useEffect(() => {
 		/**
 		 * 编辑文章
 		 */
-		if (history.location.state.isEdited) {
-			getPostDetail(history.location.state.postId).then((result) => {
+		if (isEdited) {
+			getPostDetail(postId).then((result) => {
+				ref.current.photoPath = result.data.coverUrl;
+				setCoverUrl(server.baseURL + result.data.coverUrl);
 				refPostProfile.current
 					?.getFormInstance()
 					.setFieldsValue(
@@ -63,22 +73,20 @@ const PostCreator = () => {
 		const vals = await refPostProfile.current
 			?.getFormInstance()
 			?.validateFields();
-		const content = refEditor.current?.getEditorInstance().txt.text();
+		const html = refEditor.current?.getEditorInstance().txt.html();
 
 		const data = Object.assign(vals, {
-			content,
+			content: html,
 			status,
-			coverUrl: ref.current?.photoInfo?.path
+			coverUrl: ref.current?.photoPath
 		});
-		await createPost(data);
+		if (isEdited) {
+			await updatePost(postId, data);
+		} else {
+			await createPost(data);
+		}
 		handleReset();
-		notification.success({
-			message: status,
-			duration: 1,
-			style: {
-				cursor: 'pointer'
-			}
-		});
+		message.success(status + ' successfully');
 	};
 
 	/**
@@ -92,48 +100,52 @@ const PostCreator = () => {
 	const handleReset = () => {
 		refPostProfile.current?.getFormInstance().resetFields();
 		refEditor.current?.getEditorInstance().txt.clear();
+		setCoverUrl('');
+		ref.current.photoPath = '';
 	};
 	return (
 		<div className="article-create-container">
 			<PostProfile ref={refPostProfile} />
 			<div className="article-cover" style={{ marginBottom: '16px' }}>
 				<BasicUpload
-					placehloder="上传文章封面"
+					placehloder={isEdited ? ' 更换文章封面 ' : '上传文章封面'}
 					data={{ type: PHOTO_TYPE.POST }}
 					onChange={(info) => {
 						if (info.file.status && info.file.status === 'done') {
-							ref.current.photoInfo = (info.file
-								.response as ResultInterface<PhotoInterface.BasicPhoto>).data;
+							ref.current.photoPath = (info.file
+								.response as ResultInterface<PhotoInterface.BasicPhoto>).data.path;
 							info.file.originFileObj &&
 								getBase64(info.file.originFileObj).then(
 									(base64) => {
-										setImgBase64(base64);
+										setCoverUrl(base64);
 									}
 								);
 						}
 					}}
 					showUploadList={false}
 				/>
-				{imgBase64 && (
+				{coverUrl && (
 					<Tooltip title="上传错了? 点击删除，重新再上传吧">
 						<CloseOutlined
 							className="delete-icon"
 							style={{ marginLeft: '5px' }}
 							onClick={() => {
-								ref.current.photoInfo &&
-									deletePhoto(ref.current.photoInfo.id).then(
-										() => {
-											setImgBase64('');
-										}
-									);
+								ref.current.photoPath &&
+									deletePhotoByPath({
+										path: ref.current.photoPath
+									}).then(() => {
+										setCoverUrl('');
+										ref.current.photoPath = '';
+										message.success('删除成功');
+									});
 							}}
 						/>
 					</Tooltip>
 				)}
 
-				{imgBase64 && (
+				{coverUrl && (
 					<div style={{ paddingTop: '16px' }}>
-						<img src={imgBase64} alt="" height={120} />
+						<img src={coverUrl} alt="" height={120} />
 					</div>
 				)}
 			</div>
@@ -146,9 +158,11 @@ const PostCreator = () => {
 					key="post"
 					className="post-btn btn"
 					onClick={() => {
-						handlePublish(STATUS.PUBLISHED);
+						handlePublish(
+							isEdited ? STATUS.UPDATED : STATUS.PUBLISHED
+						);
 					}}>
-					Publish
+					{isEdited ? 'Save' : 'Publish'}
 				</span>
 				<span
 					key="draft"

@@ -1,36 +1,15 @@
 /* 富文本编辑器 */
 .w-e-toolbar {
-	// border-top: none !important;
 	background: #fff !important;
-	padding: 4px;
 	font-size: 15px;
-	height: 40px;
 }
 
 .w-e-error {
 	.w-e-text-container {
-		border: 2px solid $red1 !important;
+		border: 1px solid $red1 !important;
 	}
 
 	.placeholder {
-		font-weight: bold;
-		color: $red1;
-		visibility: visible;
-	}
-}
-
-/* markdown 编辑器 */
-.CodeMirror {
-	height: 300px;
-}
-
-.markdown-error {
-	.CodeMirror {
-		border: 2px solid $red2;
-	}
-
-	.CodeMirror-placeholder {
-		font-weight: bold;
 		color: $red1;
 	}
 }
