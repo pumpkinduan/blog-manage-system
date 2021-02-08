@@ -1,27 +1,15 @@
-.article-controls {
-	width: 100%;
-	padding: 20px 0;
-	.btn {
-		margin-right: 10px;
-		color: #fff;
-		padding: 10px;
-		border-radius: 3px;
-		font-size: 16px;
-		cursor: pointer;
+.custom-dropdown {
+	max-height: 300px;
+	overflow-y: auto;
+	padding: 0;
 
-		&:hover {
-			opacity: 0.66;
-		}
+	.ant-select-item {
+		font-size: 12px;
 	}
-	.switch-btn {
-		background: rgb(236, 118, 136);
-	}
+}
 
-	.post-btn {
-		background: #13ce66;
-	}
-
-	.draft-btn {
-		background: #ffba00;
-	}
+.ant-select-selection-placeholder {
+	font-size: 12px;
+	text-shadow: 0 0 1px #999;
+	opacity: 0.5;
 }

@@ -9,7 +9,6 @@ export interface CreatePhoto {
 export interface BasicPhoto {
     id: string;
     path: string;
-    createdAt: string;
     originalname: string;
 }
 

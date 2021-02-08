@@ -32,6 +32,7 @@ export type CreatePost = Pick<
     | 'author'
     | 'title'
     | 'coverUrl'
+    | 'category'
 >;
 export type UpdatePost = CreatePost;
 

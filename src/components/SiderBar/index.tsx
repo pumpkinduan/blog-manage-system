@@ -28,12 +28,12 @@ const siderLinks = [
 		id: '2',
 		icon: <ProfileOutlined />,
 		title: '文章管理',
-		path: '/article',
+		path: '/post',
 		subSiderLinks: [
 			{
 				id: '21',
 				title: '文章列表',
-				path: '/articleList'
+				path: '/postList'
 			},
 			{
 				id: '22',

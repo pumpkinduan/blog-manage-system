@@ -7,10 +7,10 @@ export const routers = [
 		component: silentLoadable(() => import("containers/DashBoard")),
 	},
 	{
-		path: "/articleList",
+		path: "/postList",
 		exact: true,
 		requireAuth: true,
-		component: silentLoadable(() => import("containers/ArticleList")),
+		component: silentLoadable(() => import("containers/PostList")),
 	},
 	{
 		path: "/postCreator",
