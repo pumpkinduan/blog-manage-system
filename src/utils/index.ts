@@ -32,3 +32,11 @@ export const createRandomColor = () => {
 		return `rgba(${red},${green},${blue})`;
 	}
 };
+
+export const pick = <T = { [key: string]: any }>(obj: T, keys: (keyof T)[]) => {
+	const r: any = {};
+	keys.forEach((key) => {
+		r[key] = obj[key];
+	});
+	return r;
+};

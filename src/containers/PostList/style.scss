@@ -1,0 +1,30 @@
+.article-list-container {
+	padding-top: 10px;
+
+	.btn-controls {
+		position: relative;
+
+		.btn {
+			box-sizing: border-box;
+			cursor: pointer;
+			display: inline-block;
+			margin: 0 12px;
+			width: 45px;
+			height: 45px;
+			line-height: 45px;
+			text-align: center;
+			border-width: 1px;
+			border-style: solid;
+			border-color: transparent;
+			transition: all 0.3s;
+			color: #ccc;
+
+			&:hover,
+			&:focus {
+				border-radius: 50%;
+				color: $volcano5;
+				border-color: $volcano2;
+			}
+		}
+	}
+}

@@ -8,13 +8,10 @@ import React, {
 import E from 'wangeditor';
 import { setLocalStorage, getLocalStorage } from 'utils';
 import './style.scss';
-interface IProps {
-	content?: string;
-}
 export interface Some_APIS {
 	getEditorInstance: () => E;
 }
-export const RichEditor = forwardRef(({ content }: IProps, ref) => {
+export const RichEditor = forwardRef((props, ref) => {
 	const [isEmpty, setIsEmpty] = useState(false);
 	const wangeditorContainer = useRef<HTMLDivElement>(null);
 	const wangeditorInstance = useRef<E | null>(null);
@@ -65,7 +62,7 @@ export const RichEditor = forwardRef(({ content }: IProps, ref) => {
 
 			// 由编辑文章进入，显示已经发布了，并获取到的数据
 			// 由创建文章进入，显示空数据或是编辑过但没有发布的数据(如：路由切换，数据保存至storage)
-			editor.txt.text(content || getLocalStorage('rich_text'));
+			editor.txt.text(getLocalStorage('rich_text') || '');
 		};
 
 		initConfig();

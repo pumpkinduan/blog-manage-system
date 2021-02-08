@@ -1,15 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { RichEditor, Some_APIS } from 'components/Editor';
 import { PostProfile, PostProfileExposed } from './components/PostProfile';
 import { BasicUpload } from 'components/BasicUpload';
 import { notification, Tooltip } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { STATUS } from 'interfaces/post.interface';
-import { createPost, deletePhoto } from 'core/apis';
+import { createPost, deletePhoto, getPostDetail } from 'core/apis';
 import { PHOTO_TYPE } from 'interfaces/photo.interface';
 import { PhotoInterface, ResultInterface } from 'interfaces/index.interface';
 import { useHistory } from 'react-router';
 import './style.scss';
+import { pick } from 'utils';
 
 function getBase64(file): Promise<any> {
 	return new Promise((resolve, reject) => {
@@ -28,7 +29,32 @@ const PostCreator = () => {
 	});
 	const [imgBase64, setImgBase64] = useState('');
 
-	const history = useHistory();
+	const history = useHistory<{ isEdited: boolean; postId: string }>();
+	console.log(history);
+
+	useEffect(() => {
+		/**
+		 * 编辑文章
+		 */
+		if (history.location.state.isEdited) {
+			getPostDetail(history.location.state.postId).then((result) => {
+				refPostProfile.current
+					?.getFormInstance()
+					.setFieldsValue(
+						pick(result.data, [
+							'author',
+							'tags',
+							'category',
+							'description',
+							'title'
+						])
+					);
+				refEditor.current
+					?.getEditorInstance()
+					.txt.html(result.data.content);
+			});
+		}
+	}, []);
 
 	/**
 	 * 发布新文章
@@ -45,6 +71,7 @@ const PostCreator = () => {
 			coverUrl: ref.current?.photoInfo?.path
 		});
 		await createPost(data);
+		handleReset();
 		notification.success({
 			message: status,
 			duration: 1,
@@ -112,7 +139,7 @@ const PostCreator = () => {
 			</div>
 
 			<div className="editor-container">
-				<RichEditor ref={refEditor} content="" />
+				<RichEditor ref={refEditor} />
 			</div>
 			<div className="article-controls">
 				<span
