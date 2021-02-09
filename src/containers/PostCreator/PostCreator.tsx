@@ -10,22 +10,14 @@ import {
 	deletePhotoByPath,
 	getPostDetail,
 	updatePost,
-	server
+	server,
+	uploadPhotos
 } from 'core/apis';
 import { PHOTO_TYPE } from 'interfaces/photo.interface';
 import { PhotoInterface, ResultInterface } from 'interfaces/index.interface';
 import { useHistory } from 'react-router';
+import { pick, getBase64 } from 'utils';
 import './style.scss';
-import { pick } from 'utils';
-
-function getBase64(file): Promise<any> {
-	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onload = () => resolve(reader.result);
-		reader.onerror = (error) => reject(error);
-	});
-}
 
 const PostCreator = () => {
 	const refEditor = useRef<Some_APIS>();
@@ -38,7 +30,6 @@ const PostCreator = () => {
 	const history = useHistory<{ isEdited: boolean; postId: string }>();
 	const isEdited = history.location.state?.isEdited;
 	const postId = history.location.state?.postId;
-	console.log(isEdited);
 
 	useEffect(() => {
 		/**
@@ -70,16 +61,19 @@ const PostCreator = () => {
 	 * 发布新文章
 	 */
 	const handlePublish = async (status: STATUS) => {
+		if (!refPostProfile.current || !refEditor.current) return;
 		const vals = await refPostProfile.current
-			?.getFormInstance()
+			.getFormInstance()
 			?.validateFields();
-		const html = refEditor.current?.getEditorInstance().txt.html();
+		const html = refEditor.current.getEditorInstance().txt.html();
 
 		const data = Object.assign(vals, {
 			content: html,
 			status,
 			coverUrl: ref.current?.photoPath
 		});
+		await handleUploadFiles();
+
 		if (isEdited) {
 			await updatePost(postId, data);
 		} else {
@@ -87,6 +81,39 @@ const PostCreator = () => {
 		}
 		handleReset();
 		message.success(status + ' successfully');
+	};
+
+	/**
+	 * 上传多图片
+	 */
+	const handleUploadFiles = async () => {
+		if (!refEditor.current) return;
+		const files = refEditor.current.getFiles();
+
+		const formData = new FormData();
+		formData.append('type', PHOTO_TYPE.POST);
+		files.forEach((file) => {
+			formData.append('files', file);
+		});
+		if (files.length !== 0) {
+			const result = await uploadPhotos(formData);
+			transformImagesBase64IntoUrl(result.data);
+		}
+	};
+	/**
+	 * 上传图片至服务器后, 将编辑器内的base64格式的图片替换成真实的地址
+	 */
+	const transformImagesBase64IntoUrl = (
+		data: PhotoInterface.BasicPhoto[]
+	) => {
+		if (!refEditor.current) return;
+		const imgages = document
+			.getElementById('richEditorApp')
+			?.getElementsByTagName('img');
+		imgages &&
+			Array.from(imgages).forEach((image, index) => {
+				image.src = data[index].path;
+			});
 	};
 
 	/**
@@ -145,7 +172,7 @@ const PostCreator = () => {
 
 				{coverUrl && (
 					<div style={{ paddingTop: '16px' }}>
-						<img src={coverUrl} alt="" height={120} />
+						<img src={coverUrl} alt="cover" height={120} />
 					</div>
 				)}
 			</div>

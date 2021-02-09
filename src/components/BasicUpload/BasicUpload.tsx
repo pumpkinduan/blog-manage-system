@@ -6,6 +6,10 @@ import { UploadProps } from 'antd/lib/upload';
 interface BasicUploadProps extends UploadProps {
 	placehloder: string;
 }
+
+/**
+ * 默认支持单张图片的上传
+ */
 export const BasicUpload = ({ placehloder, ...rest }: BasicUploadProps) => {
 	return (
 		<Upload
