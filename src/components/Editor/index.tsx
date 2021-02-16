@@ -1,1 +1,2 @@
-export * from './Rich';
+export * from "./Rich";
+export * from "./MarkDown";
