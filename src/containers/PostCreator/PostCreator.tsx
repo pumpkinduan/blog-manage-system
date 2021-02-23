@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { RichEditor, Some_APIS } from 'components/Editor';
 import { PostProfile, PostProfileExposed } from './components/PostProfile';
 import { BasicUpload } from 'components/BasicUpload';
-import { message, notification, Tooltip } from 'antd';
+import { message, Tooltip } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 import { STATUS } from 'interfaces/post.interface';
 import {
@@ -30,7 +30,6 @@ const PostCreator = () => {
 	const history = useHistory<{ isEdited: boolean; postId: string }>();
 	const isEdited = history.location.state?.isEdited;
 	const postId = history.location.state?.postId;
-
 	useEffect(() => {
 		/**
 		 * 编辑文章
@@ -65,6 +64,10 @@ const PostCreator = () => {
 		const vals = await refPostProfile.current
 			.getFormInstance()
 			?.validateFields();
+		const txt = refEditor.current.getEditorInstance().txt.text();
+
+		if (!txt) return;
+
 		const html = refEditor.current.getEditorInstance().txt.html();
 
 		const data = Object.assign(vals, {

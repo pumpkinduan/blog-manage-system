@@ -2,18 +2,14 @@ import React from 'react';
 import { Button, Row, Col, Modal } from 'antd';
 interface IProps {
 	selectedCount: number;
-	deleteSelectedReplys: () => void;
+	onOk: () => void;
 	visible: boolean;
 }
-const FooterControl = ({
-	selectedCount,
-	deleteSelectedReplys,
-	visible,
-}: IProps) => {
+const FooterControl = ({ selectedCount, onOk, visible }: IProps) => {
 	const handleDelete = () => {
 		Modal.confirm({
 			content: '您确定要删除所选中的回复嘛?',
-			onOk: deleteSelectedReplys,
+			onOk: onOk
 		});
 	};
 	return (

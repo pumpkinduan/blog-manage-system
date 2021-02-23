@@ -39,6 +39,11 @@ const siderLinks = [
 				id: '22',
 				title: '文章创建',
 				path: '/postCreator'
+			},
+			{
+				id: '23',
+				title: '草稿箱',
+				path: '/postDrafts'
 			}
 		]
 	},

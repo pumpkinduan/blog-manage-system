@@ -24,19 +24,19 @@ const IconReplyBtn = ({ item, onOk }: IconTextProps) => {
 			title: '昵称',
 			dataIndex: 'name',
 			width: '200px',
-			render: (text, record) => record.sourceUser.username,
+			render: (text, record) => record.sourceUser.username
 		},
 		{
 			title: '回复',
 			dataIndex: 'reply',
-			render: (text, record) => record.content,
+			render: (text, record) => record.content
 		},
 		{
 			title: '创建时间',
 			dataIndex: 'createdAt',
 			width: '160px',
-			render: (text) => dayjs(text).fromNow(),
-		},
+			render: (text) => dayjs(text).fromNow()
+		}
 	];
 	const controlVisibleFooter = (selectedRowkeys) => {
 		if (selectedRowkeys.length > 0) return setVisibleFooter(true);
@@ -46,7 +46,7 @@ const IconReplyBtn = ({ item, onOk }: IconTextProps) => {
 		onChange: (selectedRowkeys: (string | number)[]) => {
 			controlVisibleFooter(selectedRowkeys);
 			setSelectedRowKeys(selectedRowkeys);
-		},
+		}
 	};
 	const showReplyPanel = () => {
 		setVisible(true);
@@ -92,7 +92,7 @@ const IconReplyBtn = ({ item, onOk }: IconTextProps) => {
 					footer={null}>
 					<AdvancedTable
 						scroll={{
-							y: 600,
+							y: 600
 						}}
 						pagination={false}
 						headerControllerConfig={[
@@ -104,8 +104,8 @@ const IconReplyBtn = ({ item, onOk }: IconTextProps) => {
 											setSearchValue(value);
 										}}
 									/>
-								),
-							},
+								)
+							}
 						]}
 						dataSource={replys}
 						rowSelection={rowSelection}
@@ -113,7 +113,7 @@ const IconReplyBtn = ({ item, onOk }: IconTextProps) => {
 						footer={() => (
 							<FooterControl
 								visible={visibleFooter}
-								deleteSelectedReplys={deleteSelectedReplys}
+								onOk={deleteSelectedReplys}
 								selectedCount={selectedRowkeys.length}
 							/>
 						)}></AdvancedTable>

@@ -19,14 +19,10 @@ export interface Some_APIS {
 	getFiles: () => File[];
 }
 export const RichEditor = forwardRef((props, ref) => {
-	const [isEmpty, setIsEmpty] = useState(false);
 	const wangeditorContainer = useRef<HTMLDivElement>(null);
+	const elementContainer = useRef<HTMLDivElement>(null);
 	const filesRef = useRef<File[]>([]);
 	const wangeditorInstance = useRef<E | null>(null);
-	const isBlankSpace = (value) => {
-		const reg = /^(&nbsp;)+$/;
-		return reg.test(value);
-	};
 	useImperativeHandle(ref, () => ({
 		getEditorInstance: () => wangeditorInstance.current,
 		getFiles: () => filesRef.current
@@ -48,12 +44,12 @@ export const RichEditor = forwardRef((props, ref) => {
 			 * 内容监听函数
 			 */
 			editor.config.onchange = (html) => {
-				// 将html与内容一起保存到storage中，便于实现草稿功能
-				setLocalStorage('rich_text', html);
-				if (!editor.txt.text() || isBlankSpace(editor.txt.text())) {
-					setIsEmpty(true);
+				// 自动保存至草稿箱
+				// TODO ....
+				if (!editor.txt.text()) {
+					elementContainer.current?.classList.add('w-e-error');
 				} else {
-					setIsEmpty(false);
+					elementContainer.current?.classList.remove('w-e-error');
 				}
 			};
 			editor.config.zIndex = 3;
@@ -112,7 +108,7 @@ export const RichEditor = forwardRef((props, ref) => {
 			 */
 			editor.config.height = 400;
 
-			editor.config.onchangeTimeout = 100; // 单位 ms
+			editor.config.onchangeTimeout = 3000; // 单位 ms
 
 			editor.config.placeholder = '写点东西吧~';
 
@@ -120,13 +116,13 @@ export const RichEditor = forwardRef((props, ref) => {
 
 			// 由编辑文章进入，显示已经发布了，并获取到的数据
 			// 由创建文章进入，显示空数据或是编辑过但没有发布的数据(如：路由切换，数据保存至storage)
-			editor.txt.text(getLocalStorage('rich_text') || '');
+			// editor.txt.text(getLocalStorage('rich_text') || '');
 		};
 
 		initConfig();
 	}, []);
 	return (
-		<div className={isEmpty ? 'w-e-error' : ''}>
+		<div ref={elementContainer}>
 			<div id="richEditorApp" ref={wangeditorContainer} />
 		</div>
 	);

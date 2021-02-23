@@ -11,7 +11,7 @@ export const Words = () => {
 	const [pagination, setPagination] = useState({
 		current: 1,
 		pageSize: 15,
-		total: 0,
+		total: 0
 	});
 	const [visibleFooter, setVisibleFooter] = useState(false);
 	const [dataSource, setDataSource] = useState<BasicComment[]>([]);
@@ -22,26 +22,26 @@ export const Words = () => {
 			dataIndex: 'name',
 			title: 'Name',
 			width: '100px',
-			render: (text, record) => record.sourceUser.username,
+			render: (text, record) => record.sourceUser.username
 		},
 
 		{
 			title: 'ta对你说',
-			dataIndex: 'content',
+			dataIndex: 'content'
 		},
 		{
 			title: '时间',
 			dataIndex: 'created_at',
 			width: '100px',
-			render: (text, record) => dayjs(record.createdAt).fromNow(),
-		},
+			render: (text, record) => dayjs(record.createdAt).fromNow()
+		}
 	];
 
 	const requestData = useCallback(async (current = 1) => {
 		const res = await getComments({
 			type: COMMENT_TYPE.ADMIN,
 			page: current,
-			pageSize: 15,
+			pageSize: 15
 		});
 		setPagination({ ...pagination, current, total: res.sum });
 		setDataSource(res.data);
@@ -69,7 +69,7 @@ export const Words = () => {
 		) => {
 			controlVisibleFooter(selectedRowkeys);
 			setSelectedRows(selectedRows);
-		},
+		}
 	};
 	return (
 		<BaseTable
@@ -84,7 +84,7 @@ export const Words = () => {
 					46 -
 					44 -
 					40 -
-					(visibleFooter ? 160 : 120),
+					(visibleFooter ? 160 : 120)
 			}}
 			rowSelection={rowSelection}
 			rowKey={(record: replyItemProps) => record.id}
@@ -93,7 +93,7 @@ export const Words = () => {
 			footer={() => (
 				<FooterControl
 					visible={visibleFooter}
-					deleteSelectedReplys={handleOnDelete}
+					onOk={handleOnDelete}
 					selectedCount={selectedRows.length}
 				/>
 			)}

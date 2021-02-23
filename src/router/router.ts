@@ -19,6 +19,12 @@ export const routers = [
 		component: silentLoadable(() => import("containers/PostCreator")),
 	},
 	{
+		path: "/postDrafts",
+		exact: false,
+		requireAuth: true,
+		component: silentLoadable(() => import("containers/PostDrafts")),
+	},
+	{
 		path: "/comment",
 		exact: true,
 		requireAuth: true,

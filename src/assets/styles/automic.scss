@@ -1,0 +1,4 @@
+@import 'mixin.scss';
+.ellipsis {
+	@include no-wrap();
+}
