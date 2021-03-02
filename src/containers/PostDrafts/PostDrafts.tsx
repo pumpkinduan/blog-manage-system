@@ -2,7 +2,7 @@ import { message, Tag } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
 import { BaseTable } from 'components/CutomTable';
 import FooterControl from 'containers/Comment/FooterControl';
-import { getPostLists } from 'core/apis';
+import { deletePosts, getPostLists } from 'core/apis';
 import dayjs from 'dayjs';
 import { PostInterface } from 'interfaces/index.interface';
 import React, { useState, useEffect, useCallback } from 'react';
@@ -27,8 +27,7 @@ const PostDrafts = () => {
 		setPagination({ ...pagination, current, total: result.sum });
 		setDataSource(
 			result.data.filter((post) => {
-				// return post.status === PostInterface.STATUS.DRAFTED;
-				return true;
+				return post.status === PostInterface.STATUS.DRAFTED;
 			})
 		);
 	}, []);
@@ -42,7 +41,7 @@ const PostDrafts = () => {
 	};
 	// 删除所选的回复
 	const handleOnDelete = async () => {
-		// await deleteComments(selectedRows.map((data) => data.id).join(','));
+		await deletePosts(selectedRows.map((data) => data.id).join(','));
 		setVisibleFooter(false);
 		message.success('删除成功');
 		await requestData();

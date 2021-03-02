@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { Popconfirm } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import dayjs from 'dayjs';
-import { deletePost, server } from 'core/apis';
+import { deletePosts, server } from 'core/apis';
 import './style.scss';
 
 interface IProps {
@@ -14,7 +14,7 @@ export const ListCard = ({ listItem, onOk }: IProps) => {
 	const element = useRef<HTMLDivElement>(null);
 	const history = useHistory();
 	const handleDelete = (selectedItemId: string) => {
-		deletePost(selectedItemId).then(() => {
+		deletePosts(selectedItemId).then(() => {
 			onOk();
 		});
 	};

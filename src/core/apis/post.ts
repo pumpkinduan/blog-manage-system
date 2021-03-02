@@ -31,4 +31,4 @@ export const createPost = async (data: PostInterface.CreatePost) => await server
 
 export const updatePost = async (id: string, data: PostInterface.UpdatePost) => await server.put(`/posts/${id}`, data);
 
-export const deletePost = async (id: string) => await server.delete(`/posts/${id}`);
+export const deletePosts = async (ids: string) => await server.delete(`/posts/${ids}`);
