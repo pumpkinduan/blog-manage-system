@@ -11,7 +11,7 @@ const PostDrafts = () => {
 	const [dataSource, setDataSource] = useState<PostInterface.BasicPost[]>([]);
 	const [pagination, setPagination] = useState({
 		current: 1,
-		pageSize: 15,
+		pageSize: 10,
 		total: 0
 	});
 	const [visibleFooter, setVisibleFooter] = useState(false);
@@ -19,8 +19,12 @@ const PostDrafts = () => {
 		[]
 	);
 
-	const requestData = useCallback(async () => {
-		const result = await getPostLists();
+	const requestData = useCallback(async (current = 1) => {
+		const result = await getPostLists({
+			page: current,
+			pageSize: pagination.pageSize
+		});
+		setPagination({ ...pagination, current, total: result.sum });
 		setDataSource(
 			result.data.filter((post) => {
 				// return post.status === PostInterface.STATUS.DRAFTED;
@@ -74,7 +78,7 @@ const PostDrafts = () => {
 			render: (text) => (
 				<p
 					className="ellipsis"
-					style={{ maxWidth: '500px' }}
+					style={{ maxWidth: '300px' }}
 					title={text}>
 					{text}
 				</p>
@@ -95,9 +99,13 @@ const PostDrafts = () => {
 	];
 	return (
 		<BaseTable
+			onChange={(_pagination) => {
+				requestData(_pagination.current);
+			}}
 			dataSource={dataSource}
 			columns={columns}
 			rowSelection={rowSelection}
+			pagination={pagination}
 			footer={() => (
 				<FooterControl
 					selectedCount={selectedRows.length}

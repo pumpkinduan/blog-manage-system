@@ -16,9 +16,13 @@ const FooterControl = ({ selectedCount, onOk, visible }: IProps) => {
 		<Row
 			align="middle"
 			justify="space-between"
-			style={{ display: visible ? 'flex' : 'none' }}>
+			style={{
+				display: visible ? 'flex' : 'none',
+				height: '50px',
+				padding: '10px'
+			}}>
 			<Col>
-				已选中{<span className="count">{selectedCount}</span>}条回复
+				已选中{<span className="count">{selectedCount}</span>}条数据
 			</Col>
 			<Col>
 				<Button

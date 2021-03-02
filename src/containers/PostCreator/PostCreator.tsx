@@ -122,7 +122,9 @@ const PostCreator = () => {
 	/**
 	 * 保存文章信息至草稿箱
 	 */
-	const handleDraft = (status: STATUS) => {};
+	const handleDraft = (status: STATUS) => {
+		handlePublish(status);
+	};
 
 	/**
 	 * 清空所有信息

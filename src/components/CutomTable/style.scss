@@ -3,29 +3,36 @@
 	background: #fff;
 	position: relative;
 
+	.ant-table-footer {
+		padding: 0;
+		margin: 10px 0;
+		position: absolute;
+		left: 0;
+		right: 0;
+		z-index: 9;
+	}
 	.header-control {
 		height: 50px;
 		padding: 10px 0;
 	}
 
 	.override-ant-table {
-
-		.ant-table-thead>tr>th,
-		.ant-table-tbody>tr>td {
+		.ant-table-thead > tr > th,
+		.ant-table-tbody > tr > td {
 			text-align: center;
 		}
 	}
 
-	.ant-table-thead>tr>th {
+	.ant-table-thead > tr > th {
 		background: inherit;
 	}
 
-	.ant-table-thead>tr {
+	.ant-table-thead > tr {
 		background-color: $table-head-bgc;
 		border-radius: 15px 15px 0 0 !important;
 	}
 
-	.ant-table-container table>thead>tr:first-child {
+	.ant-table-container table > thead > tr:first-child {
 		th:first-child {
 			border-top-left-radius: inherit;
 		}
