@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { replyItemProps } from 'types/Comment';
 import { BaseTable } from 'components/CutomTable';
 import { ColumnType } from 'antd/lib/table';
 import FooterControl from '../Comment/FooterControl';
@@ -87,7 +86,6 @@ export const Words = () => {
 					(visibleFooter ? 160 : 120)
 			}}
 			rowSelection={rowSelection}
-			rowKey={(record: replyItemProps) => record.id}
 			dataSource={dataSource}
 			columns={columns}
 			footer={() => (
