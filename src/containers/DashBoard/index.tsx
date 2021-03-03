@@ -1,13 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Statics from '../../components/DashBoard/Statics/index';
-import Charts from '../../components/DashBoard/Charts/index';
-import {
-	TeamOutlined,
-	LikeOutlined,
-	CommentOutlined,
-	UploadOutlined,
-} from '@ant-design/icons';
+import Statics from './components/Statics';
+import Chart from './components/Chart';
+import { TeamOutlined, LikeOutlined, CommentOutlined } from '@ant-design/icons';
 const data = [
 	{ month: '1月', counts: 10 },
 	{ month: '2月', counts: 12 },
@@ -20,7 +15,7 @@ const data = [
 	{ month: '9月', counts: 21 },
 	{ month: '10月', counts: 4 },
 	{ month: '11月', counts: 7 },
-	{ month: '12月', counts: 55 },
+	{ month: '12月', counts: 55 }
 ];
 class DashBoard extends React.Component {
 	state = {
@@ -28,25 +23,20 @@ class DashBoard extends React.Component {
 			{
 				title: '网站访问量',
 				counts: 150,
-				icon: <TeamOutlined />,
+				icon: <TeamOutlined />
 			},
 			{
 				title: '文章获赞数',
 				counts: 120,
-				icon: <LikeOutlined />,
+				icon: <LikeOutlined />
 			},
 			{
 				title: '留言数',
 				counts: 45,
-				icon: <CommentOutlined />,
-			},
-			{
-				title: '文章下载量',
-				counts: 15,
-				icon: <UploadOutlined rotate={180} />,
-			},
+				icon: <CommentOutlined />
+			}
 		],
-		title: '网站访问量',
+		title: '网站访问量'
 	};
 	componentDidMount() {
 		// request api
@@ -61,7 +51,7 @@ class DashBoard extends React.Component {
 		return (
 			<div className="dashboard-container">
 				<Statics data={statics} updateCharts={this.updateCharts} />
-				<Charts data={data} title={title} />
+				<Chart data={data} title={title} />
 			</div>
 		);
 	}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import { Line } from '@ant-design/charts';
-import './index.scss';
 const Charts = (props) => {
 	const { data, title } = props;
 
@@ -11,11 +10,11 @@ const Charts = (props) => {
 		data,
 		title: {
 			visible: true,
-			text: title + '（折线图）',
+			text: title + '（折线图）'
 		},
 		description: {
 			visible: true,
-			text: '加把劲儿 ' + title + ' 就上去啦',
+			text: '加把劲儿 ' + title + ' 就上去啦'
 		},
 		smooth: true,
 		forceFit: true,
@@ -24,17 +23,17 @@ const Charts = (props) => {
 		yField: y,
 		meta: {
 			[x]: { alias: '月份' },
-			[y]: { alias: '统计数量' },
+			[y]: { alias: '统计数量' }
 		},
 		interactions: [
 			{
 				type: 'slider',
 				cfg: {
 					start: 0,
-					end: 1,
-				},
-			},
-		],
+					end: 1
+				}
+			}
+		]
 	};
 	return (
 		<Row>
