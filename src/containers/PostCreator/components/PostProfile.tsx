@@ -85,7 +85,7 @@ export interface PostProfileExposed {
 		Omit<CreatePost, 'content' | 'coverUrl'>
 	>;
 }
-export const PostProfile = forwardRef((props, ref) => {
+export const PostProfile = forwardRef<PostProfileExposed>((props, ref) => {
 	const [form] = useForm<Omit<CreatePost, 'content' | 'coverUrl'>>();
 	useEffect(() => {
 		const post_profile = getLocalStorage('post_profile');

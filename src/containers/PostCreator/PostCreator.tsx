@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { RichEditor, Some_APIS } from 'components/Editor';
+import { RichEditor, RichEditorApis } from 'components/Editor';
 import { PostProfile, PostProfileExposed } from './components/PostProfile';
 import { BasicUpload } from 'components/BasicUpload';
 import { message, Tooltip } from 'antd';
@@ -20,11 +20,16 @@ import { pick, getBase64 } from 'utils';
 import './style.scss';
 
 const PostCreator = () => {
-	const refEditor = useRef<Some_APIS>();
-	const refPostProfile = useRef<PostProfileExposed>();
+	const refEditor = useRef<ReturnType<RichEditorApis['getEditorInstance']>>();
+	const refPostProfile = useRef<
+		ReturnType<PostProfileExposed['getFormInstance']>
+	>();
+
+	/** 封面的地址 */
 	const ref = useRef<{ photoPath: string }>({
 		photoPath: ''
 	});
+	/** base64格式 */
 	const [coverUrl, setCoverUrl] = useState('');
 
 	const history = useHistory<{ isEdited: boolean; postId: string }>();
@@ -38,20 +43,16 @@ const PostCreator = () => {
 			getPostDetail(postId).then((result) => {
 				ref.current.photoPath = result.data.coverUrl;
 				setCoverUrl(server.baseURL + result.data.coverUrl);
-				refPostProfile.current
-					?.getFormInstance()
-					.setFieldsValue(
-						pick(result.data, [
-							'author',
-							'tags',
-							'category',
-							'description',
-							'title'
-						])
-					);
-				refEditor.current
-					?.getEditorInstance()
-					.txt.html(result.data.content);
+				refPostProfile.current?.setFieldsValue(
+					pick(result.data, [
+						'author',
+						'tags',
+						'category',
+						'description',
+						'title'
+					])
+				);
+				refEditor.current?.txt.html(result.data.content);
 			});
 		}
 	}, []);
@@ -61,62 +62,35 @@ const PostCreator = () => {
 	 */
 	const handlePublish = async (status: STATUS) => {
 		if (!refPostProfile.current || !refEditor.current) return;
-		const vals = await refPostProfile.current
-			.getFormInstance()
-			?.validateFields();
-		const txt = refEditor.current.getEditorInstance().txt.text();
+		const vals = await refPostProfile.current?.validateFields();
+		const text = refEditor.current.txt.text();
+		const html = refEditor.current.txt.html();
 
-		if (!txt) return;
+		/** 文章cover不能为空 */
+		if (!ref.current.photoPath) {
+			message.error('文章封面不能为空');
+			return;
+		}
 
-		const html = refEditor.current.getEditorInstance().txt.html();
+		/** 内容为空，不能发布 */
+		if (!html) {
+			message.error('文章内容不能为空');
+			return;
+		}
 
 		const data = Object.assign(vals, {
 			content: html,
 			status,
 			coverUrl: ref.current?.photoPath
 		});
-		await handleUploadFiles();
 
 		if (isEdited) {
 			await updatePost(postId, data);
 		} else {
 			await createPost(data);
 		}
-		handleReset();
+		status === STATUS.PUBLISHED && handleReset();
 		message.success(status + ' successfully');
-	};
-
-	/**
-	 * 上传多图片
-	 */
-	const handleUploadFiles = async () => {
-		if (!refEditor.current) return;
-		const files = refEditor.current.getFiles();
-
-		const formData = new FormData();
-		formData.append('type', PHOTO_TYPE.POST);
-		files.forEach((file) => {
-			formData.append('files', file);
-		});
-		if (files.length !== 0) {
-			const result = await uploadPhotos(formData);
-			transformImagesBase64IntoUrl(result.data);
-		}
-	};
-	/**
-	 * 上传图片至服务器后, 将编辑器内的base64格式的图片替换成真实的地址
-	 */
-	const transformImagesBase64IntoUrl = (
-		data: PhotoInterface.BasicPhoto[]
-	) => {
-		if (!refEditor.current) return;
-		const imgages = document
-			.getElementById('richEditorApp')
-			?.getElementsByTagName('img');
-		imgages &&
-			Array.from(imgages).forEach((image, index) => {
-				image.src = data[index].path;
-			});
 	};
 
 	/**
@@ -130,14 +104,20 @@ const PostCreator = () => {
 	 * 清空所有信息
 	 */
 	const handleReset = () => {
-		refPostProfile.current?.getFormInstance().resetFields();
-		refEditor.current?.getEditorInstance().txt.clear();
+		refPostProfile.current?.resetFields();
+		refEditor.current?.txt.clear();
 		setCoverUrl('');
 		ref.current.photoPath = '';
 	};
 	return (
 		<div className="article-create-container">
-			<PostProfile ref={refPostProfile} />
+			<PostProfile
+				ref={(e) => {
+					if (e) {
+						refPostProfile.current = e.getFormInstance();
+					}
+				}}
+			/>
 			<div className="article-cover" style={{ marginBottom: '16px' }}>
 				<BasicUpload
 					placehloder={isEdited ? ' 更换文章封面 ' : '上传文章封面'}
@@ -183,7 +163,13 @@ const PostCreator = () => {
 			</div>
 
 			<div className="editor-container">
-				<RichEditor ref={refEditor} />
+				<RichEditor
+					ref={(e) => {
+						if (e) {
+							refEditor.current = e.getEditorInstance();
+						}
+					}}
+				/>
 			</div>
 			<div className="article-controls">
 				<span

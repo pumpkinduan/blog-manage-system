@@ -32,9 +32,9 @@ export const updateAdminProfile = async (data: UserInterface.AdminProfiles) => a
 export const deleteUser = async (id: string) => await server.delete(`/users/${id}`);
 
 // photo
-export const uploadPhoto = async (data: PhotoInterface.CreatePhoto) => await server.post<PhotoInterface.BasicPhoto>('/photo/upload', data);
+export const uploadPhoto = async (data: FormData) => await server.post<PhotoInterface.BasicPhoto>('/photo/upload', data);
 
-export const uploadPhotos = async (data: any) => await server.post<PhotoInterface.BasicPhoto[]>('/photo/uploads', data);
+export const uploadPhotos = async (data: FormData) => await server.post<PhotoInterface.BasicPhoto[]>('/photo/uploads', data);
 
 export const deletePhotoById = async (id: string) => await server.delete(`/photo/${id}`);
 
