@@ -34,7 +34,7 @@
     "jest-watch-typeahead": "0.4.2",
     "loadsh": "^0.0.4",
     "mini-css-extract-plugin": "0.9.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "pnp-webpack-plugin": "1.6.4",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -112,7 +112,7 @@
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "babel-plugin-lodash": "^3.3.4",
-    "node-sass": "^4.14.1"
+    "node-sass": "^7.0.0"
   },
   "jest": {
     "roots": [
